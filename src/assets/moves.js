@@ -7,11 +7,12 @@ import {
   FIELD_STATUS,
 } from "./status";
 import TARGET from "./targets";
+import CATEGORIES from "./categories";
 
 export const absorb = {
   name: "absorb",
   type: TYPES.GRASS,
-  category: "special",
+  category: CATEGORIES.SPECIAL,
   power: 20,
   accuracy: 1.0,
   pp: 25,
@@ -20,7 +21,7 @@ export const absorb = {
 export const acid = {
   name: "acid",
   type: TYPES.POISON,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 40,
   accuracy: 1.0,
   pp: 30,
@@ -29,7 +30,7 @@ export const acid = {
 export const acidArmor = {
   name: "acid armor",
   type: TYPES.POISON,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: null,
   pp: 20,
@@ -38,7 +39,7 @@ export const acidArmor = {
 export const agility = {
   name: "agility",
   type: TYPES.PSYCHIC,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: null,
   pp: 30,
@@ -47,7 +48,7 @@ export const agility = {
 export const amnesia = {
   name: "amnesia",
   type: TYPES.PSYCHIC,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: null,
   pp: 20,
@@ -56,7 +57,7 @@ export const amnesia = {
 export const auroraBeam = {
   name: "aurora beam",
   type: TYPES.ICE,
-  category: "special",
+  category: CATEGORIES.SPECIAL,
   power: 65,
   accuracy: 1.0,
   pp: 20,
@@ -65,7 +66,7 @@ export const auroraBeam = {
 export const barrage = {
   name: "barrage",
   type: TYPES.NORMAL,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 15,
   accuracy: 0.85,
   minTimes: 2,
@@ -76,7 +77,7 @@ export const barrage = {
 export const barrier = {
   name: "barrier",
   type: TYPES.PSYCHIC,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: null,
   pp: 20,
@@ -85,7 +86,7 @@ export const barrier = {
 export const bide = {
   name: "bide",
   type: TYPES.NORMAL,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: null,
   accuracy: null,
   pp: 10,
@@ -99,7 +100,7 @@ export const bide = {
 export const bind = {
   name: "bind",
   type: TYPES.NORMAL,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 15,
   accuracy: 0.85,
   pp: 20,
@@ -108,7 +109,7 @@ export const bind = {
 export const bite = {
   name: "bite",
   type: TYPES.DARK,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 60,
   accuracy: 1.0,
   pp: 25,
@@ -117,7 +118,7 @@ export const bite = {
 export const blizzard = {
   name: "blizzard",
   type: TYPES.ICE,
-  category: "special",
+  category: CATEGORIES.SPECIAL,
   power: 110,
   accuracy: 0.7,
   pp: 5,
@@ -126,7 +127,7 @@ export const blizzard = {
 export const bodySlam = {
   name: "body slam",
   type: TYPES.NORMAL,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 85,
   accuracy: 1.0,
   pp: 15,
@@ -135,7 +136,7 @@ export const bodySlam = {
 export const boneClub = {
   name: "bone club",
   type: TYPES.GROUND,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 65,
   accuracy: 0.85,
   pp: 20,
@@ -144,7 +145,7 @@ export const boneClub = {
 export const bonemerang = {
   name: "bonemerang",
   type: TYPES.GROUND,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 50,
   accuracy: 0.9,
   pp: 10,
@@ -155,7 +156,7 @@ export const bonemerang = {
 export const bubble = {
   name: "bubble",
   type: TYPES.WATER,
-  category: "special",
+  category: CATEGORIES.SPECIAL,
   power: 40,
   accuracy: 1.0,
   pp: 30,
@@ -164,7 +165,7 @@ export const bubble = {
 export const bubbleBeam = {
   name: "bubble beam",
   type: TYPES.WATER,
-  category: "special",
+  category: CATEGORIES.SPECIAL,
   power: 65,
   accuracy: 1.0,
   pp: 20,
@@ -173,7 +174,7 @@ export const bubbleBeam = {
 export const clamp = {
   name: "clamp",
   type: TYPES.WATER,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 35,
   accuracy: 0.85,
   pp: 15,
@@ -182,7 +183,7 @@ export const clamp = {
 export const cometPunch = {
   name: "comet punch",
   type: TYPES.NORMAL,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 18,
   accuracy: 0.85,
   pp: 15,
@@ -193,7 +194,7 @@ export const cometPunch = {
 export const confuseRay = {
   name: "confuse ray",
   type: TYPES.GHOST,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: 1.0,
   pp: 10,
@@ -202,7 +203,7 @@ export const confuseRay = {
 export const confusion = {
   name: "confusion",
   type: TYPES.PSYCHIC,
-  category: "special",
+  category: CATEGORIES.SPECIAL,
   power: 50,
   accuracy: 1.0,
   pp: 25,
@@ -211,7 +212,7 @@ export const confusion = {
 export const constrict = {
   name: "constrict",
   type: TYPES.NORMAL,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 10,
   accuracy: 1.0,
   pp: 35,
@@ -220,7 +221,7 @@ export const constrict = {
 export const conversion = {
   name: "conversion",
   type: TYPES.NORMAL,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: null,
   pp: 30,
@@ -229,7 +230,7 @@ export const conversion = {
 export const counter = {
   name: "counter",
   type: TYPES.FIGHT,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: null,
   accuracy: 1.0,
   pp: 20,
@@ -239,7 +240,7 @@ export const counter = {
 export const crabhammer = {
   name: "crabhammer",
   type: TYPES.WATER,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 100,
   accuracy: 0.9,
   pp: 10,
@@ -248,7 +249,7 @@ export const crabhammer = {
 export const cut = {
   name: "cut",
   type: TYPES.NORMAL,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 50,
   accuracy: 0.95,
   pp: 30,
@@ -256,7 +257,7 @@ export const cut = {
 export const defenseCurl = {
   name: "defense curl",
   type: TYPES.NORMAL,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: null,
   pp: 40,
@@ -269,7 +270,7 @@ export const defenseCurl = {
 export const dig = {
   name: "dig",
   type: TYPES.GROUND,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 80,
   accuracy: 1.0,
   pp: 10,
@@ -282,7 +283,7 @@ export const dig = {
 export const disable = {
   name: "disable",
   type: TYPES.NORMAL,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: 1,
   pp: 20,
@@ -291,7 +292,7 @@ export const disable = {
 export const dizzyPunch = {
   name: "dizzy punch",
   type: TYPES.NORMAL,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 70,
   accuracy: 1.0,
   pp: 10,
@@ -300,7 +301,7 @@ export const dizzyPunch = {
 export const doubleKick = {
   name: "double kick",
   type: TYPES.FIGHT,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 30,
   accuracy: 1.0,
   pp: 30,
@@ -311,7 +312,7 @@ export const doubleKick = {
 export const doubleSlap = {
   name: "double slap",
   type: TYPES.NORMAL,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 15,
   accuracy: 0.85,
   pp: 10,
@@ -322,7 +323,7 @@ export const doubleSlap = {
 export const doubleTeam = {
   name: "double team",
   type: TYPES.NORMAL,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: null,
   pp: 15,
@@ -331,7 +332,7 @@ export const doubleTeam = {
 export const doubleEdge = {
   name: "double-edge",
   type: TYPES.NORMAL,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 120,
   accuracy: 1.0,
   pp: 15,
@@ -340,7 +341,7 @@ export const doubleEdge = {
 export const dragonRage = {
   name: "dragon rage",
   type: TYPES.DRAGON,
-  category: "special",
+  category: CATEGORIES.SPECIAL,
   power: null,
   accuracy: 1.0,
   pp: 10,
@@ -349,7 +350,7 @@ export const dragonRage = {
 export const dreameater = {
   name: "dream eater",
   type: TYPES.PSYCHIC,
-  category: "special",
+  category: CATEGORIES.SPECIAL,
   power: 100,
   accuracy: 1.0,
   pp: 15,
@@ -358,7 +359,7 @@ export const dreameater = {
 export const drillPeck = {
   name: "drill peck",
   type: TYPES.FLYING,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 80,
   accuracy: 1.0,
   pp: 20,
@@ -366,7 +367,7 @@ export const drillPeck = {
 export const earthquake = {
   name: "earthquake",
   type: TYPES.GROUND,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 100,
   accuracy: 1.0,
   pp: 10,
@@ -374,7 +375,7 @@ export const earthquake = {
 export const eggBomb = {
   name: "egg bomb",
   type: TYPES.NORMAL,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 100,
   accuracy: 0.75,
   pp: 10,
@@ -382,7 +383,7 @@ export const eggBomb = {
 export const ember = {
   name: "ember",
   type: TYPES.FIRE,
-  category: "special",
+  category: CATEGORIES.SPECIAL,
   power: 40,
   accuracy: 1.0,
   pp: 25,
@@ -391,7 +392,7 @@ export const ember = {
 export const explosion = {
   name: "explosion",
   type: TYPES.NORMAL,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 250,
   accuracy: 1.0,
   pp: 5,
@@ -400,7 +401,7 @@ export const explosion = {
 export const fireBlast = {
   name: "fire blast",
   type: TYPES.FIRE,
-  category: "special",
+  category: CATEGORIES.SPECIAL,
   power: 110,
   accuracy: 0.85,
   pp: 5,
@@ -409,7 +410,7 @@ export const fireBlast = {
 export const firePunch = {
   name: "fire punch",
   type: TYPES.FIRE,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 75,
   accuracy: 1.0,
   pp: 15,
@@ -418,7 +419,7 @@ export const firePunch = {
 export const fireSpin = {
   name: "fire spin",
   type: TYPES.FIRE,
-  category: "special",
+  category: CATEGORIES.SPECIAL,
   power: 35,
   accuracy: 0.85,
   pp: 15,
@@ -427,7 +428,7 @@ export const fireSpin = {
 export const fissure = {
   name: "fissure",
   type: TYPES.GROUND,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: null,
   accuracy: null,
   pp: 5,
@@ -436,7 +437,7 @@ export const fissure = {
 export const flamethrower = {
   name: "flamethrower",
   type: TYPES.FIRE,
-  category: "special",
+  category: CATEGORIES.SPECIAL,
   power: 90,
   accuracy: 1.0,
   pp: 15,
@@ -445,7 +446,7 @@ export const flamethrower = {
 export const flash = {
   name: "flash",
   type: TYPES.NORMAL,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: 1,
   pp: 20,
@@ -454,7 +455,7 @@ export const flash = {
 export const fly = {
   name: "fly",
   type: TYPES.FLYING,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 90,
   accuracy: 0.95,
   pp: 15,
@@ -467,7 +468,7 @@ export const fly = {
 export const focusEnergy = {
   name: "focus energy",
   type: TYPES.NORMAL,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: null,
   pp: 30,
@@ -479,7 +480,7 @@ export const focusEnergy = {
 export const furyAttack = {
   name: "fury attack",
   type: TYPES.NORMAL,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 15,
   accuracy: 0.85,
   pp: 20,
@@ -490,7 +491,7 @@ export const furyAttack = {
 export const furySwipes = {
   name: "fury swipes",
   type: TYPES.NORMAL,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 18,
   accuracy: 0.8,
   pp: 15,
@@ -501,7 +502,7 @@ export const furySwipes = {
 export const glare = {
   name: "glare",
   type: TYPES.NORMAL,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: 100,
   pp: 30,
@@ -510,7 +511,7 @@ export const glare = {
 export const growl = {
   name: "growl",
   type: TYPES.NORMAL,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: 1.0,
   pp: 40,
@@ -519,7 +520,7 @@ export const growl = {
 export const growth = {
   name: "growth",
   type: TYPES.NORMAL,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: null,
   pp: 40,
@@ -528,7 +529,7 @@ export const growth = {
 export const guillotine = {
   name: "guillotine",
   type: TYPES.NORMAL,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: null,
   accuracy: null,
   pp: 5,
@@ -537,7 +538,7 @@ export const guillotine = {
 export const gust = {
   name: "gust",
   type: TYPES.FLYING,
-  category: "special",
+  category: CATEGORIES.SPECIAL,
   power: 40,
   accuracy: 1.0,
   pp: 35,
@@ -545,7 +546,7 @@ export const gust = {
 export const harden = {
   name: "harden",
   type: TYPES.NORMAL,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: null,
   pp: 30,
@@ -554,7 +555,7 @@ export const harden = {
 export const haze = {
   name: "haze",
   type: TYPES.ICE,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: null,
   pp: 30,
@@ -563,7 +564,7 @@ export const haze = {
 export const headbutt = {
   name: "headbutt",
   type: TYPES.NORMAL,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 70,
   accuracy: 1.0,
   pp: 15,
@@ -572,7 +573,7 @@ export const headbutt = {
 export const highJumpKick = {
   name: "high jump kick",
   type: TYPES.FIGHT,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 130,
   accuracy: 0.9,
   pp: 10,
@@ -586,7 +587,7 @@ export const highJumpKick = {
 export const hornAttack = {
   name: "horn attack",
   type: TYPES.NORMAL,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 65,
   accuracy: 1.0,
   pp: 25,
@@ -594,7 +595,7 @@ export const hornAttack = {
 export const hornDrill = {
   name: "horn drill",
   type: TYPES.NORMAL,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: null,
   accuracy: null,
   pp: 5,
@@ -603,7 +604,7 @@ export const hornDrill = {
 export const hydroPump = {
   name: "hydro pump",
   type: TYPES.WATER,
-  category: "special",
+  category: CATEGORIES.SPECIAL,
   power: 110,
   accuracy: 0.8,
   pp: 5,
@@ -611,7 +612,7 @@ export const hydroPump = {
 export const hyperBeam = {
   name: "hyper beam",
   type: TYPES.NORMAL,
-  category: "special",
+  category: CATEGORIES.SPECIAL,
   power: 150,
   accuracy: 0.9,
   pp: 5,
@@ -620,7 +621,7 @@ export const hyperBeam = {
 export const hyperFang = {
   name: "hyper fang",
   type: TYPES.NORMAL,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 80,
   accuracy: 0.9,
   pp: 15,
@@ -629,7 +630,7 @@ export const hyperFang = {
 export const hypnosis = {
   name: "hypnosis",
   type: TYPES.PSYCHIC,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: 0.6,
   pp: 20,
@@ -638,7 +639,7 @@ export const hypnosis = {
 export const iceBeam = {
   name: "ice beam",
   type: TYPES.ICE,
-  category: "special",
+  category: CATEGORIES.SPECIAL,
   power: 90,
   accuracy: 1.0,
   pp: 10,
@@ -647,7 +648,7 @@ export const iceBeam = {
 export const icePunch = {
   name: "ice punch",
   type: TYPES.ICE,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 75,
   accuracy: 1.0,
   pp: 15,
@@ -656,7 +657,7 @@ export const icePunch = {
 export const jumpKick = {
   name: "jump kick",
   type: TYPES.FIGHT,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 100,
   accuracy: 0.95,
   pp: 10,
@@ -670,7 +671,7 @@ export const jumpKick = {
 export const karateChop = {
   name: "karate chop",
   type: TYPES.FIGHT,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 50,
   accuracy: 1.0,
   pp: 25,
@@ -679,7 +680,7 @@ export const karateChop = {
 export const kinesis = {
   name: "kinesis",
   type: TYPES.PSYCHIC,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: 0.8,
   pp: 15,
@@ -688,7 +689,7 @@ export const kinesis = {
 export const leechLife = {
   name: "leech life",
   type: TYPES.BUG,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 80,
   accuracy: 1.0,
   pp: 10,
@@ -697,7 +698,7 @@ export const leechLife = {
 export const leechSeed = {
   name: "leech seed",
   type: TYPES.GRASS,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: 0.9,
   pp: 10,
@@ -706,7 +707,7 @@ export const leechSeed = {
 export const leer = {
   name: "leer",
   type: TYPES.NORMAL,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: 1.0,
   pp: 30,
@@ -715,7 +716,7 @@ export const leer = {
 export const lick = {
   name: "lick",
   type: TYPES.GHOST,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 30,
   accuracy: 1.0,
   pp: 30,
@@ -724,7 +725,7 @@ export const lick = {
 export const lightScreen = {
   name: "light screen",
   type: TYPES.PSYCHIC,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: null,
   pp: 30,
@@ -733,7 +734,7 @@ export const lightScreen = {
 export const lovelyKiss = {
   name: "lovely kiss",
   type: TYPES.NORMAL,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: 0.75,
   pp: 10,
@@ -743,7 +744,7 @@ export const lovelyKiss = {
 export const lowKick = {
   name: "low kick",
   type: TYPES.FIGHT,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 50,
   accuracy: 0.9,
   pp: 20,
@@ -752,7 +753,7 @@ export const lowKick = {
 export const meditate = {
   name: "meditate",
   type: TYPES.PSYCHIC,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: null,
   pp: 40,
@@ -761,7 +762,7 @@ export const meditate = {
 export const megaDrain = {
   name: "mega drain",
   type: TYPES.GRASS,
-  category: "special",
+  category: CATEGORIES.SPECIAL,
   power: 40,
   accuracy: 1.0,
   pp: 10,
@@ -770,7 +771,7 @@ export const megaDrain = {
 export const megaKick = {
   name: "mega kick",
   type: TYPES.NORMAL,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 120,
   accuracy: 0.75,
   pp: 5,
@@ -778,7 +779,7 @@ export const megaKick = {
 export const megaPunch = {
   name: "mega punch",
   type: TYPES.NORMAL,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 80,
   accuracy: 0.85,
   pp: 20,
@@ -786,7 +787,7 @@ export const megaPunch = {
 export const metronome = {
   name: "metronome",
   type: TYPES.NORMAL,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: null,
   pp: 10,
@@ -795,7 +796,7 @@ export const metronome = {
 export const mimic = {
   name: "mimic",
   type: TYPES.NORMAL,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: null,
   pp: 10,
@@ -804,7 +805,7 @@ export const mimic = {
 export const minimize = {
   name: "minimize",
   type: TYPES.NORMAL,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: null,
   pp: 20,
@@ -813,7 +814,7 @@ export const minimize = {
 export const mirrorMove = {
   name: "mirror move",
   type: TYPES.FLYING,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: null,
   pp: 20,
@@ -822,7 +823,7 @@ export const mirrorMove = {
 export const mist = {
   name: "mist",
   type: TYPES.ICE,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: null,
   pp: 30,
@@ -834,7 +835,7 @@ export const mist = {
 export const nightShade = {
   name: "night shade",
   type: TYPES.GHOST,
-  category: "special",
+  category: CATEGORIES.SPECIAL,
   power: null,
   accuracy: 1.0,
   pp: 15,
@@ -843,7 +844,7 @@ export const nightShade = {
 export const payDay = {
   name: "pay day",
   type: TYPES.NORMAL,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 40,
   accuracy: 1.0,
   pp: 20,
@@ -851,7 +852,7 @@ export const payDay = {
 export const peck = {
   name: "peck",
   type: TYPES.FLYING,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 35,
   accuracy: 1.0,
   pp: 35,
@@ -859,7 +860,7 @@ export const peck = {
 export const petalDance = {
   name: "petal dance",
   type: TYPES.GRASS,
-  category: "special",
+  category: CATEGORIES.SPECIAL,
   power: 120,
   accuracy: 1.0,
   pp: 10,
@@ -872,7 +873,7 @@ export const petalDance = {
 export const pinMissile = {
   name: "pin missile",
   type: TYPES.BUG,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 25,
   accuracy: 0.95,
   pp: 20,
@@ -883,7 +884,7 @@ export const pinMissile = {
 export const poisonGas = {
   name: "poison gas",
   type: TYPES.POISON,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: 0.9,
   pp: 40,
@@ -892,7 +893,7 @@ export const poisonGas = {
 export const poisonPowder = {
   name: "poison powder",
   type: TYPES.POISON,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: 0.75,
   pp: 35,
@@ -901,7 +902,7 @@ export const poisonPowder = {
 export const poisonSting = {
   name: "poison sting",
   type: TYPES.POISON,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 15,
   accuracy: 1.0,
   pp: 35,
@@ -910,7 +911,7 @@ export const poisonSting = {
 export const pound = {
   name: "pound",
   type: TYPES.NORMAL,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 40,
   accuracy: 1.0,
   pp: 35,
@@ -918,7 +919,7 @@ export const pound = {
 export const psybeam = {
   name: "psybeam",
   type: TYPES.PSYCHIC,
-  category: "special",
+  category: CATEGORIES.SPECIAL,
   power: 65,
   accuracy: 1.0,
   pp: 20,
@@ -927,7 +928,7 @@ export const psybeam = {
 export const psychic = {
   name: "psychic",
   type: TYPES.PSYCHIC,
-  category: "special",
+  category: CATEGORIES.SPECIAL,
   power: 90,
   accuracy: 1.0,
   pp: 10,
@@ -937,7 +938,7 @@ export const psychic = {
 export const psywave = {
   name: "psywave",
   type: TYPES.PSYCHIC,
-  category: "special",
+  category: CATEGORIES.SPECIAL,
   power: null,
   accuracy: 1,
   pp: 15,
@@ -947,7 +948,7 @@ export const psywave = {
 export const quickAttack = {
   name: "quick attack",
   type: TYPES.NORMAL,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 40,
   accuracy: 1.0,
   pp: 30,
@@ -956,7 +957,7 @@ export const quickAttack = {
 export const rage = {
   name: "rage",
   type: TYPES.NORMAL,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 20,
   accuracy: 1.0,
   pp: 20,
@@ -965,7 +966,7 @@ export const rage = {
 export const razorLeaf = {
   name: "razor leaf",
   type: TYPES.GRASS,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 55,
   accuracy: 0.95,
   pp: 25,
@@ -974,7 +975,7 @@ export const razorLeaf = {
 export const razorWind = {
   name: "razor wind",
   type: TYPES.NORMAL,
-  category: "special",
+  category: CATEGORIES.SPECIAL,
   power: 80,
   accuracy: 100,
   pp: 10,
@@ -988,7 +989,7 @@ export const razorWind = {
 export const recover = {
   name: "recover",
   type: TYPES.NORMAL,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: null,
   pp: 20,
@@ -997,7 +998,7 @@ export const recover = {
 export const reflect = {
   name: "reflect",
   type: TYPES.PSYCHIC,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: null,
   pp: 20,
@@ -1006,7 +1007,7 @@ export const reflect = {
 export const rest = {
   name: "rest",
   type: TYPES.PSYCHIC,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: null,
   pp: 10,
@@ -1016,7 +1017,7 @@ export const rest = {
 export const roar = {
   name: "roar",
   type: TYPES.NORMAL,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: 1.0,
   pp: 20,
@@ -1026,7 +1027,7 @@ export const roar = {
 export const rockSlide = {
   name: "rock slide",
   type: TYPES.ROCK,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 75,
   accuracy: 0.9,
   pp: 10,
@@ -1035,7 +1036,7 @@ export const rockSlide = {
 export const rockThrow = {
   name: "rock throw",
   type: TYPES.ROCK,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 50,
   accuracy: 0.65,
   pp: 15,
@@ -1043,7 +1044,7 @@ export const rockThrow = {
 export const rollingKick = {
   name: "rolling kick",
   type: TYPES.FIGHT,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 60,
   accuracy: 0.85,
   pp: 15,
@@ -1052,7 +1053,7 @@ export const rollingKick = {
 export const sandAttack = {
   name: "sand attack",
   type: TYPES.NORMAL,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: 1.0,
   pp: 15,
@@ -1061,7 +1062,7 @@ export const sandAttack = {
 export const scratch = {
   name: "scratch",
   type: TYPES.NORMAL,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 40,
   accuracy: 1.0,
   pp: 35,
@@ -1069,7 +1070,7 @@ export const scratch = {
 export const screech = {
   name: "screech",
   type: TYPES.NORMAL,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: 0.85,
   pp: 40,
@@ -1078,7 +1079,7 @@ export const screech = {
 export const seismicToss = {
   name: "seismic toss",
   type: TYPES.FIGHT,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: null,
   accuracy: 1.0,
   pp: 20,
@@ -1087,7 +1088,7 @@ export const seismicToss = {
 export const selfDestruct = {
   name: "self-destruct",
   type: TYPES.NORMAL,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 200,
   accuracy: 1.0,
   pp: 5,
@@ -1096,7 +1097,7 @@ export const selfDestruct = {
 export const sharpen = {
   name: "sharpen",
   type: TYPES.NORMAL,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: null,
   pp: 30,
@@ -1105,7 +1106,7 @@ export const sharpen = {
 export const sing = {
   name: "sing",
   type: TYPES.NORMAL,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: 0.55,
   pp: 15,
@@ -1114,7 +1115,7 @@ export const sing = {
 export const skullBash = {
   name: "skull bash",
   type: TYPES.NORMAL,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 130,
   accuracy: 1.0,
   pp: 15,
@@ -1129,7 +1130,7 @@ export const skullBash = {
 export const skyAttack = {
   name: "sky attack",
   type: TYPES.FLYING,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 140,
   accuracy: 0.9,
   pp: 5,
@@ -1143,7 +1144,7 @@ export const skyAttack = {
 export const slam = {
   name: "slam",
   type: TYPES.NORMAL,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 80,
   accuracy: 0.75,
   pp: 20,
@@ -1151,7 +1152,7 @@ export const slam = {
 export const slash = {
   name: "slash",
   type: TYPES.NORMAL,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 70,
   accuracy: 1.0,
   pp: 20,
@@ -1160,7 +1161,7 @@ export const slash = {
 export const sleepPowder = {
   name: "sleep powder",
   type: TYPES.GRASS,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: 0.75,
   pp: 15,
@@ -1169,7 +1170,7 @@ export const sleepPowder = {
 export const sludge = {
   name: "sludge",
   type: TYPES.POISON,
-  category: "special",
+  category: CATEGORIES.SPECIAL,
   power: 65,
   accuracy: 1.0,
   pp: 20,
@@ -1178,7 +1179,7 @@ export const sludge = {
 export const smog = {
   name: "smog",
   type: TYPES.POISON,
-  category: "special",
+  category: CATEGORIES.SPECIAL,
   power: 30,
   accuracy: 0.7,
   pp: 20,
@@ -1187,7 +1188,7 @@ export const smog = {
 export const smokescreen = {
   name: "smokescreen",
   type: TYPES.NORMAL,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: 1.0,
   pp: 20,
@@ -1196,7 +1197,7 @@ export const smokescreen = {
 export const softBoiled = {
   name: "soft-boiled",
   type: TYPES.NORMAL,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: null,
   pp: 10,
@@ -1205,7 +1206,7 @@ export const softBoiled = {
 export const solarBeam = {
   name: "solar beam",
   type: TYPES.GRASS,
-  category: "special",
+  category: CATEGORIES.SPECIAL,
   power: 120,
   accuracy: 1.0,
   pp: 10,
@@ -1218,7 +1219,7 @@ export const solarBeam = {
 export const sonicBoom = {
   name: "sonic boom",
   type: TYPES.NORMAL,
-  category: "special",
+  category: CATEGORIES.SPECIAL,
   power: null,
   accuracy: 0.9,
   pp: 20,
@@ -1227,7 +1228,7 @@ export const sonicBoom = {
 export const spikeCannon = {
   name: "spike cannon",
   type: TYPES.NORMAL,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 20,
   accuracy: 1.0,
   pp: 15,
@@ -1238,7 +1239,7 @@ export const spikeCannon = {
 export const splash = {
   name: "splash",
   type: TYPES.NORMAL,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: null,
   pp: 40,
@@ -1246,7 +1247,7 @@ export const splash = {
 export const spore = {
   name: "spore",
   type: TYPES.GRASS,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: 1.0,
   pp: 15,
@@ -1255,7 +1256,7 @@ export const spore = {
 export const stomp = {
   name: "stomp",
   type: TYPES.NORMAL,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 65,
   accuracy: 1.0,
   pp: 20,
@@ -1264,7 +1265,7 @@ export const stomp = {
 export const strength = {
   name: "strength",
   type: TYPES.NORMAL,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 80,
   accuracy: 1.0,
   pp: 15,
@@ -1272,7 +1273,7 @@ export const strength = {
 export const stringShot = {
   name: "string shot",
   type: TYPES.BUG,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: 0.95,
   pp: 40,
@@ -1281,7 +1282,7 @@ export const stringShot = {
 export const struggle = {
   name: "struggle",
   type: TYPES.NORMAL,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 50,
   accuracy: 1.0,
   pp: null,
@@ -1290,7 +1291,7 @@ export const struggle = {
 export const stunSpore = {
   name: "stun spore",
   type: TYPES.GRASS,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: 0.75,
   pp: 30,
@@ -1299,7 +1300,7 @@ export const stunSpore = {
 export const submission = {
   name: "submission",
   type: TYPES.FIGHT,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 80,
   accuracy: 0.8,
   pp: 25,
@@ -1308,7 +1309,7 @@ export const submission = {
 export const substitute = {
   name: "substitute",
   type: TYPES.NORMAL,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: null,
   pp: 10,
@@ -1317,7 +1318,7 @@ export const substitute = {
 export const superFang = {
   name: "super fang",
   type: TYPES.NORMAL,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: null,
   accuracy: 0.9,
   pp: 10,
@@ -1331,7 +1332,7 @@ export const superFang = {
 export const supersonic = {
   name: "supersonic",
   type: TYPES.NORMAL,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: 0.55,
   pp: 20,
@@ -1340,7 +1341,7 @@ export const supersonic = {
 export const surf = {
   name: "surf",
   type: TYPES.WATER,
-  category: "special",
+  category: CATEGORIES.SPECIAL,
   power: 90,
   accuracy: 1.0,
   pp: 15,
@@ -1348,7 +1349,7 @@ export const surf = {
 export const swift = {
   name: "swift",
   type: TYPES.NORMAL,
-  category: "special",
+  category: CATEGORIES.SPECIAL,
   power: 60,
   accuracy: null,
   pp: 20,
@@ -1357,7 +1358,7 @@ export const swift = {
 export const swordsDance = {
   name: "swords dance",
   type: TYPES.NORMAL,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: null,
   pp: 30,
@@ -1366,7 +1367,7 @@ export const swordsDance = {
 export const tackle = {
   name: "tackle",
   type: TYPES.NORMAL,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 40,
   accuracy: 1,
   pp: 35,
@@ -1374,7 +1375,7 @@ export const tackle = {
 export const tailWhip = {
   name: "tail whip",
   type: TYPES.NORMAL,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: 1.0,
   pp: 30,
@@ -1383,7 +1384,7 @@ export const tailWhip = {
 export const takeDown = {
   name: "take down",
   type: TYPES.NORMAL,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 90,
   accuracy: 0.85,
   pp: 20,
@@ -1392,7 +1393,7 @@ export const takeDown = {
 export const teleport = {
   name: "teleport",
   type: TYPES.PSYCHIC,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: null,
   pp: 20,
@@ -1401,7 +1402,7 @@ export const teleport = {
 export const thrash = {
   name: "thrash",
   type: TYPES.NORMAL,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 120,
   accuracy: 1.0,
   pp: 10,
@@ -1414,7 +1415,7 @@ export const thrash = {
 export const thunder = {
   name: "thunder",
   type: TYPES.ELECTRIC,
-  category: "special",
+  category: CATEGORIES.SPECIAL,
   power: 110,
   accuracy: 0.7,
   pp: 10,
@@ -1423,7 +1424,7 @@ export const thunder = {
 export const thunderPunch = {
   name: "thunder punch",
   type: TYPES.ELECTRIC,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 75,
   accuracy: 1.0,
   pp: 15,
@@ -1432,7 +1433,7 @@ export const thunderPunch = {
 export const thunderShock = {
   name: "thunder shock",
   type: TYPES.ELECTRIC,
-  category: "special",
+  category: CATEGORIES.SPECIAL,
   power: 40,
   accuracy: 1.0,
   pp: 30,
@@ -1441,7 +1442,7 @@ export const thunderShock = {
 export const thunderWave = {
   name: "thunder wave",
   type: TYPES.ELECTRIC,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: 1.0,
   pp: 20,
@@ -1450,7 +1451,7 @@ export const thunderWave = {
 export const thunderbolt = {
   name: "thunderbolt",
   type: TYPES.ELECTRIC,
-  category: "special",
+  category: CATEGORIES.SPECIAL,
   power: 90,
   accuracy: 1.0,
   pp: 15,
@@ -1459,7 +1460,7 @@ export const thunderbolt = {
 export const toxic = {
   name: "toxic",
   type: TYPES.POISON,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: 0.9,
   pp: 10,
@@ -1468,7 +1469,7 @@ export const toxic = {
 export const transform = {
   name: "transform",
   type: TYPES.NORMAL,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: null,
   pp: 10,
@@ -1477,7 +1478,7 @@ export const transform = {
 export const triAttack = {
   name: "tri attack",
   type: TYPES.NORMAL,
-  category: "special",
+  category: CATEGORIES.SPECIAL,
   power: 80,
   accuracy: 1.0,
   pp: 10,
@@ -1493,7 +1494,7 @@ export const triAttack = {
 export const twineedle = {
   name: "twineedle",
   type: TYPES.BUG,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 25,
   accuracy: 1.0,
   pp: 20,
@@ -1505,7 +1506,7 @@ export const twineedle = {
 export const viceGrip = {
   name: "vice grip",
   type: TYPES.NORMAL,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 55,
   accuracy: 1.0,
   pp: 30,
@@ -1513,7 +1514,7 @@ export const viceGrip = {
 export const vineWhip = {
   name: "vine whip",
   type: TYPES.GRASS,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 45,
   accuracy: 1.0,
   pp: 25,
@@ -1521,7 +1522,7 @@ export const vineWhip = {
 export const waterGun = {
   name: "water gun",
   type: TYPES.WATER,
-  category: "special",
+  category: CATEGORIES.SPECIAL,
   power: 40,
   accuracy: 1.0,
   pp: 25,
@@ -1529,7 +1530,7 @@ export const waterGun = {
 export const waterfall = {
   name: "waterfall",
   type: TYPES.WATER,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 80,
   accuracy: 1.0,
   pp: 15,
@@ -1537,7 +1538,7 @@ export const waterfall = {
 export const whirlwind = {
   name: "whirlwind",
   type: TYPES.NORMAL,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: 0.85,
   pp: 20,
@@ -1547,7 +1548,7 @@ export const whirlwind = {
 export const wingAttack = {
   name: "wing attack",
   type: TYPES.FLYING,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 60,
   accuracy: 1.0,
   pp: 35,
@@ -1555,7 +1556,7 @@ export const wingAttack = {
 export const withdraw = {
   name: "withdraw",
   type: TYPES.WATER,
-  category: "status",
+  category: CATEGORIES.STATUS,
   power: null,
   accuracy: null,
   pp: 40,
@@ -1564,7 +1565,7 @@ export const withdraw = {
 export const wrap = {
   name: "wrap",
   type: TYPES.NORMAL,
-  category: "physical",
+  category: CATEGORIES.PHYSICAL,
   power: 15,
   accuracy: 0.9,
   pp: 20,
