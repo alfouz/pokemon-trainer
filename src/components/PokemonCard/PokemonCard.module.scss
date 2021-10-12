@@ -1,0 +1,41 @@
+.container {
+  background: white;
+  width: 256px;
+  height: 416px;
+  border: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 8px;
+  border-radius: 8px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: calc(100% - 16px);
+  background: #ececec;
+  padding: 8px;
+}
+
+.headerText {
+  text-transform: capitalize;
+  margin: 4px 0;
+}
+
+.image {
+  image-rendering: pixelated;
+  height: 120px;
+  width: 120px;
+}
+
+.typesContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.statsContainer {
+  display: flex;
+  flex-direction: row;
+}

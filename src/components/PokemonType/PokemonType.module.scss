@@ -1,0 +1,66 @@
+@import "../../../theme.scss";
+
+.card {
+  width: 96px;
+  margin: 4px;
+  font-weight: bold;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  color: white;
+  text-align: center;
+  box-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  border-radius: 8px;
+}
+.card-grass {
+  background: $color-grass;
+}
+.card-steel {
+  background: $color-steel;
+}
+.card-water {
+  background: $color-water;
+}
+.card-bug {
+  background: $color-bug;
+}
+.card-dragon {
+  background: $color-dragon;
+}
+.card-electric {
+  background: $color-electric;
+}
+.card-ghost {
+  background: $color-ghost;
+}
+.card-fire {
+  background: $color-fire;
+}
+.card-fairy {
+  background: $color-fairy;
+}
+.card-ice {
+  background: $color-ice;
+}
+.card-fight {
+  background: $color-fight;
+}
+.card-normal {
+  background: $color-normal;
+}
+.card-psychic {
+  background: $color-psychic;
+}
+.card-rock {
+  background: $color-rock;
+}
+.card-dark {
+  background: $color-dark;
+}
+.card-ground {
+  background: $color-ground;
+}
+.card-flying {
+  background: $color-flying;
+}
+.card-poison {
+  background: $color-poison;
+}

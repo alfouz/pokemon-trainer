@@ -1,0 +1,32 @@
+@import "../../../theme.scss";
+
+.card {
+  width: 28px;
+  margin: 4px;
+  font-weight: bold;
+  font-size: 12px;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  color: white;
+  text-align: center;
+  box-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  border-radius: 8px;
+}
+
+.card-hp {
+  background: $color-hp;
+}
+.card-attack {
+  background: $color-attack;
+}
+.card-defense {
+  background: $color-defense;
+}
+.card-spattack {
+  background: $color-spattack;
+}
+.card-spdefense {
+  background: $color-spdefense;
+}
+.card-speed {
+  background: $color-speed;
+}
