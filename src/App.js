@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./App.module.scss";
 import PokemonCard from "./components/PokemonCard/PokemonCard";
+import PokemonDrop from "./components/PokemonDrop/PokemonDrop";
 import species from "./assets/species";
 
 function App() {
@@ -10,7 +11,7 @@ function App() {
       <button onClick={() => setIndex((151 + index - 1) % 151)}>
         Previous
       </button>
-      <PokemonCard pokemon={species[index]} />
+      <PokemonDrop pokemon={species[index]} />
       <button onClick={() => setIndex((index + 1) % 151)}>Next</button>
     </div>
   );
