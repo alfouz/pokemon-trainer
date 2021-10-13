@@ -1,0 +1,18 @@
+@import "../../../theme.scss";
+
+.card {
+  height: 48px;
+  width: 298px;
+  display: flex;
+  flex-direction: row;
+  background: white;
+  border: 1px solid black;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  &:hover {
+    background: rgb(255, 246, 218);
+  }
+  cursor: pointer;
+  user-select: none;
+}

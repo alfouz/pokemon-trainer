@@ -3,9 +3,9 @@ import ACTIONS from "./stateActions";
 export const AppContext = createContext();
 
 const initialState = {
-  pokemonList: [],
+  pokemonBox: [],
   currentPokemon: {},
-  currentTeam: {},
+  currentTeam: [],
 };
 
 function appReducer(state, action) {
@@ -24,8 +24,8 @@ function appReducer(state, action) {
       const newPokemon = action?.value;
       const newState = {
         ...state,
-        pokemonList: newPokemon
-          ? [...state.pokemonList, newPokemon]
+        pokemonBox: newPokemon
+          ? [...state.pokemonBox, newPokemon]
           : state.pokemonList,
       };
       return newState;

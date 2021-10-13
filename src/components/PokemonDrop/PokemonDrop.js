@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./PokemonDrop.module.scss";
 import PokemonType from "../PokemonType/PokemonType";
-import PokemonStat from "../PokemonStat.js/PokemonStat";
+import PokemonStat from "../PokemonStat/PokemonStat";
 import PokemonMove from "../PokemonMove/PokemonMove";
 import { getRandomPokemon } from "../../utils/pokemonGenerator";
 
@@ -18,7 +18,7 @@ const PokemonDrop = () => {
         <div className={styles.statsContainer}>Lvl {pokemon.level}</div>
         <div className={styles.typesContainer}>
           {pokemon.types.map((item) => (
-            <PokemonType type={item} />
+            <PokemonType type={item} key={item} />
           ))}
         </div>
       </div>
@@ -30,12 +30,12 @@ const PokemonDrop = () => {
       <div className={styles.customDivider} />
       <div className={styles.statsContainer}>
         {Object.keys(pokemon.baseStats).map((item) => (
-          <PokemonStat stat={item} value={pokemon.stats[item]} />
+          <PokemonStat stat={item} value={pokemon.ivs[item]} key={item} />
         ))}
       </div>
       <div className={styles.movesContainer}>
         {pokemon.currentMoves.map((item) => (
-          <PokemonMove move={item} />
+          <PokemonMove move={item} key={item.name} />
         ))}
       </div>
     </div>

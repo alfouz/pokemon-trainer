@@ -11,7 +11,7 @@ export const getRandomPokemon = () => {
   );
 
   const currentPokemon = POKEMON[random];
-  currentPokemon.level = getRandomLevel();
+  currentPokemon.level = getRandomLevel(100, 1);
   currentPokemon.ivs = getRandomIVs();
   currentPokemon.evs = getRandomEVs();
   currentPokemon.stats = getStats(currentPokemon);
@@ -20,8 +20,8 @@ export const getRandomPokemon = () => {
   return currentPokemon;
 };
 
-const getRandomLevel = () => {
-  return Math.floor(Math.random() * (100 - 0 + 1) + 0);
+const getRandomLevel = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
 const getRandomIV = () => {

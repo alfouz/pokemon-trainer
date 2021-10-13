@@ -12,6 +12,10 @@ const getColors = {
 };
 
 const PokemonStat = ({ stat, value }) => {
-  return <div className={`${styles.card} ${getColors[stat]}`}>{value}</div>;
+  return (
+    <div className={`${styles.card} ${getColors[stat]}`} title={stat}>
+      {value}
+    </div>
+  );
 };
 export default PokemonStat;
