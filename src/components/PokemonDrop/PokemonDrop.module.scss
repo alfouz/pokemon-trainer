@@ -16,7 +16,7 @@
   align-items: center;
   width: calc(100% - 16px);
   background: #ececec;
-  padding: 8px;
+  padding: 4px 8px;
 }
 
 .headerText {
@@ -28,6 +28,8 @@
   image-rendering: pixelated;
   height: 120px;
   width: 120px;
+  margin-top: 8px;
+  margin-bottom: 8px;
 }
 
 .typesContainer {

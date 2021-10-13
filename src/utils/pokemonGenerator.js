@@ -15,6 +15,8 @@ export const getRandomPokemon = () => {
   currentPokemon.ivs = getRandomIVs();
   currentPokemon.evs = getRandomEVs();
   currentPokemon.stats = getStats(currentPokemon);
+  currentPokemon.currentMoves = getRandomMoves(currentPokemon);
+  console.log(currentPokemon);
   return currentPokemon;
 };
 
@@ -101,4 +103,42 @@ const getStats = (currentPokemon) => {
       currentPokemon.level
     ),
   };
+};
+
+const getRandomMoves = (currentPokemon) => {
+  // x3 chance lvl moves, x3 preevo moves, x1 mt moves
+  const levelExtraChance = 3;
+  const preevoExtraChance = 3;
+  const mtExtraChance = 1;
+  const moves = currentPokemon.moves;
+  const moveChanced = moves.reduce((acc, item) => {
+    if (item.level) {
+      for (let i = 0; i < levelExtraChance; i++) {
+        acc.push(item.data);
+      }
+    }
+    if (item.preevo) {
+      for (let i = 0; i < preevoExtraChance; i++) {
+        acc.push(item.data);
+      }
+    }
+    if (item.mt) {
+      for (let i = 0; i < mtExtraChance; i++) {
+        acc.push(item.data);
+      }
+    }
+    return acc;
+  }, []);
+  console.log(moveChanced);
+  const currentMoves = [];
+  while (currentMoves.length < 4 && currentMoves.length < moves.length) {
+    const random =
+      Math.floor(Math.random() * (moveChanced.length - 1 - 0 + 1)) + 0;
+    const currentMove = moveChanced[random];
+    if (!currentMoves.some((item) => currentMove.name === item.name)) {
+      currentMoves.push(currentMove);
+    }
+  }
+  console.log(currentMoves);
+  return currentMoves;
 };
