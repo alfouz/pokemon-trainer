@@ -12,11 +12,10 @@ export const getRandomPokemon = () => {
 
   const currentPokemon = POKEMON[random];
   currentPokemon.level = getRandomLevel(100, 1);
-  currentPokemon.ivs = getRandomIVs();
+  currentPokemon.ivs = getRandomIVs(0, 31);
   currentPokemon.evs = getRandomEVs();
   currentPokemon.stats = getStats(currentPokemon);
   currentPokemon.currentMoves = getRandomMoves(currentPokemon);
-  console.log(currentPokemon);
   return currentPokemon;
 };
 
@@ -24,18 +23,18 @@ const getRandomLevel = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
-const getRandomIV = () => {
-  return Math.floor(Math.random() * (31 - 0 + 1) + 0);
+const getRandomIV = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
-const getRandomIVs = () => {
+const getRandomIVs = (min, max) => {
   return {
-    [STATS.HP]: getRandomIV(),
-    [STATS.ATTACK]: getRandomIV(),
-    [STATS.DEFENSE]: getRandomIV(),
-    [STATS.SPATTACK]: getRandomIV(),
-    [STATS.SPDEFENSE]: getRandomIV(),
-    [STATS.SPEED]: getRandomIV(),
+    [STATS.HP]: getRandomIV(min, max),
+    [STATS.ATTACK]: getRandomIV(min, max),
+    [STATS.DEFENSE]: getRandomIV(min, max),
+    [STATS.SPATTACK]: getRandomIV(min, max),
+    [STATS.SPDEFENSE]: getRandomIV(min, max),
+    [STATS.SPEED]: getRandomIV(min, max),
   };
 };
 
@@ -129,7 +128,6 @@ const getRandomMoves = (currentPokemon) => {
     }
     return acc;
   }, []);
-  console.log(moveChanced);
   const currentMoves = [];
   while (currentMoves.length < 4 && currentMoves.length < moves.length) {
     const random =
@@ -139,6 +137,5 @@ const getRandomMoves = (currentPokemon) => {
       currentMoves.push(currentMove);
     }
   }
-  console.log(currentMoves);
   return currentMoves;
 };

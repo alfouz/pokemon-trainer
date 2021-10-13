@@ -1,16 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styles from "./PokemonDrop.module.scss";
 import PokemonType from "../PokemonType/PokemonType";
 import PokemonStat from "../PokemonStat/PokemonStat";
 import PokemonMove from "../PokemonMove/PokemonMove";
-import { getRandomPokemon } from "../../utils/pokemonGenerator";
 
-const PokemonDrop = () => {
-  const [pokemon, setPokemon] = useState({});
-  useEffect(() => {
-    setPokemon(getRandomPokemon());
-  }, []);
-  console.log(pokemon);
+const PokemonDrop = ({ pokemon, handleCapture, handleRun }) => {
   return pokemon.name ? (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -30,13 +24,21 @@ const PokemonDrop = () => {
       <div className={styles.customDivider} />
       <div className={styles.statsContainer}>
         {Object.keys(pokemon.baseStats).map((item) => (
-          <PokemonStat stat={item} value={pokemon.ivs[item]} key={item} />
+          <PokemonStat stat={item} value={pokemon.stats[item]} key={item} />
         ))}
       </div>
       <div className={styles.movesContainer}>
         {pokemon.currentMoves.map((item) => (
           <PokemonMove move={item} key={item.name} />
         ))}
+      </div>
+      <div className={styles.buttonsContainer}>
+        <div className={styles.captureButton} onClick={handleCapture}>
+          Capture
+        </div>
+        <div className={styles.runButton} onClick={handleRun}>
+          Run
+        </div>
       </div>
     </div>
   ) : (

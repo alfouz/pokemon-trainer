@@ -15,3 +15,16 @@
   flex-direction: column;
   justify-content: space-between;
 }
+
+.leftContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.randomDropContainer {
+  width: 400px;
+}
+
+.battleContainer {
+  flex: 1;
+}

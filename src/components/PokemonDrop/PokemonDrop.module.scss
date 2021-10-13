@@ -47,3 +47,51 @@
   background: rgba(0, 0, 0, 0.5);
   width: 100%;
 }
+
+.buttonsContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.captureButton {
+  width: 80px;
+  margin: 4px;
+  font-weight: bold;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  color: white;
+  text-align: center;
+  box-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  border-radius: 16px;
+  background: rgb(99, 182, 147);
+  user-select: none;
+  cursor: pointer;
+  &:hover {
+    box-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+  }
+  &:active {
+    background: rgb(115, 212, 172);
+  }
+}
+
+.runButton {
+  width: 80px;
+  margin: 4px;
+  font-weight: bold;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  color: white;
+  text-align: center;
+  box-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  border-radius: 16px;
+  background: rgb(46, 138, 141);
+  user-select: none;
+  cursor: pointer;
+  &:hover {
+    box-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+  }
+  &:active {
+    background: rgb(57, 178, 182);
+  }
+}

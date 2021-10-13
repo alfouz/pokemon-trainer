@@ -3,14 +3,16 @@ import styles from "./Body.module.scss";
 import PokemonSmallCard from "../../../components/PokemonSmallCard/PokemonSmallCard";
 import PokemonBox from "../../../components/PokemonBox/PokemonBox";
 import useAppContext from "../../../context/useAppContext";
+import DropView from "../../DropView/DropView";
 
 const Body = ({ stat, value }) => {
   const { state } = useAppContext();
-  console.log(state);
   return (
     <div className={styles.container}>
       <div className={styles.leftContainer}>
-        <div className={styles.randomDropContainer}>RANDOM DROP</div>
+        <div className={styles.randomDropContainer}>
+          <DropView />
+        </div>
         <div className={styles.battleContainer}>RANDOM DROP</div>
       </div>
       <div className={styles.rightContainer}>
