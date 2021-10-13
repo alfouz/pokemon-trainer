@@ -44,7 +44,9 @@ const DropView = ({ stat, value }) => {
           <PokemonLoader />
         )}
       </div>
-      <div className={styles.dropBottomContainer}></div>
+      <div className={styles.dropBottomContainer}>
+        Here will go resources and zones
+      </div>
     </div>
   );
 };

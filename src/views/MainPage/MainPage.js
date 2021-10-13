@@ -1,10 +1,8 @@
 import React from "react";
 import styles from "./MainPage.module.scss";
-import useAppContext from "../../context/useAppContext";
 import Body from "./Body/Body";
 
 const MainPage = () => {
-  const { state } = useAppContext();
   return (
     <div className={styles.container}>
       <div className={styles.header}>

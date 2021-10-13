@@ -16,6 +16,11 @@
 
 .dropBottomContainer {
   height: 200px;
-  background: red;
+  background: rgb(87, 87, 87);
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bold;
 }

@@ -46,7 +46,10 @@ const PokemonSmallCard = ({ pokemon }) => {
       </div>
       <div className={styles.rightCard}>
         {pokemon.types.map((item) => (
-          <div className={`${styles.typeSquare} ${getColors[item]}`} />
+          <div
+            className={`${styles.typeSquare} ${getColors[item]}`}
+            key={item}
+          />
         ))}
       </div>
     </div>

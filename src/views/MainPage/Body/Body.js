@@ -4,6 +4,7 @@ import PokemonSmallCard from "../../../components/PokemonSmallCard/PokemonSmallC
 import PokemonBox from "../../../components/PokemonBox/PokemonBox";
 import useAppContext from "../../../context/useAppContext";
 import DropView from "../../DropView/DropView";
+import BattleView from "../../BattleView/BattleView";
 
 const Body = ({ stat, value }) => {
   const { state } = useAppContext();
@@ -13,7 +14,9 @@ const Body = ({ stat, value }) => {
         <div className={styles.randomDropContainer}>
           <DropView />
         </div>
-        <div className={styles.battleContainer}>RANDOM DROP</div>
+        <div className={styles.battleContainer}>
+          <BattleView />
+        </div>
       </div>
       <div className={styles.rightContainer}>
         <div className={styles.teamContainer}>
