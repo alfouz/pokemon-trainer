@@ -7,10 +7,12 @@ import DropView from "../../DropView/DropView";
 import BattleView from "../../BattleView/BattleView";
 import Modal from "../../../views/Modal/Modal";
 import BoxView from "../../BoxView/BoxView";
+import PokemonView from "../../PokemonView/PokemonView";
 
 const Body = ({ stat, value }) => {
-  const { state } = useAppContext();
+  const { state, getPokemon } = useAppContext();
   const [boxOpen, setBoxOpen] = useState(undefined);
+  console.log(state);
   return (
     <div className={styles.container}>
       <div className={styles.leftContainer}>
@@ -40,6 +42,13 @@ const Body = ({ stat, value }) => {
         visible={boxOpen !== undefined}
       >
         <BoxView box={boxOpen} />
+      </Modal>
+      <Modal
+        title={`${state.currentPokemon?.name}`}
+        onClose={() => getPokemon()}
+        visible={state.currentPokemon?.name !== undefined}
+      >
+        <PokemonView pokemon={state.currentPokemon} />
       </Modal>
     </div>
   );

@@ -9,6 +9,7 @@
   text-align: center;
   box-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   border-radius: 8px;
+  user-select: none;
 }
 .card-grass {
   background: $color-grass;

@@ -23,9 +23,9 @@ const getColors = {
   [TYPES.FLYING]: styles["card-flying"],
 };
 
-const PokemonSquareCard = ({ pokemon }) => {
+const PokemonSquareCard = ({ pokemon, onClick }) => {
   return (
-    <div className={styles.card}>
+    <div className={styles.card} onClick={onClick}>
       <img
         className={styles.image}
         src={pokemon.image}

@@ -23,9 +23,14 @@ const getColors = {
   [TYPES.FLYING]: styles["card-flying"],
 };
 
-const PokemonMove = ({ move }) => {
+const PokemonMove = ({ move, onClick }) => {
   return (
-    <div className={`${styles.card} ${getColors[move.type]}`}>{move.name}</div>
+    <div
+      className={`${styles.card} ${getColors[move.type]}`}
+      onClick={() => onClick && onClick(move)}
+    >
+      {move.name}
+    </div>
   );
 };
 export default PokemonMove;
