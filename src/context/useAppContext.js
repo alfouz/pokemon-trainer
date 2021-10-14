@@ -19,11 +19,19 @@ const useAppContext = (context) => {
     [dispatch]
   );
 
+  const addToTeam = useCallback(
+    ({ pokemon, position }) => {
+      dispatch({ type: ACTIONS.ADD_TO_TEAM, value: { pokemon, position } });
+    },
+    [dispatch]
+  );
+
   return {
     state,
     dispatch,
     capturePokemon,
     getPokemon,
+    addToTeam,
   };
 };
 

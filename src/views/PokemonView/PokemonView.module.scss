@@ -117,3 +117,24 @@
   margin-left: 8px;
   text-transform: capitalize;
 }
+
+.actionsContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding-right: 24px;
+}
+
+.teamContainer {
+  width: 136px;
+  height: 240px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.teamTitle {
+  margin: 0;
+}

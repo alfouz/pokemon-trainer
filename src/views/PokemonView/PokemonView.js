@@ -3,8 +3,18 @@ import styles from "./PokemonView.module.scss";
 import PokemonType from "../../components/PokemonType/PokemonType";
 import PokemonStat from "../../components/PokemonStat/PokemonStat";
 import PokemonMove from "../../components/PokemonMove/PokemonMove";
+import PokemonTeamSquare from "../../components/PokemonTeamSquare/PokemonTeamSquare";
+import useAppContext from "../../context/useAppContext";
 
 const PokemonView = ({ pokemon }) => {
+  const { state, addToTeam } = useAppContext();
+
+  const handleAddToTeam = useCallback(
+    (position) => {
+      addToTeam({ pokemon, position });
+    },
+    [pokemon, addToTeam]
+  );
   const [currentMove, setCurrentMove] = useState(undefined);
   const handleMoveClick = useCallback((move) => {
     setCurrentMove(move);
@@ -110,7 +120,41 @@ const PokemonView = ({ pokemon }) => {
             </div>
           )}
         </div>
-        <div className={styles.actionsContainer}></div>
+        <div className={styles.actionsContainer}>
+          <div className={styles.teamContainer}>
+            <h3 className={styles.teamTitle}>Add to team</h3>
+            <PokemonTeamSquare
+              pokemon={state.currentTeam[0]}
+              position={0}
+              onClick={handleAddToTeam}
+            />
+            <PokemonTeamSquare
+              pokemon={state.currentTeam[1]}
+              position={1}
+              onClick={handleAddToTeam}
+            />
+            <PokemonTeamSquare
+              pokemon={state.currentTeam[2]}
+              position={2}
+              onClick={handleAddToTeam}
+            />
+            <PokemonTeamSquare
+              pokemon={state.currentTeam[3]}
+              position={3}
+              onClick={handleAddToTeam}
+            />
+            <PokemonTeamSquare
+              pokemon={state.currentTeam[4]}
+              position={4}
+              onClick={handleAddToTeam}
+            />
+            <PokemonTeamSquare
+              pokemon={state.currentTeam[5]}
+              position={5}
+              onClick={handleAddToTeam}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

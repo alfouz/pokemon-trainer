@@ -33,6 +33,33 @@ function appReducer(state, action) {
       };
       return newState;
     }
+    case ACTIONS.ADD_TO_TEAM: {
+      const pokemon = action?.value?.pokemon;
+      const position = action?.value?.position;
+      let newTeam = [];
+      if (state.currentTeam.length >= 6) {
+        newTeam = state.currentTeam.map((item, index) =>
+          index === position ? pokemon : item
+        );
+      } else {
+        if (position >= state.currentTeam.length) {
+          newTeam = [...state.currentTeam, pokemon];
+        } else {
+          if (state.currentTeam.length === 0) {
+            newTeam = [pokemon];
+          } else {
+            newTeam = state.currentTeam.map((item, index) =>
+              index === position ? pokemon : item
+            );
+          }
+        }
+      }
+      const newState = {
+        ...state,
+        currentTeam: newTeam,
+      };
+      return newState;
+    }
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);
     }
