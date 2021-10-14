@@ -1,0 +1,70 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.imageContainer {
+  padding: 24px;
+  margin-left: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.image {
+  image-rendering: pixelated;
+  height: 120px;
+  width: 120px;
+}
+
+.lifeContainer {
+  position: relative;
+  margin-top: 16px;
+  border-left: 1px solid black;
+  border-bottom: 1px solid black;
+  border-top: 1px solid black;
+  width: 240px;
+  height: 64px;
+}
+
+.name {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.level {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.hpLife {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+}
+
+.hpLabel {
+  color: white;
+  font-weight: bolder;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.outerLifeBar {
+  border: 2px solid black;
+  height: 8px;
+  background: white;
+  width: 200px;
+}
+
+.innerLifeBar {
+  background: green;
+  height: 8px;
+  width: 40%;
+}

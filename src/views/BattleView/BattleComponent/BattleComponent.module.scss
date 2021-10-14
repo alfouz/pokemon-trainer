@@ -1,5 +1,9 @@
 .container {
   background: rgb(255, 255, 255);
   width: 500px;
-  height: 500px;
+  height: 480px;
+  display: flex;
+  flex-direction: column;
+  border: 48px solid rgba(0, 0, 0, 0.2);
+  border-radius: 64px;
 }
