@@ -1,6 +1,7 @@
 import POKEMON from "../assets/species";
 import STATS from "../assets/stats";
 import { getHP, getStat } from "./statsCalculator";
+import { generateId } from "./idGenerator";
 
 const minPokemon = 0;
 const maxPokemon = 25;
@@ -10,7 +11,8 @@ export const getRandomPokemon = () => {
     Math.random() * (maxPokemon - minPokemon + 1) + minPokemon
   );
 
-  const currentPokemon = POKEMON[random];
+  const currentPokemon = { ...POKEMON[random] };
+  currentPokemon.id = generateId();
   currentPokemon.level = getRandomLevel(100, 1);
   currentPokemon.ivs = getRandomIVs(0, 31);
   currentPokemon.evs = getRandomEVs();

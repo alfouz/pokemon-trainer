@@ -37,20 +37,52 @@ function appReducer(state, action) {
       const pokemon = action?.value?.pokemon;
       const position = action?.value?.position;
       let newTeam = [];
-      if (state.currentTeam.length >= 6) {
-        newTeam = state.currentTeam.map((item, index) =>
-          index === position ? pokemon : item
-        );
-      } else {
-        if (position >= state.currentTeam.length) {
-          newTeam = [...state.currentTeam, pokemon];
-        } else {
-          if (state.currentTeam.length === 0) {
-            newTeam = [pokemon];
+      const indexCurrent = state.currentTeam.findIndex(
+        (item) => item.id === pokemon.id
+      );
+      if (indexCurrent >= 0) {
+        if (indexCurrent !== position) {
+          if (state.currentTeam[position]) {
+            newTeam = state.currentTeam.map((item, index) => {
+              if (index === indexCurrent) {
+                return state.currentTeam[position];
+              }
+              if (index === position) {
+                return state.currentTeam[indexCurrent];
+              }
+              return item;
+            });
           } else {
-            newTeam = state.currentTeam.map((item, index) =>
-              index === position ? pokemon : item
-            );
+            const lastIndex = state.currentTeam.length - 1;
+            newTeam = state.currentTeam.map((item, index) => {
+              if (index === indexCurrent) {
+                return state.currentTeam[lastIndex];
+              }
+              if (index === lastIndex) {
+                return state.currentTeam[indexCurrent];
+              }
+              return item;
+            });
+          }
+        } else {
+          newTeam = state.currentTeam;
+        }
+      } else {
+        if (state.currentTeam.length >= 6) {
+          newTeam = state.currentTeam.map((item, index) =>
+            index === position ? pokemon : item
+          );
+        } else {
+          if (position >= state.currentTeam.length) {
+            newTeam = [...state.currentTeam, pokemon];
+          } else {
+            if (state.currentTeam.length === 0) {
+              newTeam = [pokemon];
+            } else {
+              newTeam = state.currentTeam.map((item, index) =>
+                index === position ? pokemon : item
+              );
+            }
           }
         }
       }
