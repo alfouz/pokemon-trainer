@@ -1,0 +1,81 @@
+@import "../../../theme.scss";
+
+.card {
+  height: 92px;
+  width: 92px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border: 1px solid black;
+  justify-content: space-between;
+  &:hover {
+    border: 1px solid rgb(177, 177, 177);
+  }
+  cursor: pointer;
+  user-select: none;
+  margin: 4px;
+}
+
+.image {
+  top: 0;
+  left: 0;
+  height: 92px;
+  width: 92px;
+  image-rendering: pixelated;
+}
+
+.nameContainer {
+  position: absolute;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.9);
+  bottom: 0;
+  height: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid rgb(128, 0, 0);
+}
+
+.name {
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.levelContainer {
+  position: absolute;
+  width: 24px;
+  background-color: rgba(255, 255, 255, 0.9);
+  top: 0;
+  right: 0;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-left: 1px solid rgb(128, 0, 0);
+}
+
+.level {
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.typeContainer {
+  position: absolute;
+  width: 24px;
+  background-color: rgba(255, 255, 255, 0.9);
+  top: 24px;
+  right: 0;
+  height: 12px;
+  display: flex;
+  flex-direction: row;
+  border-top: 1px solid rgb(128, 0, 0);
+  border-left: 1px solid rgb(128, 0, 0);
+  border-bottom: 1px solid rgb(128, 0, 0);
+}
+
+.typeSquare {
+  width: 12px;
+}
