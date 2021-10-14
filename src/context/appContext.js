@@ -1,5 +1,5 @@
 import React, { createContext, useReducer } from "react";
-import ACTIONS from "./stateActions";
+import ACTIONS, { RELEASE_POKEMON } from "./stateActions";
 import ZONES from "../assets/zones";
 export const AppContext = createContext();
 
@@ -89,6 +89,21 @@ function appReducer(state, action) {
       const newState = {
         ...state,
         currentTeam: newTeam,
+      };
+      return newState;
+    }
+    case RELEASE_POKEMON: {
+      const pokemon = action?.value?.pokemon;
+      const newPokemonList = state.pokemonBox.filter(
+        (item) => item.id !== pokemon.id
+      );
+      const newPokemonTeam = state.currentTeam.filter(
+        (item) => item.id !== pokemon.id
+      );
+      const newState = {
+        ...state,
+        currentTeam: newPokemonTeam,
+        pokemonBox: newPokemonList,
       };
       return newState;
     }

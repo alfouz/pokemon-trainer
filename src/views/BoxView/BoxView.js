@@ -4,10 +4,10 @@ import PokemonSquareCard from "../../components/PokemonSquareCard/PokemonSquareC
 import useAppContext from "../../context/useAppContext";
 
 const BoxView = ({ box }) => {
-  const { getPokemon } = useAppContext();
+  const { state, getPokemon } = useAppContext();
   return (
     <div className={styles.container}>
-      {box.pokemon.map((item) => (
+      {state.pokemonBox.map((item) => (
         <PokemonSquareCard
           pokemon={item}
           onClick={() => {

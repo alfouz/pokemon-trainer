@@ -9,7 +9,7 @@ import Modal from "../../../views/Modal/Modal";
 import BoxView from "../../BoxView/BoxView";
 import PokemonView from "../../PokemonView/PokemonView";
 
-const Body = ({ stat, value }) => {
+const Body = () => {
   const { state, getPokemon } = useAppContext();
   const [boxOpen, setBoxOpen] = useState(undefined);
   console.log(state);
@@ -25,13 +25,13 @@ const Body = ({ stat, value }) => {
       </div>
       <div className={styles.rightContainer}>
         <div className={styles.teamContainer}>
-          {state.pokemonBox.map((item) => (
+          {state.currentTeam.map((item) => (
             <PokemonSmallCard pokemon={item} />
           ))}
         </div>
         <div className={styles.boxContainer}>
           <PokemonBox
-            box={{ number: 1, pokemon: state.pokemonBox }}
+            box={{ pokemon: state.pokemonBox }}
             onClick={(box) => setBoxOpen(box)}
           />
         </div>
@@ -41,14 +41,17 @@ const Body = ({ stat, value }) => {
         onClose={() => setBoxOpen(undefined)}
         visible={boxOpen !== undefined}
       >
-        <BoxView box={boxOpen} />
+        <BoxView />
       </Modal>
       <Modal
         title={`${state.currentPokemon?.name}`}
         onClose={() => getPokemon()}
         visible={state.currentPokemon?.name !== undefined}
       >
-        <PokemonView pokemon={state.currentPokemon} />
+        <PokemonView
+          pokemon={state.currentPokemon}
+          closeView={() => getPokemon()}
+        />
       </Modal>
     </div>
   );

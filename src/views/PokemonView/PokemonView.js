@@ -5,9 +5,11 @@ import PokemonStat from "../../components/PokemonStat/PokemonStat";
 import PokemonMove from "../../components/PokemonMove/PokemonMove";
 import PokemonTeamSquare from "../../components/PokemonTeamSquare/PokemonTeamSquare";
 import useAppContext from "../../context/useAppContext";
+import PokemonButton from "../../components/PokemonButton/PokemonButton";
 
-const PokemonView = ({ pokemon }) => {
-  const { state, addToTeam } = useAppContext();
+const PokemonView = ({ pokemon, closeView }) => {
+  const { state, addToTeam, releasePokemon } = useAppContext();
+  const [currentMove, setCurrentMove] = useState(undefined);
 
   const handleAddToTeam = useCallback(
     (position) => {
@@ -15,10 +17,16 @@ const PokemonView = ({ pokemon }) => {
     },
     [pokemon, addToTeam]
   );
-  const [currentMove, setCurrentMove] = useState(undefined);
+
+  const handleClickRelease = useCallback(() => {
+    releasePokemon({ pokemon });
+    closeView();
+  }, [pokemon, releasePokemon, closeView]);
+
   const handleMoveClick = useCallback((move) => {
     setCurrentMove(move);
   }, []);
+
   return (
     <div className={styles.container}>
       <div className={styles.detailContainer}>
@@ -153,6 +161,9 @@ const PokemonView = ({ pokemon }) => {
               position={5}
               onClick={handleAddToTeam}
             />
+          </div>
+          <div className={styles.buttonContainer}>
+            <PokemonButton text="Release" onClick={handleClickRelease} />
           </div>
         </div>
       </div>

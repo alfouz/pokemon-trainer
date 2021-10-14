@@ -79,8 +79,8 @@
   flex-direction: row;
   margin-bottom: 8px;
   background: white;
-  padding: 8px;
-  border: 2px solid black;
+  padding-top: 8px;
+  border-top: 2px solid black;
 }
 
 .movesContainer {
@@ -121,8 +121,8 @@
 .actionsContainer {
   flex: 1;
   display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
+  flex-direction: column;
+  align-items: flex-end;
   padding-right: 24px;
 }
 
@@ -137,4 +137,9 @@
 
 .teamTitle {
   margin: 0;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: row;
 }

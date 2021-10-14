@@ -26,12 +26,20 @@ const useAppContext = (context) => {
     [dispatch]
   );
 
+  const releasePokemon = useCallback(
+    ({ pokemon }) => {
+      dispatch({ type: ACTIONS.RELEASE_POKEMON, value: { pokemon } });
+    },
+    [dispatch]
+  );
+
   return {
     state,
     dispatch,
     capturePokemon,
     getPokemon,
     addToTeam,
+    releasePokemon,
   };
 };
 
