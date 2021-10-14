@@ -1,11 +1,14 @@
 import React, { createContext, useReducer } from "react";
 import ACTIONS from "./stateActions";
+import ZONES from "../assets/zones";
 export const AppContext = createContext();
 
 const initialState = {
   pokemonBox: [],
   currentPokemon: {},
   currentTeam: [],
+  zones: [ZONES.CITY, ZONES.RANCH, ZONES.VOLCAN, ZONES.CLASSIC, ZONES.SEA],
+  currentZone: ZONES.RANCH,
 };
 
 function appReducer(state, action) {

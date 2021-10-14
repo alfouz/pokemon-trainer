@@ -3,13 +3,14 @@ import styles from "./DropView.module.scss";
 import { getRandomPokemon } from "../../utils/pokemonGenerator";
 import PokemonDrop from "../../components/PokemonDrop/PokemonDrop";
 import PokemonLoader from "../../components/PokemonLoader/PokemonLoader";
+import PokemonZone from "../../components/PokemonZone/PokemonZone";
 import useAppContext from "../../context/useAppContext";
 
 const chanceNewDrop = 1;
 
 const DropView = ({ stat, value }) => {
   const [currentPokemon, setCurrentPokemon] = useState({});
-  const { capturePokemon } = useAppContext();
+  const { state, capturePokemon } = useAppContext();
 
   const handleCapture = useCallback(() => {
     capturePokemon({ value: currentPokemon });
@@ -45,7 +46,13 @@ const DropView = ({ stat, value }) => {
         )}
       </div>
       <div className={styles.dropBottomContainer}>
-        Here will go resources and zones
+        {state.zones.map((item) => (
+          <PokemonZone
+            zone={item}
+            key={item.name}
+            selected={item.name === state.currentZone.name}
+          />
+        ))}
       </div>
     </div>
   );
