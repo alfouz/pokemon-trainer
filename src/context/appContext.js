@@ -1,5 +1,5 @@
 import React, { createContext, useReducer } from "react";
-import ACTIONS, { RELEASE_POKEMON } from "./stateActions";
+import ACTIONS from "./stateActions";
 import ZONES from "../assets/zones";
 export const AppContext = createContext();
 
@@ -9,6 +9,7 @@ const initialState = {
   currentTeam: [],
   zones: [ZONES.CITY, ZONES.RANCH, ZONES.VOLCAN, ZONES.CLASSIC, ZONES.SEA],
   currentZone: ZONES.RANCH,
+  battle: { ownTeam: {}, enemyTeam: {} },
 };
 
 function appReducer(state, action) {
@@ -92,7 +93,7 @@ function appReducer(state, action) {
       };
       return newState;
     }
-    case RELEASE_POKEMON: {
+    case ACTIONS.RELEASE_POKEMON: {
       const pokemon = action?.value?.pokemon;
       const newPokemonList = state.pokemonBox.filter(
         (item) => item.id !== pokemon.id
@@ -104,6 +105,24 @@ function appReducer(state, action) {
         ...state,
         currentTeam: newPokemonTeam,
         pokemonBox: newPokemonList,
+      };
+      return newState;
+    }
+    case ACTIONS.CREATE_BATTLE: {
+      const ownPokemon = action?.value?.ownPokemon;
+      const enemyPokemon = action?.value?.enemyPokemon;
+      const newState = {
+        ...state,
+        battle: { ownTeam: ownPokemon, enemyTeam: enemyPokemon },
+      };
+      return newState;
+    }
+    case ACTIONS.MODIFY_BATTLE: {
+      const ownPokemon = action?.value?.ownPokemon;
+      const enemyPokemon = action?.value?.enemyPokemon;
+      const newState = {
+        ...state,
+        battle: { ownTeam: ownPokemon, enemyTeam: enemyPokemon },
       };
       return newState;
     }

@@ -7,6 +7,7 @@ export const SPEED = "speed";
 
 export const EVASIVENESS = "evasiveness";
 export const ACCURACY = "accuracy";
+export const CRITCHANCE = "critchance";
 
 const stats = {
   ATTACK,
@@ -17,6 +18,7 @@ const stats = {
   SPEED,
   EVASIVENESS,
   ACCURACY,
+  CRITCHANCE,
 };
 
 export default stats;

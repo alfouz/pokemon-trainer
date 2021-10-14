@@ -33,6 +33,26 @@ const useAppContext = (context) => {
     [dispatch]
   );
 
+  const createBattle = useCallback(
+    ({ ownPokemon, enemyPokemon }) => {
+      dispatch({
+        type: ACTIONS.CREATE_BATTLE,
+        value: { ownPokemon, enemyPokemon },
+      });
+    },
+    [dispatch]
+  );
+
+  const modifyBattle = useCallback(
+    ({ ownPokemon, enemyPokemon }) => {
+      dispatch({
+        type: ACTIONS.CREATE_BATTLE,
+        value: { ownPokemon, enemyPokemon },
+      });
+    },
+    [dispatch]
+  );
+
   return {
     state,
     dispatch,
@@ -40,6 +60,8 @@ const useAppContext = (context) => {
     getPokemon,
     addToTeam,
     releasePokemon,
+    createBattle,
+    modifyBattle,
   };
 };
 

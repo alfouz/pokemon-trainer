@@ -3,7 +3,7 @@ import styles from "./BoxView.module.scss";
 import PokemonSquareCard from "../../components/PokemonSquareCard/PokemonSquareCard";
 import useAppContext from "../../context/useAppContext";
 
-const BoxView = ({ box }) => {
+const BoxView = () => {
   const { state, getPokemon } = useAppContext();
   return (
     <div className={styles.container}>
