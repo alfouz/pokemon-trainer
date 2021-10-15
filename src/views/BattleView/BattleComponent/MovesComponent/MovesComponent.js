@@ -1,13 +1,16 @@
 import React, { useCallback } from "react";
 import styles from "./MovesComponent.module.scss";
 import PokemonMove from "../../../../components/PokemonMove/PokemonMove";
-import { generateActionMove } from "../../../../utils/battleGenerator";
+import { generateActionMoves } from "../../../../utils/battleGenerator";
+// import { generateNewMove } from "../../../../utils/enemyIa";
 
 const MovesComponent = ({ pokemon, enemy, onClick }) => {
   const handleClick = useCallback(
     (move) => {
-      const actions = generateActionMove(move, pokemon, enemy);
+      const actions = generateActionMoves(move, pokemon, enemy);
+      // const enemyActions = generateEnemyActionMove(generateNewMove(pokemon, enemy), pokemon, enemy);
       console.log(actions);
+      // console.log(enemyActions);
       onClick && onClick(actions);
     },
     [enemy, pokemon, onClick]

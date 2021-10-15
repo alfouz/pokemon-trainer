@@ -24,7 +24,11 @@ const OwnBar = ({ pokemon }) => {
               <div
                 className={styles.innerLifeBar}
                 style={{
-                  width: `${(pokemon.life / pokemon.stats[stats.HP]) * 100}%`,
+                  width: `${
+                    (pokemon.life < 0
+                      ? 0
+                      : pokemon.life / pokemon.stats[stats.HP]) * 100
+                  }%`,
                 }}
               />
             </div>

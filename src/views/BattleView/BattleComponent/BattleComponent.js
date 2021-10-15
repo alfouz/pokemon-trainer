@@ -22,6 +22,9 @@ const BattleComponent = ({ ownTeam, enemyTeam }) => {
   useEffect(() => {
     if (actions.length > 0) {
       if (executeNextAction) {
+        setExecuteNextAction(false);
+        console.log("Actions", actions);
+        console.log("Executing action");
         executeStep({
           action: actions[0],
           ownTeam: ownTeamBattle,
@@ -33,7 +36,6 @@ const BattleComponent = ({ ownTeam, enemyTeam }) => {
           setOwnIndex: setOwnCurrentPokemonIndex,
           setenemyIndex: setEnemyCurrentPokemonIndex,
         });
-        setExecuteNextAction(false);
         setActions(actions.slice(1));
       }
     }
@@ -52,7 +54,7 @@ const BattleComponent = ({ ownTeam, enemyTeam }) => {
       <OwnBar pokemon={ownTeamBattle[ownCurrentPokemonIndex]} />
       {actions.length > 0 ? (
         <InfoBox
-          message="HERE WILL GO THE MESSAGES"
+          message={actions[0].text}
           onClick={() => setExecuteNextAction(true)}
         />
       ) : (

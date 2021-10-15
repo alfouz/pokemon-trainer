@@ -1,5 +1,9 @@
 import ACTIONS from "../assets/actions";
 
+const processAttack = (pokemon, actionValues) => {
+  return { ...pokemon, life: pokemon.life + actionValues.life };
+};
+
 export const executeStep = ({
   action,
   ownTeam,
@@ -13,13 +17,15 @@ export const executeStep = ({
 }) => {
   switch (action.action) {
     case ACTIONS.EXECUTE_MOVE:
-      const newEnemyTeam = enemyTeam.map((item, index) => {
-        if (index !== enemyIndex) {
-          return item;
-        }
-        return action.enemy;
-      });
-      setEnemyTeam(newEnemyTeam);
+      executeMove(
+        action,
+        ownTeam,
+        ownIndex,
+        enemyTeam,
+        enemyIndex,
+        setOwnTeam,
+        setEnemyTeam
+      );
       break;
     default:
       console.log("DEFAULT");
@@ -28,7 +34,35 @@ export const executeStep = ({
   console.log("Step");
 };
 
-const executeMove = (move, ownTeam, enemyTeam) => {};
+const executeMove = (
+  action,
+  ownTeam,
+  ownIndex,
+  enemyTeam,
+  enemyIndex,
+  setOwnTeam,
+  setEnemyTeam
+) => {
+  if (Object.keys(action.enemyValues).length > 0) {
+    const newEnemyTeam = enemyTeam.map((item, index) => {
+      if (index !== enemyIndex) {
+        return item;
+      }
+      return processAttack(item, action.enemyValues);
+    });
+    setEnemyTeam(newEnemyTeam);
+  }
+  if (Object.keys(action.ownValues).length > 0) {
+    const newOwnTeam = ownTeam.map((item, index) => {
+      if (index !== ownIndex) {
+        return item;
+      }
+      console.log(item);
+      return processAttack(item, action.ownValues);
+    });
+    setOwnTeam(newOwnTeam);
+  }
+};
 
 const executeFixedStatusEffect = (move, ownTeam, enemyTeam) => {};
 

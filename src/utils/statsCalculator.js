@@ -20,14 +20,6 @@ export const battleDamage = (
   effectiveness,
   burn
 ) => {
-  console.log("level: ", level);
-  console.log("power: ", power);
-  console.log("attack: ", attack);
-  console.log("defense: ", defense);
-  console.log("critical: ", critical);
-  console.log("stab: ", stab);
-  console.log("effectiveness: ", effectiveness);
-  console.log("burn: ", burn);
   const randomMultiplier = (Math.random() * (100 - 85 + 1) + 85) / 100;
   return (
     ((((2 * level) / 5) * power * attack) / defense / 50 + 2) *
