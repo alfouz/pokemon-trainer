@@ -5,6 +5,12 @@ import ACTIONS from "../context/stateActions";
 const useAppContext = (context) => {
   const { state, dispatch } = useContext(context || AppContext);
 
+  const loadInitialTeam = useCallback(
+    (value) => {
+      dispatch({ type: ACTIONS.LOAD_INITIAL_TEAM, value: value });
+    },
+    [dispatch]
+  );
   const getPokemon = useCallback(
     (value) => {
       dispatch({ type: ACTIONS.LOAD_POKEMON, value: value });
@@ -62,6 +68,7 @@ const useAppContext = (context) => {
     releasePokemon,
     createBattle,
     modifyBattle,
+    loadInitialTeam,
   };
 };
 

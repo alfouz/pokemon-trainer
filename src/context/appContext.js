@@ -23,6 +23,15 @@ function appReducer(state, action) {
       };
       return newState;
     }
+    case ACTIONS.LOAD_INITIAL_TEAM: {
+      const initialTeam = action?.value;
+      const newState = {
+        ...state,
+        pokemonBox: [...state.pokemonBox, ...initialTeam],
+        currentTeam: [...state.currentTeam, ...initialTeam],
+      };
+      return newState;
+    }
     // Capture pokemon
     case ACTIONS.CAPTURE_POKEMON: {
       const newPokemon = action?.value;

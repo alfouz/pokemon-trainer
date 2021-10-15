@@ -1,8 +1,8 @@
 import React from "react";
+import stats from "../../../../assets/stats";
 import styles from "./OwnBar.module.scss";
 
 const OwnBar = ({ pokemon }) => {
-  pokemon.level = 15;
   return (
     <div className={styles.container}>
       <div className={styles.leftContainer}>
@@ -21,7 +21,12 @@ const OwnBar = ({ pokemon }) => {
           <div className={styles.hpLife}>
             <span className={styles.hpLabel}>HP</span>
             <div className={styles.outerLifeBar}>
-              <div className={styles.innerLifeBar} />
+              <div
+                className={styles.innerLifeBar}
+                style={{
+                  width: `${(pokemon.life / pokemon.stats[stats.HP]) * 100}%`,
+                }}
+              />
             </div>
           </div>
         </div>

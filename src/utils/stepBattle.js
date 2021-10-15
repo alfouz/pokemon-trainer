@@ -11,7 +11,19 @@ export const executeStep = ({
   setOwnIndex,
   setenemyIndex,
 }) => {
-  switch (ACTIONS) {
+  switch (action.action) {
+    case ACTIONS.EXECUTE_MOVE:
+      const newEnemyTeam = enemyTeam.map((item, index) => {
+        if (index !== enemyIndex) {
+          return item;
+        }
+        return action.enemy;
+      });
+      setEnemyTeam(newEnemyTeam);
+      break;
+    default:
+      console.log("DEFAULT");
+      break;
   }
   console.log("Step");
 };

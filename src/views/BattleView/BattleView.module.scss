@@ -4,4 +4,39 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+}
+.badgesContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+  background: #e8c6fd;
+  border-bottom: 1px solid black;
+  width: 100%;
+}
+
+.battleContainer {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.randomBattleButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  border: 2px solid black;
+  &:hover {
+    border: 4px solid black;
+  }
+  &:active {
+    border: 3px solid rgb(134, 134, 134);
+  }
+  padding: 24px;
+  user-select: none;
+  cursor: pointer;
 }

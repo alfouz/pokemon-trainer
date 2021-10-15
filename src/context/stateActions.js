@@ -4,6 +4,7 @@ export const ADD_TO_TEAM = "ADD_TO_TEAM";
 export const RELEASE_POKEMON = "RELEASE_POKEMON";
 export const CREATE_BATTLE = "CREATE_BATTLE";
 export const MODIFY_BATTLE = "MODIFY_BATTLE";
+export const LOAD_INITIAL_TEAM = "LOAD_INITIAL_TEAM";
 
 const actions = {
   LOAD_POKEMON,
@@ -12,6 +13,7 @@ const actions = {
   RELEASE_POKEMON,
   CREATE_BATTLE,
   MODIFY_BATTLE,
+  LOAD_INITIAL_TEAM,
 };
 
 export default actions;

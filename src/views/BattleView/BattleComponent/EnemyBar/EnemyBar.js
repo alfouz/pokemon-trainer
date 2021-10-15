@@ -1,8 +1,8 @@
 import React from "react";
+import stats from "../../../../assets/stats";
 import styles from "./EnemyBar.module.scss";
 
 const EnemyBar = ({ pokemon }) => {
-  pokemon.level = 64;
   return (
     <div className={styles.container}>
       <div className={styles.leftContainer}>
@@ -12,7 +12,16 @@ const EnemyBar = ({ pokemon }) => {
           <div className={styles.hpLife}>
             <span className={styles.hpLabel}>HP</span>
             <div className={styles.outerLifeBar}>
-              <div className={styles.innerLifeBar} />
+              <div
+                className={styles.innerLifeBar}
+                style={{
+                  width: `${
+                    (pokemon.life < 0
+                      ? 0
+                      : pokemon.life / pokemon.stats[stats.HP]) * 100
+                  }%`,
+                }}
+              />
             </div>
           </div>
         </div>

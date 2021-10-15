@@ -9,6 +9,44 @@ import {
 import TARGET from "./targets";
 import CATEGORIES from "./categories";
 
+// NEW TOTAL KEYS
+// {
+// name,
+// type,
+// category,
+// power,
+// accuracy,
+// pp,
+// recover,
+// drain,
+// multiHit,
+// highCriticalHitRatio,
+// oneHitKOMove,
+// damageOnLevel,
+// recoil,
+// psyWaveDamage
+// randomMove,
+// priority,
+// forceChange,
+// fixedPower,
+// unableToMiss,
+// selfBoost: [],
+// enemyBoosts: [],
+// volatileStatus: [],
+// temporalStatus: [],
+// selfFieldBoosts: [],
+// condition: {}
+// trappedWithDamage,
+// selfDestruct,
+// resetStats,
+// recoilOnMiss,
+// replaceMove,
+// repeatEnemyMove,
+// defaultMove,
+// halfHPDamage,
+// transformMovement,
+// }
+
 export const absorb = {
   name: "absorb",
   type: TYPES.GRASS,
@@ -16,7 +54,15 @@ export const absorb = {
   power: 20,
   accuracy: 1.0,
   pp: 25,
-  recover: 0.5,
+  drain: 0.5,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const acid = {
   name: "acid",
@@ -25,7 +71,20 @@ export const acid = {
   power: 40,
   accuracy: 1.0,
   pp: 30,
-  effect: { chance: 0.1, stat: STATS.SPDEFENSE, stages: -1 },
+  selfBoost: [],
+  enemyBoosts: [
+    {
+      chance: 0.1,
+      stat: STATS.SPDEFENSE,
+      stages: -1,
+    },
+  ],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const acidArmor = {
   name: "acid armor",
@@ -34,7 +93,14 @@ export const acidArmor = {
   power: null,
   accuracy: null,
   pp: 20,
-  effect: { stat: STATS.DEFENSE, stages: 2 },
+  selfBoost: [{ stat: STATS.DEFENSE, stages: 2 }],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const agility = {
   name: "agility",
@@ -43,7 +109,14 @@ export const agility = {
   power: null,
   accuracy: null,
   pp: 30,
-  effect: { stat: STATS.SPEED, stages: 2 },
+  selfBoost: [{ stat: STATS.SPEED, stages: 2 }],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const amnesia = {
   name: "amnesia",
@@ -52,7 +125,14 @@ export const amnesia = {
   power: null,
   accuracy: null,
   pp: 20,
-  effect: { stat: STATS.SPDEFENSE, stages: 2 },
+  selfBoost: [{ stat: STATS.SPDEFENSE, stages: 2 }],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const auroraBeam = {
   name: "aurora beam",
@@ -61,7 +141,14 @@ export const auroraBeam = {
   power: 65,
   accuracy: 1.0,
   pp: 20,
-  effect: { chance: 0.1, stat: STATS.ATTACK, stages: -1 },
+  selfBoost: [],
+  enemyBoosts: [{ chance: 0.1, stat: STATS.ATTACK, stages: -1 }],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const barrage = {
   name: "barrage",
@@ -69,10 +156,16 @@ export const barrage = {
   category: CATEGORIES.PHYSICAL,
   power: 15,
   accuracy: 0.85,
-  minTimes: 2,
-  maxTimes: 5,
-  probabilities: [0.3333, 0.3333, 0.1667, 0.1667],
+  multihit: [2, 5],
   pp: 20,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const barrier = {
   name: "barrier",
@@ -81,7 +174,14 @@ export const barrier = {
   power: null,
   accuracy: null,
   pp: 20,
-  effect: { stat: STATS.DEFENSE, stages: 2 },
+  selfBoost: [{ stat: STATS.DEFENSE, stages: 2 }],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const bide = {
   name: "bide",
@@ -91,11 +191,19 @@ export const bide = {
   accuracy: null,
   pp: 10,
   priority: 1,
-  effects: {
-    status: MOVES_STATUS.BIDING,
-    target: TARGET.ENEMY,
-    duration: [2, 3],
-  },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [
+    {
+      status: MOVES_STATUS.BIDING,
+      duration: [2, 3],
+    },
+  ],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const bind = {
   name: "bind",
@@ -104,7 +212,15 @@ export const bind = {
   power: 15,
   accuracy: 0.85,
   pp: 20,
-  effects: { stat: STATS.HP, stages: 0.125, duration: [4, 5] },
+  trappedWithDamage: [4, 5],
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const bite = {
   name: "bite",
@@ -113,7 +229,14 @@ export const bite = {
   power: 60,
   accuracy: 1.0,
   pp: 25,
-  effect: { chance: 0.3, statusCondition: TEMPORAL_STATUS.FLINCHED },
+  temporalStatus: [{ chance: 0.3, statusCondition: TEMPORAL_STATUS.FLINCHED }],
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const blizzard = {
   name: "blizzard",
@@ -122,7 +245,14 @@ export const blizzard = {
   power: 110,
   accuracy: 0.7,
   pp: 5,
-  effect: { chance: 0.1, statusCondition: FIXED_STATUS.FREEZED },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [{ chance: 0.1, statusCondition: FIXED_STATUS.FREEZED }],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const bodySlam = {
   name: "body slam",
@@ -131,7 +261,14 @@ export const bodySlam = {
   power: 85,
   accuracy: 1.0,
   pp: 15,
-  effect: { chance: 0.3, statusCondition: FIXED_STATUS.PARALIZED },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [{ chance: 0.3, statusCondition: FIXED_STATUS.PARALIZED }],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const boneClub = {
   name: "bone club",
@@ -140,7 +277,16 @@ export const boneClub = {
   power: 65,
   accuracy: 0.85,
   pp: 20,
-  effect: { chance: 0.1, statusCondition: TEMPORAL_STATUS.FLINCHED },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [
+    { chance: 0.1, statusCondition: TEMPORAL_STATUS.FLINCHED },
+  ],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const bonemerang = {
   name: "bonemerang",
@@ -149,9 +295,15 @@ export const bonemerang = {
   power: 50,
   accuracy: 0.9,
   pp: 10,
-  minTimes: 2,
-  maxTimes: 2,
-  probabilities: [1],
+  multihit: [2, 2],
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const bubble = {
   name: "bubble",
@@ -160,7 +312,14 @@ export const bubble = {
   power: 40,
   accuracy: 1.0,
   pp: 30,
-  effect: { chance: 0.1, stat: STATS.SPEED, stages: -1 },
+  selfBoost: [],
+  enemyBoosts: [{ chance: 0.1, stat: STATS.SPEED, stages: -1 }],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const bubbleBeam = {
   name: "bubble beam",
@@ -169,7 +328,14 @@ export const bubbleBeam = {
   power: 65,
   accuracy: 1.0,
   pp: 20,
-  effect: { chance: 0.1, stat: STATS.SPEED, stages: -1 },
+  selfBoost: [],
+  enemyBoosts: [{ chance: 0.1, stat: STATS.SPEED, stages: -1 }],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const clamp = {
   name: "clamp",
@@ -178,7 +344,15 @@ export const clamp = {
   power: 35,
   accuracy: 0.85,
   pp: 15,
-  effects: { stat: STATS.HP, stages: 0.125, duration: [4, 5] },
+  trappedWithDamage: [4, 5],
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const cometPunch = {
   name: "comet punch",
@@ -187,9 +361,15 @@ export const cometPunch = {
   power: 18,
   accuracy: 0.85,
   pp: 15,
-  minTimes: 2,
-  maxTimes: 5,
-  probabilities: [0.3333, 0.3333, 0.1667, 0.1667],
+  multihit: [2, 5],
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const confuseRay = {
   name: "confuse ray",
@@ -198,7 +378,14 @@ export const confuseRay = {
   power: null,
   accuracy: 1.0,
   pp: 10,
-  effect: { statusCondition: TEMPORAL_STATUS.CONFUSED },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [{ statusCondition: TEMPORAL_STATUS.CONFUSED }],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const confusion = {
   name: "confusion",
@@ -207,7 +394,16 @@ export const confusion = {
   power: 50,
   accuracy: 1.0,
   pp: 25,
-  effect: { chance: 0.1, statusCondition: TEMPORAL_STATUS.CONFUSED },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [
+    { chance: 0.1, statusCondition: TEMPORAL_STATUS.CONFUSED },
+  ],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const constrict = {
   name: "constrict",
@@ -216,8 +412,16 @@ export const constrict = {
   power: 10,
   accuracy: 1.0,
   pp: 35,
-  effect: { chance: 0.1, stat: STATS.SPEED, stages: -1 },
+  selfBoost: [],
+  enemyBoosts: [{ chance: 0.1, stat: STATS.SPEED, stages: -1 }],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
+// TAKE CARE WITH THIS
 export const conversion = {
   name: "conversion",
   type: TYPES.NORMAL,
@@ -225,7 +429,15 @@ export const conversion = {
   power: null,
   accuracy: null,
   pp: 30,
-  effect: { status: MOVES_STATUS.TYPE_CHANGED, target: TARGET.SELF, value: 0 }, // Cambia por la posición 1 de ataque
+  changeType: { status: MOVES_STATUS.TYPE_CHANGED, value: 0 }, // Cambia por la posición 1 de ataque
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const counter = {
   name: "counter",
@@ -235,7 +447,19 @@ export const counter = {
   accuracy: 1.0,
   pp: 20,
   priority: -1,
-  effect: { status: MOVES_STATUS.PHYSICAL_COUNTER, value: 2 },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [
+    {
+      status: MOVES_STATUS.PHYSICAL_COUNTER,
+      duration: [1],
+    },
+  ],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const crabhammer = {
   name: "crabhammer",
@@ -245,6 +469,14 @@ export const crabhammer = {
   accuracy: 0.9,
   pp: 10,
   highCriticalHitRatio: true,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const cut = {
   name: "cut",
@@ -253,6 +485,14 @@ export const cut = {
   power: 50,
   accuracy: 0.95,
   pp: 30,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const defenseCurl = {
   name: "defense curl",
@@ -261,11 +501,23 @@ export const defenseCurl = {
   power: null,
   accuracy: null,
   pp: 40,
-  effect: {
-    status: MOVES_STATUS.DEFENSE_CURLED,
-    stat: STATS.DEFENSE,
-    stages: 1,
-  },
+  selfBoost: [
+    {
+      stat: STATS.DEFENSE,
+      stages: 1,
+    },
+  ],
+  enemyBoosts: [],
+  volatileStatus: [
+    {
+      status: MOVES_STATUS.DEFENSE_CURLED,
+    },
+  ],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const dig = {
   name: "dig",
@@ -274,11 +526,19 @@ export const dig = {
   power: 80,
   accuracy: 1.0,
   pp: 10,
-  effect: {
-    status: MOVES_STATUS.UNDERGROUND,
-    target: TARGET.SELF,
-    duration: 2,
-  },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [
+    {
+      status: MOVES_STATUS.UNDERGROUND,
+      duration: [1],
+    },
+  ],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const disable = {
   name: "disable",
@@ -287,7 +547,14 @@ export const disable = {
   power: null,
   accuracy: 1,
   pp: 20,
-  effect: { status: MOVES_STATUS.DISABLED, target: TARGET.ENEMY, duration: 2 },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [{ status: MOVES_STATUS.DISABLED, duration: 2 }],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const dizzyPunch = {
   name: "dizzy punch",
@@ -296,7 +563,16 @@ export const dizzyPunch = {
   power: 70,
   accuracy: 1.0,
   pp: 10,
-  effect: { statusCondition: TEMPORAL_STATUS.CONFUSED, change: 0.2 },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [
+    { statusCondition: TEMPORAL_STATUS.CONFUSED, change: 0.2 },
+  ],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const doubleKick = {
   name: "double kick",
@@ -305,9 +581,15 @@ export const doubleKick = {
   power: 30,
   accuracy: 1.0,
   pp: 30,
-  minTimes: 2,
-  maxTimes: 2,
-  probabilities: [1],
+  multihit: [2, 2],
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const doubleSlap = {
   name: "double slap",
@@ -316,9 +598,15 @@ export const doubleSlap = {
   power: 15,
   accuracy: 0.85,
   pp: 10,
-  minTimes: 2,
-  maxTimes: 5,
-  probabilities: [0.3333, 0.3333, 0.1667, 0.1667],
+  multihit: [2, 5],
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const doubleTeam = {
   name: "double team",
@@ -327,7 +615,14 @@ export const doubleTeam = {
   power: null,
   accuracy: null,
   pp: 15,
-  effect: { stat: STATS.EVASIVENESS, stages: 1 },
+  selfBoost: [{ stat: STATS.EVASIVENESS, stages: 1 }],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const doubleEdge = {
   name: "double-edge",
@@ -337,6 +632,14 @@ export const doubleEdge = {
   accuracy: 1.0,
   pp: 15,
   recoil: 0.333,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const dragonRage = {
   name: "dragon rage",
@@ -346,6 +649,14 @@ export const dragonRage = {
   accuracy: 1.0,
   pp: 10,
   fixedPower: 40,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const dreameater = {
   name: "dream eater",
@@ -354,7 +665,17 @@ export const dreameater = {
   power: 100,
   accuracy: 1.0,
   pp: 15,
-  requirement: { [TARGET.ENEMY]: [FIXED_STATUS.SLEEP] },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  condition: {
+    [TARGET.ENEMY]: { enemyStatus: [{ status: [FIXED_STATUS.SLEEP] }] },
+  },
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const drillPeck = {
   name: "drill peck",
@@ -363,6 +684,14 @@ export const drillPeck = {
   power: 80,
   accuracy: 1.0,
   pp: 20,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const earthquake = {
   name: "earthquake",
@@ -371,6 +700,14 @@ export const earthquake = {
   power: 100,
   accuracy: 1.0,
   pp: 10,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const eggBomb = {
   name: "egg bomb",
@@ -379,6 +716,14 @@ export const eggBomb = {
   power: 100,
   accuracy: 0.75,
   pp: 10,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const ember = {
   name: "ember",
@@ -387,7 +732,14 @@ export const ember = {
   power: 40,
   accuracy: 1.0,
   pp: 25,
-  effect: { chance: 0.1, statusCondition: FIXED_STATUS.BURNED },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [{ chance: 0.1, statusCondition: FIXED_STATUS.BURNED }],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const explosion = {
   name: "explosion",
@@ -396,7 +748,15 @@ export const explosion = {
   power: 250,
   accuracy: 1.0,
   pp: 5,
-  effects: { stat: STATS.HP, target: TARGET.SELF, stages: 1 },
+  selfDestruct: true,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const fireBlast = {
   name: "fire blast",
@@ -405,7 +765,14 @@ export const fireBlast = {
   power: 110,
   accuracy: 0.85,
   pp: 5,
-  effect: { chance: 0.1, statusCondition: FIXED_STATUS.BURNED },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [{ chance: 0.1, statusCondition: FIXED_STATUS.BURNED }],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const firePunch = {
   name: "fire punch",
@@ -414,7 +781,14 @@ export const firePunch = {
   power: 75,
   accuracy: 1.0,
   pp: 15,
-  effect: { chance: 0.1, statusCondition: FIXED_STATUS.BURNED },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [{ chance: 0.1, statusCondition: FIXED_STATUS.BURNED }],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const fireSpin = {
   name: "fire spin",
@@ -423,7 +797,15 @@ export const fireSpin = {
   power: 35,
   accuracy: 0.85,
   pp: 15,
-  effects: { stat: STATS.HP, stages: 0.125, duration: [4, 5] },
+  trappedWithDamage: [4, 5],
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const fissure = {
   name: "fissure",
@@ -433,6 +815,14 @@ export const fissure = {
   accuracy: null,
   pp: 5,
   oneHitKOMove: true,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const flamethrower = {
   name: "flamethrower",
@@ -441,7 +831,14 @@ export const flamethrower = {
   power: 90,
   accuracy: 1.0,
   pp: 15,
-  effect: { chance: 0.1, statusCondition: FIXED_STATUS.BURNED },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [{ chance: 0.1, statusCondition: FIXED_STATUS.BURNED }],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const flash = {
   name: "flash",
@@ -450,7 +847,14 @@ export const flash = {
   power: null,
   accuracy: 1,
   pp: 20,
-  effect: { stat: STATS.ACCURACY, stages: -1 },
+  selfBoost: [],
+  enemyBoosts: [{ stat: STATS.ACCURACY, stages: -1 }],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const fly = {
   name: "fly",
@@ -459,11 +863,19 @@ export const fly = {
   power: 90,
   accuracy: 0.95,
   pp: 15,
-  effect: {
-    status: MOVES_STATUS.FLYING,
-    target: TARGET.SELF,
-    duration: 2,
-  },
+  volatileStatus: [
+    {
+      status: MOVES_STATUS.FLYING,
+      duration: [1],
+    },
+  ],
+  selfBoost: [],
+  enemyBoosts: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const focusEnergy = {
   name: "focus energy",
@@ -472,10 +884,19 @@ export const focusEnergy = {
   power: null,
   accuracy: null,
   pp: 30,
-  effect: {
-    statusCondition: TEMPORAL_STATUS.CRITICAL_RATIO_INCREASED,
-    stages: 2,
-  },
+  selfBoost: [
+    {
+      stat: STATS.CRITCHANCE,
+      stages: 2,
+    },
+  ],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const furyAttack = {
   name: "fury attack",
@@ -484,9 +905,15 @@ export const furyAttack = {
   power: 15,
   accuracy: 0.85,
   pp: 20,
-  minTimes: 2,
-  maxTimes: 5,
-  probabilities: [0.3333, 0.3333, 0.1667, 0.1667],
+  multihit: [2, 5],
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const furySwipes = {
   name: "fury swipes",
@@ -495,9 +922,15 @@ export const furySwipes = {
   power: 18,
   accuracy: 0.8,
   pp: 15,
-  minTimes: 2,
-  maxTimes: 5,
-  probabilities: [0.3333, 0.3333, 0.1667, 0.1667],
+  multihit: [2, 5],
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const glare = {
   name: "glare",
@@ -506,7 +939,14 @@ export const glare = {
   power: null,
   accuracy: 100,
   pp: 30,
-  effect: { statusCondition: FIXED_STATUS.PARALIZED },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [{ statusCondition: FIXED_STATUS.PARALIZED }],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const growl = {
   name: "growl",
@@ -515,7 +955,14 @@ export const growl = {
   power: null,
   accuracy: 1.0,
   pp: 40,
-  effect: { stat: STATS.ATTACK, stages: -1 },
+  selfBoost: [],
+  enemyBoosts: [{ stat: STATS.ATTACK, stages: -1 }],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const growth = {
   name: "growth",
@@ -524,7 +971,14 @@ export const growth = {
   power: null,
   accuracy: null,
   pp: 40,
-  effect: { stat: STATS.SPATTACK, stages: 1 },
+  selfBoost: [{ stat: STATS.SPATTACK, stages: 1 }],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const guillotine = {
   name: "guillotine",
@@ -534,6 +988,14 @@ export const guillotine = {
   accuracy: null,
   pp: 5,
   oneHitKOMove: true,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const gust = {
   name: "gust",
@@ -542,6 +1004,14 @@ export const gust = {
   power: 40,
   accuracy: 1.0,
   pp: 35,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const harden = {
   name: "harden",
@@ -550,7 +1020,14 @@ export const harden = {
   power: null,
   accuracy: null,
   pp: 30,
-  effect: { stat: STATS.DEFENSE, stages: 1 },
+  selfBoost: [{ stat: STATS.DEFENSE, stages: 1 }],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const haze = {
   name: "haze",
@@ -559,7 +1036,15 @@ export const haze = {
   power: null,
   accuracy: null,
   pp: 30,
-  effects: { resetStats: true },
+  resetStats: true,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const headbutt = {
   name: "headbutt",
@@ -568,7 +1053,16 @@ export const headbutt = {
   power: 70,
   accuracy: 1.0,
   pp: 15,
-  effect: { chance: 0.3, statusCondition: TEMPORAL_STATUS.FLINCHED },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [
+    { chance: 0.3, statusCondition: TEMPORAL_STATUS.FLINCHED, duration: 1 },
+  ],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const highJumpKick = {
   name: "high jump kick",
@@ -577,12 +1071,15 @@ export const highJumpKick = {
   power: 130,
   accuracy: 0.9,
   pp: 10,
-  effects: {
-    stat: STATS.HP,
-    target: TARGET.SELF,
-    condition: "miss",
-    stages: 0.5,
-  },
+  recoilOnMiss: 0.5,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const hornAttack = {
   name: "horn attack",
@@ -591,6 +1088,14 @@ export const hornAttack = {
   power: 65,
   accuracy: 1.0,
   pp: 25,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const hornDrill = {
   name: "horn drill",
@@ -600,6 +1105,14 @@ export const hornDrill = {
   accuracy: null,
   pp: 5,
   oneHitKOMove: true,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const hydroPump = {
   name: "hydro pump",
@@ -608,6 +1121,14 @@ export const hydroPump = {
   power: 110,
   accuracy: 0.8,
   pp: 5,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const hyperBeam = {
   name: "hyper beam",
@@ -616,7 +1137,20 @@ export const hyperBeam = {
   power: 150,
   accuracy: 0.9,
   pp: 5,
-  effect: { target: TARGET.SELF, statusCondition: TEMPORAL_STATUS.RELOADING },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [
+    {
+      target: TARGET.SELF,
+      statusCondition: TEMPORAL_STATUS.RELOADING,
+      duration: 1,
+    },
+  ],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const hyperFang = {
   name: "hyper fang",
@@ -625,7 +1159,16 @@ export const hyperFang = {
   power: 80,
   accuracy: 0.9,
   pp: 15,
-  effect: { chance: 0.1, statusCondition: TEMPORAL_STATUS.FLINCHED },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [
+    { chance: 0.1, statusCondition: TEMPORAL_STATUS.FLINCHED, duration: 1 },
+  ],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const hypnosis = {
   name: "hypnosis",
@@ -634,7 +1177,14 @@ export const hypnosis = {
   power: null,
   accuracy: 0.6,
   pp: 20,
-  effect: { statusCondition: FIXED_STATUS.SLEEP },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [{ statusCondition: FIXED_STATUS.SLEEP }],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const iceBeam = {
   name: "ice beam",
@@ -643,7 +1193,14 @@ export const iceBeam = {
   power: 90,
   accuracy: 1.0,
   pp: 10,
-  effect: { chance: 0.1, statusCondition: FIXED_STATUS.FREEZED },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [{ chance: 0.1, statusCondition: FIXED_STATUS.FREEZED }],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const icePunch = {
   name: "ice punch",
@@ -652,7 +1209,14 @@ export const icePunch = {
   power: 75,
   accuracy: 1.0,
   pp: 15,
-  effect: { chance: 0.1, statusCondition: FIXED_STATUS.FREEZED },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [{ chance: 0.1, statusCondition: FIXED_STATUS.FREEZED }],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const jumpKick = {
   name: "jump kick",
@@ -661,12 +1225,15 @@ export const jumpKick = {
   power: 100,
   accuracy: 0.95,
   pp: 10,
-  effects: {
-    stat: STATS.HP,
-    target: TARGET.SELF,
-    condition: "miss",
-    stages: 0.5,
-  },
+  recoilOnMiss: true,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const karateChop = {
   name: "karate chop",
@@ -676,6 +1243,14 @@ export const karateChop = {
   accuracy: 1.0,
   pp: 25,
   highCriticalHitRatio: true,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const kinesis = {
   name: "kinesis",
@@ -684,7 +1259,14 @@ export const kinesis = {
   power: null,
   accuracy: 0.8,
   pp: 15,
-  effect: { stat: STATS.ACCURACY, stages: -1 },
+  selfBoost: [],
+  enemyBoosts: [{ stat: STATS.ACCURACY, stages: -1 }],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const leechLife = {
   name: "leech life",
@@ -693,7 +1275,15 @@ export const leechLife = {
   power: 80,
   accuracy: 1.0,
   pp: 10,
-  recover: 0.5,
+  drain: 0.5,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const leechSeed = {
   name: "leech seed",
@@ -702,7 +1292,14 @@ export const leechSeed = {
   power: null,
   accuracy: 0.9,
   pp: 10,
-  effect: { statusCondition: TEMPORAL_STATUS.SEEDED },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [{ statusCondition: TEMPORAL_STATUS.SEEDED }],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const leer = {
   name: "leer",
@@ -711,7 +1308,14 @@ export const leer = {
   power: null,
   accuracy: 1.0,
   pp: 30,
-  effect: { stat: STATS.DEFENSE, stages: -1 },
+  selfBoost: [],
+  enemyBoosts: [{ stat: STATS.DEFENSE, stages: -1 }],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const lick = {
   name: "lick",
@@ -720,7 +1324,14 @@ export const lick = {
   power: 30,
   accuracy: 1.0,
   pp: 30,
-  effect: { chance: 0.3, statusCondition: FIXED_STATUS.PARALIZED },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [{ chance: 0.3, statusCondition: FIXED_STATUS.PARALIZED }],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const lightScreen = {
   name: "light screen",
@@ -729,7 +1340,14 @@ export const lightScreen = {
   power: null,
   accuracy: null,
   pp: 30,
-  effects: { field: FIELD_STATUS.LIGHTSCREEN, duration: 5 },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [{ field: FIELD_STATUS.LIGHTSCREEN, duration: 5 }],
+  selfStatus: [],
 };
 export const lovelyKiss = {
   name: "lovely kiss",
@@ -738,7 +1356,14 @@ export const lovelyKiss = {
   power: null,
   accuracy: 0.75,
   pp: 10,
-  effect: { statusCondition: FIXED_STATUS.SLEEP },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [{ statusCondition: FIXED_STATUS.SLEEP }],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 // TOBEFIXED
 export const lowKick = {
@@ -748,7 +1373,16 @@ export const lowKick = {
   power: 50,
   accuracy: 0.9,
   pp: 20,
-  effect: { chance: 0.3, statusCondition: TEMPORAL_STATUS.FLINCHED },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [
+    { chance: 0.3, statusCondition: TEMPORAL_STATUS.FLINCHED, duration: 1 },
+  ],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const meditate = {
   name: "meditate",
@@ -757,7 +1391,14 @@ export const meditate = {
   power: null,
   accuracy: null,
   pp: 40,
-  effect: { stat: STATS.ATTACK, stages: 1 },
+  selfBoost: [{ stat: STATS.ATTACK, stages: 1 }],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const megaDrain = {
   name: "mega drain",
@@ -766,7 +1407,15 @@ export const megaDrain = {
   power: 40,
   accuracy: 1.0,
   pp: 10,
-  recover: 0.5,
+  drain: 0.5,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const megaKick = {
   name: "mega kick",
@@ -775,6 +1424,14 @@ export const megaKick = {
   power: 120,
   accuracy: 0.75,
   pp: 5,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const megaPunch = {
   name: "mega punch",
@@ -783,6 +1440,14 @@ export const megaPunch = {
   power: 80,
   accuracy: 0.85,
   pp: 20,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const metronome = {
   name: "metronome",
@@ -792,6 +1457,14 @@ export const metronome = {
   accuracy: null,
   pp: 10,
   randomMove: true,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const mimic = {
   name: "mimic",
@@ -800,7 +1473,15 @@ export const mimic = {
   power: null,
   accuracy: null,
   pp: 10,
-  effect: { status: MOVES_STATUS.MOVE_CHANGED, target: TARGET.SELF },
+  replaceMove: true,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const minimize = {
   name: "minimize",
@@ -809,7 +1490,14 @@ export const minimize = {
   power: null,
   accuracy: null,
   pp: 20,
-  effect: { stat: STATS.EVASIVENESS, stages: 1 },
+  selfBoost: [{ stat: STATS.EVASIVENESS, stages: 1 }],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const mirrorMove = {
   name: "mirror move",
@@ -818,7 +1506,15 @@ export const mirrorMove = {
   power: null,
   accuracy: null,
   pp: 20,
-  repeatMove: true,
+  repeatEnemyMove: true,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const mist = {
   name: "mist",
@@ -827,10 +1523,19 @@ export const mist = {
   power: null,
   accuracy: null,
   pp: 30,
-  effect: {
-    statusCondition: TEMPORAL_STATUS.PREVENT_STATS_CHANGED,
-    duration: 5,
-  },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [
+    {
+      statusCondition: TEMPORAL_STATUS.PREVENT_STATS_CHANGED,
+      duration: 5,
+    },
+  ],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const nightShade = {
   name: "night shade",
@@ -840,6 +1545,14 @@ export const nightShade = {
   accuracy: 1.0,
   pp: 15,
   damageOnLevel: true,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const payDay = {
   name: "pay day",
@@ -848,6 +1561,14 @@ export const payDay = {
   power: 40,
   accuracy: 1.0,
   pp: 20,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const peck = {
   name: "peck",
@@ -856,6 +1577,14 @@ export const peck = {
   power: 35,
   accuracy: 1.0,
   pp: 35,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const petalDance = {
   name: "petal dance",
@@ -864,11 +1593,20 @@ export const petalDance = {
   power: 120,
   accuracy: 1.0,
   pp: 10,
-  effect: {
-    status: MOVES_STATUS.DANCING,
-    target: TARGET.SELF,
-    duration: [2, 3],
-  },
+  repeatMove: [2, 3],
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [
+    {
+      status: MOVES_STATUS.DANCING,
+      duration: [2, 3],
+    },
+  ],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const pinMissile = {
   name: "pin missile",
@@ -877,9 +1615,15 @@ export const pinMissile = {
   power: 25,
   accuracy: 0.95,
   pp: 20,
-  minTimes: 2,
-  maxTimes: 5,
-  probabilities: [0.3333, 0.3333, 0.1667, 0.1667],
+  multihit: [2, 5],
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const poisonGas = {
   name: "poison gas",
@@ -888,7 +1632,14 @@ export const poisonGas = {
   power: null,
   accuracy: 0.9,
   pp: 40,
-  effect: { statusCondition: FIXED_STATUS.POISONED },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [{ statusCondition: FIXED_STATUS.POISONED }],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const poisonPowder = {
   name: "poison powder",
@@ -897,7 +1648,14 @@ export const poisonPowder = {
   power: null,
   accuracy: 0.75,
   pp: 35,
-  effect: { statusCondition: FIXED_STATUS.POISONED },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [{ statusCondition: FIXED_STATUS.POISONED }],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const poisonSting = {
   name: "poison sting",
@@ -906,7 +1664,14 @@ export const poisonSting = {
   power: 15,
   accuracy: 1.0,
   pp: 35,
-  effect: { chance: 0.3, statusCondition: FIXED_STATUS.POISONED },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [{ chance: 0.3, statusCondition: FIXED_STATUS.POISONED }],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const pound = {
   name: "pound",
@@ -915,6 +1680,14 @@ export const pound = {
   power: 40,
   accuracy: 1.0,
   pp: 35,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const psybeam = {
   name: "psybeam",
@@ -923,7 +1696,16 @@ export const psybeam = {
   power: 65,
   accuracy: 1.0,
   pp: 20,
-  effect: { chance: 0.1, statusCondition: TEMPORAL_STATUS.CONFUSED },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [
+    { chance: 0.1, statusCondition: TEMPORAL_STATUS.CONFUSED },
+  ],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const psychic = {
   name: "psychic",
@@ -932,7 +1714,14 @@ export const psychic = {
   power: 90,
   accuracy: 1.0,
   pp: 10,
-  effect: { chance: 0.1, stat: STATS.SPDEFENSE, stages: -1 },
+  selfBoost: [],
+  enemyBoosts: [{ chance: 0.1, stat: STATS.SPDEFENSE, stages: -1 }],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 // TO BE FIXED
 export const psywave = {
@@ -942,8 +1731,15 @@ export const psywave = {
   power: null,
   accuracy: 1,
   pp: 15,
-  minDamage: 1,
-  maxDamage: 256,
+  psyWaveDamage: true,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const quickAttack = {
   name: "quick attack",
@@ -953,6 +1749,14 @@ export const quickAttack = {
   accuracy: 1.0,
   pp: 30,
   priority: 1,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const rage = {
   name: "rage",
@@ -961,7 +1765,14 @@ export const rage = {
   power: 20,
   accuracy: 1.0,
   pp: 20,
-  effect: { stat: STATS.ATTACK, stages: 1, onHit: true },
+  selfBoost: [{ stat: STATS.ATTACK, stages: 1, onHit: true }],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const razorLeaf = {
   name: "razor leaf",
@@ -971,6 +1782,14 @@ export const razorLeaf = {
   accuracy: 0.95,
   pp: 25,
   highCriticalHitRatio: true,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const razorWind = {
   name: "razor wind",
@@ -980,11 +1799,19 @@ export const razorWind = {
   accuracy: 100,
   pp: 10,
   highCriticalHitRatio: true,
-  effect: {
-    status: MOVES_STATUS.LOADING,
-    target: TARGET.SELF,
-    duration: 1,
-  },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [
+    {
+      status: MOVES_STATUS.LOADING,
+      duration: [1],
+    },
+  ],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const recover = {
   name: "recover",
@@ -994,6 +1821,14 @@ export const recover = {
   accuracy: null,
   pp: 20,
   recover: 0.5,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const reflect = {
   name: "reflect",
@@ -1002,7 +1837,14 @@ export const reflect = {
   power: null,
   accuracy: null,
   pp: 20,
-  effects: { field: FIELD_STATUS.REFLECT, duration: 5 },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [{ field: FIELD_STATUS.REFLECT, duration: 5 }],
+  selfStatus: [],
 };
 export const rest = {
   name: "rest",
@@ -1012,7 +1854,14 @@ export const rest = {
   accuracy: null,
   pp: 10,
   recover: 1,
-  effect: { statusCondition: FIXED_STATUS.SLEEP },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [{ statusCondition: FIXED_STATUS.SLEEP, duration: 2 }],
 };
 export const roar = {
   name: "roar",
@@ -1023,6 +1872,14 @@ export const roar = {
   pp: 20,
   priority: -6,
   forceChange: true,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const rockSlide = {
   name: "rock slide",
@@ -1031,7 +1888,16 @@ export const rockSlide = {
   power: 75,
   accuracy: 0.9,
   pp: 10,
-  effect: { chance: 0.3, statusCondition: TEMPORAL_STATUS.FLINCHED },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [
+    { chance: 0.3, statusCondition: TEMPORAL_STATUS.FLINCHED, duration: 1 },
+  ],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const rockThrow = {
   name: "rock throw",
@@ -1040,6 +1906,14 @@ export const rockThrow = {
   power: 50,
   accuracy: 0.65,
   pp: 15,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const rollingKick = {
   name: "rolling kick",
@@ -1048,7 +1922,16 @@ export const rollingKick = {
   power: 60,
   accuracy: 0.85,
   pp: 15,
-  effect: { chance: 0.3, statusCondition: TEMPORAL_STATUS.FLINCHED },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [
+    { chance: 0.3, statusCondition: TEMPORAL_STATUS.FLINCHED, duration: 1 },
+  ],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const sandAttack = {
   name: "sand attack",
@@ -1057,7 +1940,14 @@ export const sandAttack = {
   power: null,
   accuracy: 1.0,
   pp: 15,
-  effect: { stat: STATS.ACCURACY, stages: -1 },
+  selfBoost: [],
+  enemyBoosts: [{ stat: STATS.ACCURACY, stages: -1 }],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const scratch = {
   name: "scratch",
@@ -1066,6 +1956,14 @@ export const scratch = {
   power: 40,
   accuracy: 1.0,
   pp: 35,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const screech = {
   name: "screech",
@@ -1074,7 +1972,14 @@ export const screech = {
   power: null,
   accuracy: 0.85,
   pp: 40,
-  effect: { stat: STATS.DEFENSE, stages: -2 },
+  selfBoost: [],
+  enemyBoosts: [{ stat: STATS.DEFENSE, stages: -2 }],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const seismicToss = {
   name: "seismic toss",
@@ -1084,6 +1989,14 @@ export const seismicToss = {
   accuracy: 1.0,
   pp: 20,
   damageOnLevel: true,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const selfDestruct = {
   name: "self-destruct",
@@ -1092,7 +2005,15 @@ export const selfDestruct = {
   power: 200,
   accuracy: 1.0,
   pp: 5,
-  effects: { stat: STATS.HP, target: TARGET.SELF, stages: 1 },
+  selfDestruct: true,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const sharpen = {
   name: "sharpen",
@@ -1101,7 +2022,14 @@ export const sharpen = {
   power: null,
   accuracy: null,
   pp: 30,
-  effect: { stat: STATS.ATTACK, stages: 1 },
+  selfBoost: [{ stat: STATS.ATTACK, stages: 1 }],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const sing = {
   name: "sing",
@@ -1110,7 +2038,14 @@ export const sing = {
   power: null,
   accuracy: 0.55,
   pp: 15,
-  effect: { statusCondition: FIXED_STATUS.SLEEP },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [{ statusCondition: FIXED_STATUS.SLEEP }],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const skullBash = {
   name: "skull bash",
@@ -1119,13 +2054,25 @@ export const skullBash = {
   power: 130,
   accuracy: 1.0,
   pp: 15,
-  effect: {
-    status: MOVES_STATUS.LOADING,
-    target: TARGET.SELF,
-    duration: 1,
-    stat: STATS.DEFENSE,
-    stages: 1,
-  },
+  volatileStatus: [
+    {
+      status: MOVES_STATUS.LOADING,
+      duration: [1],
+    },
+  ],
+  selfBoost: [
+    {
+      duration: 1,
+      stat: STATS.DEFENSE,
+      stages: 1,
+    },
+  ],
+  enemyBoosts: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const skyAttack = {
   name: "sky attack",
@@ -1135,11 +2082,19 @@ export const skyAttack = {
   accuracy: 0.9,
   pp: 5,
   highCriticalHitRatio: true,
-  effect: {
-    status: MOVES_STATUS.LOADING,
-    target: TARGET.SELF,
-    duration: 1,
-  },
+  volatileStatus: [
+    {
+      status: MOVES_STATUS.LOADING,
+      duration: [1],
+    },
+  ],
+  selfBoost: [],
+  enemyBoosts: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const slam = {
   name: "slam",
@@ -1148,6 +2103,14 @@ export const slam = {
   power: 80,
   accuracy: 0.75,
   pp: 20,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const slash = {
   name: "slash",
@@ -1157,6 +2120,14 @@ export const slash = {
   accuracy: 1.0,
   pp: 20,
   highCriticalHitRatio: true,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const sleepPowder = {
   name: "sleep powder",
@@ -1165,7 +2136,14 @@ export const sleepPowder = {
   power: null,
   accuracy: 0.75,
   pp: 15,
-  effect: { statusCondition: FIXED_STATUS.SLEEP },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [{ statusCondition: FIXED_STATUS.SLEEP }],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const sludge = {
   name: "sludge",
@@ -1174,7 +2152,14 @@ export const sludge = {
   power: 65,
   accuracy: 1.0,
   pp: 20,
-  effect: { chance: 0.3, statusCondition: FIXED_STATUS.POISONED },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [{ chance: 0.3, statusCondition: FIXED_STATUS.POISONED }],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const smog = {
   name: "smog",
@@ -1183,7 +2168,14 @@ export const smog = {
   power: 30,
   accuracy: 0.7,
   pp: 20,
-  effect: { chance: 0.4, statusCondition: FIXED_STATUS.POISONED },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [{ chance: 0.4, statusCondition: FIXED_STATUS.POISONED }],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const smokescreen = {
   name: "smokescreen",
@@ -1192,7 +2184,14 @@ export const smokescreen = {
   power: null,
   accuracy: 1.0,
   pp: 20,
-  effect: { stat: STATS.ACCURACY, stages: -1 },
+  selfBoost: [],
+  enemyBoosts: [{ stat: STATS.ACCURACY, stages: -1 }],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const softBoiled = {
   name: "soft-boiled",
@@ -1202,6 +2201,14 @@ export const softBoiled = {
   accuracy: null,
   pp: 10,
   recover: 0.5,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const solarBeam = {
   name: "solar beam",
@@ -1210,11 +2217,19 @@ export const solarBeam = {
   power: 120,
   accuracy: 1.0,
   pp: 10,
-  effect: {
-    status: MOVES_STATUS.LOADING,
-    target: TARGET.SELF,
-    duration: 1,
-  },
+  volatileStatus: [
+    {
+      status: MOVES_STATUS.LOADING,
+      duration: [1],
+    },
+  ],
+  selfBoost: [],
+  enemyBoosts: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const sonicBoom = {
   name: "sonic boom",
@@ -1224,6 +2239,14 @@ export const sonicBoom = {
   accuracy: 0.9,
   pp: 20,
   fixedPower: 20,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const spikeCannon = {
   name: "spike cannon",
@@ -1232,9 +2255,15 @@ export const spikeCannon = {
   power: 20,
   accuracy: 1.0,
   pp: 15,
-  minTimes: 2,
-  maxTimes: 5,
-  probabilities: [0.3333, 0.3333, 0.1667, 0.1667],
+  multihit: [2, 5],
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const splash = {
   name: "splash",
@@ -1243,6 +2272,14 @@ export const splash = {
   power: null,
   accuracy: null,
   pp: 40,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const spore = {
   name: "spore",
@@ -1251,7 +2288,14 @@ export const spore = {
   power: null,
   accuracy: 1.0,
   pp: 15,
-  effect: { statusCondition: FIXED_STATUS.SLEEP },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [{ statusCondition: FIXED_STATUS.SLEEP }],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const stomp = {
   name: "stomp",
@@ -1260,7 +2304,16 @@ export const stomp = {
   power: 65,
   accuracy: 1.0,
   pp: 20,
-  effect: { chance: 0.3, statusCondition: TEMPORAL_STATUS.FLINCHED },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [
+    { chance: 0.3, statusCondition: TEMPORAL_STATUS.FLINCHED, duration: 1 },
+  ],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const strength = {
   name: "strength",
@@ -1269,6 +2322,14 @@ export const strength = {
   power: 80,
   accuracy: 1.0,
   pp: 15,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const stringShot = {
   name: "string shot",
@@ -1277,7 +2338,14 @@ export const stringShot = {
   power: null,
   accuracy: 0.95,
   pp: 40,
-  effect: { stat: STATS.SPEED, stages: -1 },
+  selfBoost: [],
+  enemyBoosts: [{ stat: STATS.SPEED, stages: -1 }],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const struggle = {
   name: "struggle",
@@ -1287,6 +2355,14 @@ export const struggle = {
   accuracy: 1.0,
   pp: null,
   defaultMove: true,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const stunSpore = {
   name: "stun spore",
@@ -1295,7 +2371,14 @@ export const stunSpore = {
   power: null,
   accuracy: 0.75,
   pp: 30,
-  effect: { statusCondition: FIXED_STATUS.PARALIZED },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [{ statusCondition: FIXED_STATUS.PARALIZED }],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const submission = {
   name: "submission",
@@ -1305,6 +2388,14 @@ export const submission = {
   accuracy: 0.8,
   pp: 25,
   recoil: 0.25,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const substitute = {
   name: "substitute",
@@ -1313,7 +2404,14 @@ export const substitute = {
   power: null,
   accuracy: null,
   pp: 10,
-  effects: { statusCondition: TEMPORAL_STATUS.SUBSTITUTE },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [{ statusCondition: TEMPORAL_STATUS.SUBSTITUTE }],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const superFang = {
   name: "super fang",
@@ -1322,12 +2420,15 @@ export const superFang = {
   power: null,
   accuracy: 0.9,
   pp: 10,
-  effects: {
-    stat: STATS.HP,
-    target: TARGET.ENEMY,
-    stages: 0.5,
-    currentValue: true,
-  },
+  halfHPDamage: true,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const supersonic = {
   name: "supersonic",
@@ -1336,7 +2437,14 @@ export const supersonic = {
   power: null,
   accuracy: 0.55,
   pp: 20,
-  effect: { statusCondition: TEMPORAL_STATUS.CONFUSED },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [{ statusCondition: TEMPORAL_STATUS.CONFUSED }],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const surf = {
   name: "surf",
@@ -1345,6 +2453,14 @@ export const surf = {
   power: 90,
   accuracy: 1.0,
   pp: 15,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const swift = {
   name: "swift",
@@ -1354,6 +2470,14 @@ export const swift = {
   accuracy: null,
   pp: 20,
   unableToMiss: true,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const swordsDance = {
   name: "swords dance",
@@ -1362,7 +2486,14 @@ export const swordsDance = {
   power: null,
   accuracy: null,
   pp: 30,
-  effect: { stat: STATS.ATTACK, stages: 2 },
+  selfBoost: [{ stat: STATS.ATTACK, stages: 2 }],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const tackle = {
   name: "tackle",
@@ -1371,6 +2502,14 @@ export const tackle = {
   power: 40,
   accuracy: 1,
   pp: 35,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const tailWhip = {
   name: "tail whip",
@@ -1379,7 +2518,14 @@ export const tailWhip = {
   power: null,
   accuracy: 1.0,
   pp: 30,
-  effect: { stat: STATS.DEFENSE, stages: -1 },
+  selfBoost: [],
+  enemyBoosts: [{ stat: STATS.DEFENSE, stages: -1 }],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const takeDown = {
   name: "take down",
@@ -1389,6 +2535,14 @@ export const takeDown = {
   accuracy: 0.85,
   pp: 20,
   recoil: 0.25,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const teleport = {
   name: "teleport",
@@ -1398,6 +2552,14 @@ export const teleport = {
   accuracy: null,
   pp: 20,
   allowToChange: true,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const thrash = {
   name: "thrash",
@@ -1406,11 +2568,19 @@ export const thrash = {
   power: 120,
   accuracy: 1.0,
   pp: 10,
-  effect: {
-    status: MOVES_STATUS.HITTING,
-    target: TARGET.SELF,
-    duration: [2, 3],
-  },
+  volatileStatus: [
+    {
+      status: MOVES_STATUS.HITTING,
+      duration: [2, 3],
+    },
+  ],
+  selfBoost: [],
+  enemyBoosts: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const thunder = {
   name: "thunder",
@@ -1419,7 +2589,14 @@ export const thunder = {
   power: 110,
   accuracy: 0.7,
   pp: 10,
-  effect: { chance: 0.1, statusCondition: FIXED_STATUS.PARALIZED },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [{ chance: 0.1, statusCondition: FIXED_STATUS.PARALIZED }],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const thunderPunch = {
   name: "thunder punch",
@@ -1428,7 +2605,14 @@ export const thunderPunch = {
   power: 75,
   accuracy: 1.0,
   pp: 15,
-  effect: { chance: 0.1, statusCondition: FIXED_STATUS.PARALIZED },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [{ chance: 0.1, statusCondition: FIXED_STATUS.PARALIZED }],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const thunderShock = {
   name: "thunder shock",
@@ -1437,7 +2621,14 @@ export const thunderShock = {
   power: 40,
   accuracy: 1.0,
   pp: 30,
-  effect: { chance: 0.1, statusCondition: FIXED_STATUS.PARALIZED },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [{ chance: 0.1, statusCondition: FIXED_STATUS.PARALIZED }],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const thunderWave = {
   name: "thunder wave",
@@ -1446,7 +2637,14 @@ export const thunderWave = {
   power: null,
   accuracy: 1.0,
   pp: 20,
-  effect: { statusCondition: FIXED_STATUS.PARALIZED },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [{ statusCondition: FIXED_STATUS.PARALIZED }],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const thunderbolt = {
   name: "thunderbolt",
@@ -1455,7 +2653,14 @@ export const thunderbolt = {
   power: 90,
   accuracy: 1.0,
   pp: 15,
-  effect: { chance: 0.1, statusCondition: FIXED_STATUS.PARALIZED },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [{ chance: 0.1, statusCondition: FIXED_STATUS.PARALIZED }],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const toxic = {
   name: "toxic",
@@ -1464,7 +2669,14 @@ export const toxic = {
   power: null,
   accuracy: 0.9,
   pp: 10,
-  effect: { statusCondition: FIXED_STATUS.BADLY_POISONED },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [{ statusCondition: FIXED_STATUS.BADLY_POISONED }],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const transform = {
   name: "transform",
@@ -1473,7 +2685,15 @@ export const transform = {
   power: null,
   accuracy: null,
   pp: 10,
-  effect: { statusCondition: TEMPORAL_STATUS.TRANSFORMED },
+  transformMovement: true,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const triAttack = {
   name: "tri attack",
@@ -1490,6 +2710,27 @@ export const triAttack = {
       FIXED_STATUS.BURNED,
     ],
   },
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [
+    {
+      chance: 0.2,
+      statusCondition: FIXED_STATUS.PARALIZED,
+    },
+    {
+      chance: 0.2,
+      statusCondition: FIXED_STATUS.FREEZED,
+    },
+    {
+      chance: 0.2,
+      statusCondition: FIXED_STATUS.BURNED,
+    },
+  ],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const twineedle = {
   name: "twineedle",
@@ -1498,10 +2739,15 @@ export const twineedle = {
   power: 25,
   accuracy: 1.0,
   pp: 20,
-  minTimes: 2,
-  maxTimes: 2,
-  probabilities: [1],
-  effect: { chance: 0.2, statusCondition: FIXED_STATUS.POISONED },
+  multihit: [2, 2],
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [{ chance: 0.2, statusCondition: FIXED_STATUS.POISONED }],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const viceGrip = {
   name: "vice grip",
@@ -1510,6 +2756,14 @@ export const viceGrip = {
   power: 55,
   accuracy: 1.0,
   pp: 30,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const vineWhip = {
   name: "vine whip",
@@ -1518,6 +2772,14 @@ export const vineWhip = {
   power: 45,
   accuracy: 1.0,
   pp: 25,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const waterGun = {
   name: "water gun",
@@ -1526,6 +2788,14 @@ export const waterGun = {
   power: 40,
   accuracy: 1.0,
   pp: 25,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const waterfall = {
   name: "waterfall",
@@ -1534,6 +2804,14 @@ export const waterfall = {
   power: 80,
   accuracy: 1.0,
   pp: 15,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const whirlwind = {
   name: "whirlwind",
@@ -1544,6 +2822,14 @@ export const whirlwind = {
   pp: 20,
   priority: -6,
   forceChange: true,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const wingAttack = {
   name: "wing attack",
@@ -1552,6 +2838,14 @@ export const wingAttack = {
   power: 60,
   accuracy: 1.0,
   pp: 35,
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const withdraw = {
   name: "withdraw",
@@ -1560,7 +2854,14 @@ export const withdraw = {
   power: null,
   accuracy: null,
   pp: 40,
-  effect: { stat: STATS.DEFENSE, stages: 1 },
+  selfBoost: [{ stat: STATS.DEFENSE, stages: 1 }],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 export const wrap = {
   name: "wrap",
@@ -1569,7 +2870,15 @@ export const wrap = {
   power: 15,
   accuracy: 0.9,
   pp: 20,
-  effects: { stat: STATS.HP, stages: 0.125, duration: [4, 5] },
+  trappedWithDamage: [4, 5],
+  selfBoost: [],
+  enemyBoosts: [],
+  volatileStatus: [],
+  temporalStatus: [],
+  enemyStatus: [],
+  enemyTemporalStatus: [],
+  selfFieldBoosts: [],
+  selfStatus: [],
 };
 
 const moves = {

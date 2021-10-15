@@ -33,6 +33,8 @@ const BattleComponent = ({ ownTeam, enemyTeam }) => {
           setOwnIndex: setOwnCurrentPokemonIndex,
           setenemyIndex: setEnemyCurrentPokemonIndex,
         });
+        setExecuteNextAction(false);
+        setActions(actions.slice(1));
       }
     }
   }, [
@@ -46,8 +48,8 @@ const BattleComponent = ({ ownTeam, enemyTeam }) => {
 
   return (
     <div className={styles.container}>
-      <EnemyBar pokemon={ownTeamBattle[ownCurrentPokemonIndex]} />
-      <OwnBar pokemon={enemyTeamBattle[enemyCurrentPokemonIndex]} />
+      <EnemyBar pokemon={enemyTeamBattle[enemyCurrentPokemonIndex]} />
+      <OwnBar pokemon={ownTeamBattle[ownCurrentPokemonIndex]} />
       {actions.length > 0 ? (
         <InfoBox
           message="HERE WILL GO THE MESSAGES"

@@ -1,0 +1,33 @@
+.card {
+  width: 64px;
+  height: 64px;
+  margin-right: 8px;
+  margin-left: 8px;
+  cursor: pointer;
+  border: 1px solid black;
+  background: gray;
+  &:hover {
+    background: rgb(179, 179, 179);
+  }
+  &:active {
+    background: rgb(202, 202, 202);
+    border: 1px solid rgb(182, 182, 182);
+  }
+}
+
+.completedCard {
+  background: rgb(215, 255, 222);
+}
+
+.image {
+  filter: grayscale(100%);
+  transition: 0.2s ease-in-out;
+  &:hover {
+    filter: grayscale(0);
+  }
+  cursor: pointer;
+}
+
+.completed {
+  filter: grayscale(0);
+}

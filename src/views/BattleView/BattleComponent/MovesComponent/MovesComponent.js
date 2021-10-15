@@ -2,14 +2,15 @@ import React, { useCallback } from "react";
 import styles from "./MovesComponent.module.scss";
 import PokemonMove from "../../../../components/PokemonMove/PokemonMove";
 import { generateActionMove } from "../../../../utils/battleGenerator";
-import ATTACK_DIRECTION from "../../../../assets/attackDirection";
 
-const MovesComponent = ({ pokemon, enemy }) => {
+const MovesComponent = ({ pokemon, enemy, onClick }) => {
   const handleClick = useCallback(
     (move) => {
-      generateActionMove(move, pokemon, enemy, ATTACK_DIRECTION.ATTACK);
+      const actions = generateActionMove(move, pokemon, enemy);
+      console.log(actions);
+      onClick && onClick(actions);
     },
-    [enemy, pokemon]
+    [enemy, pokemon, onClick]
   );
   return (
     <div className={styles.container}>
