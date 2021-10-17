@@ -3,6 +3,7 @@ export const FIXED_STATUS_EFFECT = "STATUS_EFFECT";
 export const TEMPORAL_STATUS_EFFECT = "TEMPORAL_STATUS_EFFECT";
 export const CHANGE_POKEMON = "CHANGE_POKEMON";
 export const STAT_CHANGE = "STAT_CHANGE";
+export const MISS = "MISS";
 
 const ACTIONS = {
   EXECUTE_MOVE,
@@ -10,6 +11,7 @@ const ACTIONS = {
   TEMPORAL_STATUS_EFFECT,
   CHANGE_POKEMON,
   STAT_CHANGE,
+  MISS,
 };
 
 export default ACTIONS;

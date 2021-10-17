@@ -52,7 +52,7 @@ const useAppContext = (context) => {
   const modifyBattle = useCallback(
     ({ ownPokemon, enemyPokemon }) => {
       dispatch({
-        type: ACTIONS.CREATE_BATTLE,
+        type: ACTIONS.MODIFY_BATTLE,
         value: { ownPokemon, enemyPokemon },
       });
     },

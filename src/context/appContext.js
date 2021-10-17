@@ -9,7 +9,13 @@ const initialState = {
   currentTeam: [],
   zones: [ZONES.CITY, ZONES.RANCH, ZONES.VOLCAN, ZONES.CLASSIC, ZONES.SEA],
   currentZone: ZONES.RANCH,
-  battle: { ownTeam: {}, enemyTeam: {} },
+  battle: {
+    ownTeam: [],
+    enemyTeam: [],
+    ownIndex: 0,
+    enemyIndex: 0,
+    infoMessage: undefined,
+  },
 };
 
 function appReducer(state, action) {
@@ -122,7 +128,13 @@ function appReducer(state, action) {
       const enemyPokemon = action?.value?.enemyPokemon;
       const newState = {
         ...state,
-        battle: { ownTeam: ownPokemon, enemyTeam: enemyPokemon },
+        battle: {
+          ownTeam: ownPokemon,
+          enemyTeam: enemyPokemon,
+          ownIndex: 0,
+          enemyIndex: 0,
+          message: undefined,
+        },
       };
       return newState;
     }
@@ -131,7 +143,12 @@ function appReducer(state, action) {
       const enemyPokemon = action?.value?.enemyPokemon;
       const newState = {
         ...state,
-        battle: { ownTeam: ownPokemon, enemyTeam: enemyPokemon },
+        battle: {
+          ownTeam: ownPokemon,
+          enemyTeam: enemyPokemon,
+          ownIndex: state.battle.ownIndex,
+          enemyIndex: state.battle.enemyIndex,
+        },
       };
       return newState;
     }

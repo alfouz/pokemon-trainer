@@ -29,5 +29,5 @@ export const trainer1 = [
 ];
 
 export const randomTrainer = [
-  getPokemon(6, ivs, evs, 10, [flamethrower, ember, scratch, growl]),
+  getPokemon(3, ivs, evs, 10, [flamethrower, ember, scratch, growl]),
 ];

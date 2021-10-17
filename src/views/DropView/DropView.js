@@ -6,7 +6,7 @@ import PokemonLoader from "../../components/PokemonLoader/PokemonLoader";
 import PokemonZone from "../../components/PokemonZone/PokemonZone";
 import useAppContext from "../../context/useAppContext";
 
-const chanceNewDrop = 1;
+const chanceNewDrop = 0.2;
 
 const DropView = ({ stat, value }) => {
   const [currentPokemon, setCurrentPokemon] = useState({});
