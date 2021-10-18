@@ -22,7 +22,10 @@ const BattleComponent = ({ ownTeam, enemyTeam }) => {
     >
       <div className={styles.container}>
         <EnemyBar pokemon={state.battle.enemyTeam[state.battle.enemyIndex]} />
-        <OwnBar pokemon={state.battle.ownTeam[state.battle.ownIndex]} />
+        <OwnBar
+          pokemon={state.battle.ownTeam[state.battle.ownIndex]}
+          team={state.battle.ownTeam}
+        />
         {state.battle.infoMessage ? (
           <InfoBox
             message={state.battle.infoMessage}

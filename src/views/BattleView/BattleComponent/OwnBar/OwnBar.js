@@ -2,8 +2,9 @@ import React from "react";
 import stats from "../../../../assets/stats";
 import { FIXED_STATUS } from "../../../../assets/status";
 import styles from "./OwnBar.module.scss";
+import PokemonChangeSquare from "../../../../components/PokemonChangeSquare/PokemonChangeSquare";
 
-const OwnBar = ({ pokemon }) => {
+const OwnBar = ({ pokemon, team, changePokemon }) => {
   return (
     <div className={styles.container}>
       <div className={styles.leftContainer}>
@@ -34,6 +35,16 @@ const OwnBar = ({ pokemon }) => {
                   }%`,
                 }}
               />
+            </div>
+            <div className={styles.changePokemonContainer}>
+              {team.map((item, index) => (
+                <PokemonChangeSquare
+                  pokemon={item}
+                  onClick={() => {
+                    changePokemon(index);
+                  }}
+                />
+              ))}
             </div>
           </div>
         </div>

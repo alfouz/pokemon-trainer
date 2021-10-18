@@ -69,3 +69,11 @@
   height: 8px;
   width: 40%;
 }
+
+.changePokemonContainer {
+  justify-content: flex-end;
+  width: 160px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
