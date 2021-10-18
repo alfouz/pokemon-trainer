@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useEffect } from "react/cjs/react.development";
-import { generateOwnMoveEffects } from "./battleGenerator";
+import {
+  generateOwnMoveEffects,
+  generateStatusEffects,
+} from "./battleGenerator";
 import useAppContext from "../context/useAppContext";
 import { generateNewMove } from "./enemyIa";
 
@@ -126,6 +129,25 @@ const BattleProvider = ({
             });
             break;
           case "auto":
+            const autoData = generateStatusEffects(
+              ownTempPokemon,
+              enemyTempPokemon
+            );
+            modifyBattle({
+              ownPokemon: state.battle.ownTeam.map((pok) => {
+                if (pok.id === autoData.ownPokemon.id) {
+                  return autoData.ownPokemon;
+                }
+                return pok;
+              }),
+              enemyPokemon: state.battle.enemyTeam.map((pok) => {
+                if (pok.id === autoData.enemyPokemon.id) {
+                  return autoData.enemyPokemon;
+                }
+                return pok;
+              }),
+              infoMessage: autoData.text,
+            });
             break;
           case "endTurn":
             modifyBattle({

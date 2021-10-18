@@ -57,18 +57,8 @@ const generateActionMoveCalculateDamage = (pok1, pok2, move) => {
   const effectiveness = pok2.types.reduce((acc, item) => {
     return acc * EFFECTIVENESS_TABLE[move.type][item];
   }, 1);
+
   const isCrit = criticalGenerator(pok1.boosts[STATS.CRITCHANCE]); // Need to build critchance enhancement
-  console.log(
-    "STATS",
-    pok1.stats[STATS.ATTACK] *
-      calculateStatsMultiplier(pok1.boosts[STATS.ATTACK], false),
-    pok2.stats[STATS.DEFENSE] *
-      (isCrit ? 1 : calculateStatsMultiplier(pok2.boosts[STATS.DEFENSE]),
-      false),
-    isCrit ? 1 : calculateStatsMultiplier(pok2.boosts[STATS.DEFENSE]),
-    isCrit ? critDamage : 1,
-    isStab ? stabDamage : 1
-  );
   if (move.category === CATEGORIES.PHYSICAL) {
     const damage = battleDamage(
       pok1.level,
@@ -223,19 +213,36 @@ const generateStatusActions = (move, own, enemy) => {
       itHits = move.enemyTemporalStatus[0].chance >= Math.random();
     }
     if (itHits) {
-      actionQueue.push({
-        action: ACTIONS.TEMPORAL_STATUS_EFFECT,
-        text: `${enemy.name} has been ${move.enemyTemporalStatus[0].statusCondition} `,
-        own: own,
-        enemy: enemy,
-        enemyValues: {
-          temporalStatus: {
-            status: move.enemyTemporalStatus[0].statusCondition,
-            duration: move.enemyTemporalStatus[0].duration | 1,
+      if (
+        !enemy.temporalStatus.some((tempStatus) => {
+          return (
+            tempStatus.status === move.enemyTemporalStatus[0].statusCondition
+          );
+        })
+      ) {
+        actionQueue.push({
+          action: ACTIONS.TEMPORAL_STATUS_EFFECT,
+          text: `${enemy.name} has been ${move.enemyTemporalStatus[0].statusCondition} `,
+          own: own,
+          enemy: enemy,
+          enemyValues: {
+            temporalStatus: {
+              status: move.enemyTemporalStatus[0].statusCondition,
+              duration: move.enemyTemporalStatus[0].duration | 1,
+            },
           },
-        },
-        ownValues: undefined,
-      });
+          ownValues: undefined,
+        });
+      } else {
+        actionQueue.push({
+          action: ACTIONS.TEMPORAL_STATUS_EFFECT,
+          text: `${enemy.name} is already ${move.enemyTemporalStatus[0].statusCondition} `,
+          own: own,
+          enemy: enemy,
+          enemyValues: undefined,
+          ownValues: undefined,
+        });
+      }
     }
   }
 
@@ -452,8 +459,8 @@ export const generateStatusEffects = (own, enemy) => {
           return false;
         }
         case TEMPORAL_STATUS.SEEDED: {
-          const damage = Math.floor(newOwn.stats[STATS.HP] / 16);
-          newOwn.life = newEnemy.life - damage;
+          const damage = Math.floor(newEnemy.stats[STATS.HP] / 16);
+          newOwn.life = newOwn.life - damage;
           newEnemy.life =
             newEnemy.life + damage > newEnemy.stats[STATS.HP]
               ? newEnemy.stats[STATS.HP]
@@ -479,7 +486,7 @@ export const generateStatusEffects = (own, enemy) => {
           return false;
         }
         case TEMPORAL_STATUS.SEEDED: {
-          const damage = Math.floor(newEnemy.stats[STATS.HP] / 16);
+          const damage = Math.floor(newOwn.stats[STATS.HP] / 16);
           newEnemy.life = newEnemy.life - damage;
           newOwn.life =
             newOwn.life + damage > newOwn.stats[STATS.HP]
