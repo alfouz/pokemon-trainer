@@ -1131,27 +1131,27 @@ export const hydroPump = {
   selfFieldBoosts: [],
   selfStatus: [],
 };
-export const hyperBeam = {
-  name: "hyper beam",
-  type: TYPES.NORMAL,
-  category: CATEGORIES.SPECIAL,
-  power: 150,
-  accuracy: 0.9,
-  pp: 5,
-  selfBoost: [],
-  enemyBoosts: [],
-  volatileStatus: [],
-  temporalStatus: [
-    {
-      statusCondition: TEMPORAL_STATUS.RELOADING,
-      duration: 1,
-    },
-  ],
-  enemyStatus: [],
-  enemyTemporalStatus: [],
-  selfFieldBoosts: [],
-  selfStatus: [],
-};
+// export const hyperBeam = {
+//   name: "hyper beam",
+//   type: TYPES.NORMAL,
+//   category: CATEGORIES.SPECIAL,
+//   power: 150,
+//   accuracy: 0.9,
+//   pp: 5,
+//   selfBoost: [],
+//   enemyBoosts: [],
+//   volatileStatus: [],
+//   temporalStatus: [
+//     {
+//       statusCondition: TEMPORAL_STATUS.RELOADING,
+//       duration: 1,
+//     },
+//   ],
+//   enemyStatus: [],
+//   enemyTemporalStatus: [],
+//   selfFieldBoosts: [],
+//   selfStatus: [],
+// };
 export const hyperFang = {
   name: "hyper fang",
   type: TYPES.NORMAL,
@@ -1517,27 +1517,27 @@ export const minimize = {
 //   selfFieldBoosts: [],
 //   selfStatus: [],
 // };
-export const mist = {
-  name: "mist",
-  type: TYPES.ICE,
-  category: CATEGORIES.STATUS,
-  power: null,
-  accuracy: null,
-  pp: 30,
-  selfBoost: [],
-  enemyBoosts: [],
-  volatileStatus: [],
-  temporalStatus: [
-    {
-      statusCondition: TEMPORAL_STATUS.PREVENT_STATS_CHANGED,
-      duration: 5,
-    },
-  ],
-  enemyStatus: [],
-  enemyTemporalStatus: [],
-  selfFieldBoosts: [],
-  selfStatus: [],
-};
+// export const mist = {
+//   name: "mist",
+//   type: TYPES.ICE,
+//   category: CATEGORIES.STATUS,
+//   power: null,
+//   accuracy: null,
+//   pp: 30,
+//   selfBoost: [],
+//   enemyBoosts: [],
+//   volatileStatus: [],
+//   temporalStatus: [
+//     {
+//       statusCondition: TEMPORAL_STATUS.PREVENT_STATS_CHANGED,
+//       duration: 5,
+//     },
+//   ],
+//   enemyStatus: [],
+//   enemyTemporalStatus: [],
+//   selfFieldBoosts: [],
+//   selfStatus: [],
+// };
 export const nightShade = {
   name: "night shade",
   type: TYPES.GHOST,
@@ -2940,7 +2940,7 @@ const moves = {
   hornAttack,
   hornDrill,
   hydroPump,
-  hyperBeam,
+  // hyperBeam,
   hyperFang,
   hypnosis,
   iceBeam,
@@ -2963,7 +2963,7 @@ const moves = {
   // mimic,
   minimize,
   // mirrorMove,
-  mist,
+  // mist,
   nightShade,
   payDay,
   peck,

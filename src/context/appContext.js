@@ -141,6 +141,8 @@ function appReducer(state, action) {
     case ACTIONS.MODIFY_BATTLE: {
       const ownPokemon = action?.value?.ownPokemon;
       const enemyPokemon = action?.value?.enemyPokemon;
+      const infoMessage = action?.value?.infoMessage;
+      console.log("STATE", ownPokemon, enemyPokemon, infoMessage);
       const newState = {
         ...state,
         battle: {
@@ -148,6 +150,7 @@ function appReducer(state, action) {
           enemyTeam: enemyPokemon,
           ownIndex: state.battle.ownIndex,
           enemyIndex: state.battle.enemyIndex,
+          infoMessage,
         },
       };
       return newState;

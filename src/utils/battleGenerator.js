@@ -2,7 +2,7 @@ import STATS from "../assets/stats";
 import CATEGORIES from "../assets/categories";
 import { battleDamage, criticalGenerator } from "./statsCalculator";
 import ACTIONS from "../assets/actions";
-import { FIXED_STATUS } from "../assets/status";
+import { FIXED_STATUS, TEMPORAL_STATUS } from "../assets/status";
 import EFFECTIVENESS_TABLE from "../assets/typesEffectiveness";
 import { generateNewMove } from "./enemyIa";
 
@@ -52,6 +52,7 @@ const calculateStatsMultiplier = (value, isAccuracy) => {
 };
 
 const generateActionMoveCalculateDamage = (pok1, pok2, move) => {
+  console.log("CALCULATING", pok1, pok2, move);
   const isStab = pok1.types.includes(move.type);
   const isBurned = pok1.status.includes(FIXED_STATUS.BURNED);
   const effectiveness = pok2.types.reduce((acc, item) => {
@@ -116,12 +117,12 @@ const generateStatusActions = (move, own, enemy) => {
     if (itHits) {
       actionQueue.push({
         action: ACTIONS.STAT_CHANGE,
-        text: `${own.name} uses ${move.name}. ${own.name}'s ${
-          move.selfBoost[0].stat
-        } ${newLevelTextStat(move.selfBoost[0].stages)}`,
+        text: `${own.name}'s ${move.selfBoost[0].stat} ${newLevelTextStat(
+          move.selfBoost[0].stages
+        )}`,
         own: own,
         enemy: enemy,
-        enemyValues: {},
+        enemyValues: undefined,
         ownValues: {
           stats: { [move.selfBoost[0].stat]: move.selfBoost[0].stages },
         },
@@ -136,10 +137,10 @@ const generateStatusActions = (move, own, enemy) => {
     if (itHits) {
       actionQueue.push({
         action: ACTIONS.FIXED_STATUS_EFFECT,
-        text: `${own.name} uses ${move.name}. ${own.name} has been ${move.selfStatus[0].statusCondition}`,
+        text: `${own.name} has been ${move.selfStatus[0].statusCondition}`,
         own: own,
         enemy: enemy,
-        enemyValues: {},
+        enemyValues: undefined,
         ownValues: {
           status: move.selfStatus[0].statusCondition,
         },
@@ -154,10 +155,10 @@ const generateStatusActions = (move, own, enemy) => {
     if (itHits) {
       actionQueue.push({
         action: ACTIONS.TEMPORAL_STATUS_EFFECT,
-        text: `${own.name} uses ${move.name}. ${own.name} has been ${move.temporalStatus[0].statusCondition} `,
+        text: `${own.name} has been ${move.temporalStatus[0].statusCondition} `,
         own: own,
         enemy: enemy,
-        enemyValues: {},
+        enemyValues: undefined,
         ownValues: {
           temporalStatus: {
             status: move.temporalStatus[0].statusCondition,
@@ -175,15 +176,15 @@ const generateStatusActions = (move, own, enemy) => {
     if (itHits) {
       actionQueue.push({
         action: ACTIONS.STAT_CHANGE,
-        text: `${own.name} uses ${move.name}. ${enemy.name}'s ${
-          move.enemyBoosts[0].stat
-        } ${newLevelTextStat(move.enemyBoosts[0].stages)}`,
+        text: `${enemy.name}'s ${move.enemyBoosts[0].stat} ${newLevelTextStat(
+          move.enemyBoosts[0].stages
+        )}`,
         own: own,
         enemy: enemy,
         enemyValues: {
           stats: { [move.enemyBoosts[0].stat]: move.enemyBoosts[0].stages },
         },
-        ownValues: {},
+        ownValues: undefined,
       });
     }
   }
@@ -195,7 +196,7 @@ const generateStatusActions = (move, own, enemy) => {
     if (itHits) {
       actionQueue.push({
         action: ACTIONS.FIXED_STATUS_EFFECT,
-        text: `${own.name} uses ${move.name}. ${enemy.name} has been ${move.enemyStatus[0].statusCondition}`,
+        text: `${enemy.name} has been ${move.enemyStatus[0].statusCondition}`,
         own: own,
         enemy: enemy,
         enemyValues: { status: move.enemyStatus[0].statusCondition },
@@ -211,7 +212,7 @@ const generateStatusActions = (move, own, enemy) => {
     if (itHits) {
       actionQueue.push({
         action: ACTIONS.TEMPORAL_STATUS_EFFECT,
-        text: `${own.name} uses ${move.name}. ${enemy.name} has been ${move.enemyTemporalStatus[0].statusCondition} `,
+        text: `${enemy.name} has been ${move.enemyTemporalStatus[0].statusCondition} `,
         own: own,
         enemy: enemy,
         enemyValues: {
@@ -220,7 +221,7 @@ const generateStatusActions = (move, own, enemy) => {
             duration: move.enemyTemporalStatus[0].duration | 1,
           },
         },
-        ownValues: {},
+        ownValues: undefined,
       });
     }
   }
@@ -228,141 +229,259 @@ const generateStatusActions = (move, own, enemy) => {
   return actionQueue;
 };
 
-export const generateOwnAction = (move, own, enemy) => {
+export const generateOwnMoveEffects = ({ move }, own, enemy) => {
   // Create Actions Queue
-  let actionsQueue = [];
+  let newText = `${own.name} uses ${move.name}.`;
+  const newOwn = { ...own };
+  const newEnemy = { ...enemy };
   // OWN MOVE
   let itHitsGeneric = true;
   if (move.accuracy != null || move.accuracy < 1) {
     itHitsGeneric = move.accuracy >= Math.random();
   }
-  if (itHitsGeneric) {
-    if (move.category !== CATEGORIES.STATUS) {
-      const damage = generateActionMoveCalculateDamage(own, enemy, move);
-      actionsQueue.push({
-        action: ACTIONS.EXECUTE_MOVE,
-        text: `${own.name} uses ${move.name}. ${own.name} causes a damage of ${damage} PS to ${enemy.name}`,
-        own: own,
-        enemy: enemy,
-        enemyValues: { life: -damage },
-        ownValues: {},
-      });
-    }
-    const statusActions = generateStatusActions(move, own, enemy);
-    actionsQueue = [...actionsQueue, ...statusActions];
-  } else {
-    actionsQueue.push({
-      action: ACTIONS.MISS,
-      text: `${own.name} misses`,
-      own: own,
-      enemy: enemy,
-      enemyValues: {},
-      ownValues: {},
-    });
+  // FREEZE STATUS
+  let isFreezed = own.status === FIXED_STATUS.FREEZED;
+  if (isFreezed) {
+    isFreezed = 0.2 >= Math.round();
+    newOwn.status = FIXED_STATUS.HEALTHY;
+    newText = newText + `\n${own.name} is no more freeze.`;
   }
-  return actionsQueue;
+  // SLEEP STATUS
+  let isSleep = own.status === FIXED_STATUS.SLEEP;
+  if (isSleep) {
+    isFreezed = 0.3 >= Math.round();
+    newOwn.status = FIXED_STATUS.HEALTHY;
+    newText = newText + `\n${own.name} awake.`;
+  }
+  // PARALYZED STATUS
+  let isParalyzed = own.status === FIXED_STATUS.PARALIZED;
+  if (isParalyzed) {
+    isFreezed = 0.25 >= Math.round();
+  }
+
+  //FLINCHED
+  const isFlinched = own.temporalStatus.some(
+    (item) => item.status === TEMPORAL_STATUS.FLINCHED
+  );
+
+  if (!isFreezed) {
+    if (!isSleep) {
+      if (!isParalyzed) {
+        if (!isFlinched) {
+          if (itHitsGeneric) {
+            if (move.category !== CATEGORIES.STATUS) {
+              const damage = generateActionMoveCalculateDamage(
+                newOwn,
+                newEnemy,
+                move
+              );
+              newEnemy.life = newEnemy.life - damage;
+              newText =
+                newText +
+                `\n${own.name} causes a damage of ${damage} PS to ${enemy.name}.`;
+              if (move.drain) {
+                const drain = damage * move.drain;
+                newOwn.life =
+                  newOwn.life + drain > newOwn.stats[STATS.HP]
+                    ? newOwn.stats[STATS.HP]
+                    : newOwn.life + drain;
+                newText = newText + `\n${own.name} heals half damage done.`;
+              }
+            }
+            const statusActions = generateStatusActions(move, newOwn, newEnemy);
+            statusActions.forEach((item) => {
+              switch (item.action) {
+                case ACTIONS.STAT_CHANGE:
+                  if (item.ownValues) {
+                    const stats = Object.keys(item.ownValues.stats);
+                    stats.forEach((stat) => {
+                      const newStatValue =
+                        newOwn.boosts[stat] + item.ownValues.stats[stat];
+                      let newStat = newStatValue;
+                      if (newStat < -6) {
+                        newStat = -6;
+                      }
+                      if (newStat > 6) {
+                        newStat = 6;
+                      }
+                      newOwn.boosts[stat] = newStat;
+                      newText = newText + `\n${item.text}`;
+                    });
+                  }
+                  if (item.enemyValues) {
+                    const stats = Object.keys(item.enemyValues.stats);
+                    stats.forEach((stat) => {
+                      const newStatValue =
+                        newEnemy.boosts[stat] + item.enemyValues.stats[stat];
+                      let newStat = newStatValue;
+                      if (newStat < -6) {
+                        newStat = -6;
+                      }
+                      if (newStat > 6) {
+                        newStat = 6;
+                      }
+                      newEnemy.boosts[stat] = newStat;
+                      newText = newText + `\n${item.text}`;
+                    });
+                  }
+                  break;
+                case ACTIONS.FIXED_STATUS_EFFECT:
+                  if (item.ownValues) {
+                    if (newOwn.status === FIXED_STATUS.HEALTHY) {
+                      newOwn.status = item.ownValues.status;
+                      newText = newText + `\n${item.text}`;
+                    }
+                  }
+                  if (item.enemyValues) {
+                    if (newEnemy.status === FIXED_STATUS.HEALTHY) {
+                      newEnemy.status = item.enemyValues.status;
+                      newText = newText + `\n${item.text}`;
+                    }
+                  }
+                  break;
+                case ACTIONS.TEMPORAL_STATUS_EFFECT:
+                  if (item.ownValues) {
+                    console.log("TEMP STATUS", item.ownValues);
+                    newOwn.temporalStatus = [
+                      ...newOwn.temporalStatus,
+                      {
+                        status: item.ownValues.temporalStatus.status,
+                        durationLeft: item.ownValues.temporalStatus.duration,
+                      },
+                    ];
+                    newText = newText + `\n${item.text}`;
+                  }
+                  if (item.enemyValues) {
+                    newEnemy.temporalStatus = [
+                      ...newEnemy.temporalStatus,
+                      {
+                        status: item.enemyValues.temporalStatus.status,
+                        durationLeft: item.enemyValues.temporalStatus.duration,
+                      },
+                    ];
+                    newText = newText + `\n${item.text}`;
+                  }
+                  break;
+                default:
+                  break;
+              }
+            });
+          } else {
+            newText = newText + `\n${own.name} misses`;
+          }
+        } else {
+          newText = newText + `\n${own.name} flinched`;
+        }
+      } else {
+        newText = newText + `\n${own.name} is paralyzed`;
+      }
+    } else {
+      newText = newText + `\n${own.name} is sleeping`;
+    }
+  } else {
+    newText = newText + `\n${own.name} is freezed`;
+  }
+  return { ownPokemon: newOwn, enemyPokemon: newEnemy, text: newText };
 };
 
-export const generateEnemyAction = (move, own, enemy) => {
-  // Create Actions Queue
-  let actionsQueue = [];
-  // Enemy actions
-  const enemyMove = generateNewMove(own, enemy);
-  let itHitsEnemyGeneric = true;
-  if (enemyMove.accuracy != null || enemyMove.accuracy < 1) {
-    itHitsEnemyGeneric = enemyMove.accuracy >= Math.random();
-  }
-  if (itHitsEnemyGeneric) {
-    if (enemyMove.category !== CATEGORIES.STATUS) {
-      const damage = generateActionMoveCalculateDamage(enemy, own, enemyMove);
-      actionsQueue.push({
-        action: ACTIONS.EXECUTE_MOVE,
-        text: `${enemy.name} causes a damage of ${damage} PS damage to ${own.name}`,
-        own: own,
-        enemy: enemy,
-        enemyValues: {},
-        ownValues: { life: -damage },
-      });
+export const generateStatusEffects = (own, enemy) => {
+  let newText = "";
+  const newOwn = { ...own };
+  const newEnemy = { ...enemy };
+
+  if (newOwn.status !== FIXED_STATUS.HEALTHY) {
+    switch (newOwn.status) {
+      case FIXED_STATUS.BURNED:
+        newOwn.life = newOwn.life - (1 / 16) * newOwn.stats[STATS.HP];
+        newText = newText + `\n${own.name} gets burn damage`;
+        break;
+      case FIXED_STATUS.POISONED:
+        newOwn.life = newOwn.life - (1 / 86) * newOwn.stats[STATS.HP];
+        newText = newText + `\n${own.name} gets burn damage`;
+        break;
+      case FIXED_STATUS.BADLY_POISONED:
+        newOwn.life = newOwn.life - (1 / 86) * newOwn.stats[STATS.HP];
+        newText = newText + `\n${own.name} gets burn damage`;
+        break;
+      default:
+        break;
     }
-    const statusEnemyActions = generateStatusActions(enemyMove, enemy, own);
-    actionsQueue = [...actionsQueue, ...statusEnemyActions];
-  } else {
-    actionsQueue.push({
-      action: ACTIONS.MISS,
-      text: `${enemy.name} misses`,
-      own: own,
-      enemy: enemy,
-      enemyValues: {},
-      ownValues: {},
+  }
+  if (newEnemy.status !== FIXED_STATUS.HEALTHY) {
+    switch (newEnemy.status) {
+      case FIXED_STATUS.BURNED:
+        newEnemy.life =
+          newEnemy.life - Math.floor((1 / 16) * newEnemy.stats[STATS.HP]);
+        newText = newText + `\n${newEnemy.name} gets burn damage`;
+        break;
+      case FIXED_STATUS.POISONED:
+        newEnemy.life =
+          newEnemy.life - Math.floor((1 / 8) * newEnemy.stats[STATS.HP]);
+        newText = newText + `\n${newEnemy.name} gets burn damage`;
+        break;
+      case FIXED_STATUS.BADLY_POISONED:
+        newEnemy.life =
+          newEnemy.life - Math.floor((1 / 8) * newEnemy.stats[STATS.HP]);
+        newText = newText + `\n${newEnemy.name} gets burn damage`;
+        break;
+      default:
+        break;
+    }
+  }
+
+  if (newOwn.temporalStatus.length > 0) {
+    newOwn.temporalStatus = newOwn.temporalStatus.filter((item) => {
+      switch (item.status) {
+        case TEMPORAL_STATUS.FLINCHED: {
+          return false;
+        }
+        case TEMPORAL_STATUS.RELOADING: {
+          return false;
+        }
+        case TEMPORAL_STATUS.SEEDED: {
+          const damage = Math.floor(newOwn.stats[STATS.HP] / 16);
+          newOwn.life = newEnemy.life - damage;
+          newEnemy.life =
+            newEnemy.life + damage > newEnemy.stats[STATS.HP]
+              ? newEnemy.stats[STATS.HP]
+              : newEnemy.life + damage;
+          newText =
+            newText +
+            `\n${newOwn.name} is seeded. ${newEnemy.name} recover a bit health.`;
+          return true;
+        }
+        default:
+          return true;
+      }
     });
   }
 
-  return actionsQueue;
-};
-
-export const generateActionMoves = (move, own, enemy) => {
-  // Create Actions Queue
-  let actionsQueue = [];
-  // OWN MOVE
-  let itHitsGeneric = true;
-  if (move.accuracy != null || move.accuracy < 1) {
-    itHitsGeneric = move.accuracy >= Math.random();
-  }
-  if (itHitsGeneric) {
-    if (move.category !== CATEGORIES.STATUS) {
-      const damage = generateActionMoveCalculateDamage(own, enemy, move);
-      actionsQueue.push({
-        action: ACTIONS.EXECUTE_MOVE,
-        text: `${own.name} uses ${move.name}. ${own.name} causes a damage of ${damage} PS to ${enemy.name}`,
-        own: own,
-        enemy: enemy,
-        enemyValues: { life: -damage },
-        ownValues: {},
-      });
-    }
-    const statusActions = generateStatusActions(move, own, enemy);
-    actionsQueue = [...actionsQueue, ...statusActions];
-  } else {
-    actionsQueue.push({
-      action: ACTIONS.MISS,
-      text: `${own.name} misses`,
-      own: own,
-      enemy: enemy,
-      enemyValues: {},
-      ownValues: {},
-    });
-  }
-  // Enemy actions
-  const enemyMove = generateNewMove(own, enemy);
-  let itHitsEnemyGeneric = true;
-  if (enemyMove.accuracy != null || enemyMove.accuracy < 1) {
-    itHitsEnemyGeneric = enemyMove.accuracy >= Math.random();
-  }
-  if (itHitsEnemyGeneric) {
-    if (enemyMove.category !== CATEGORIES.STATUS) {
-      const damage = generateActionMoveCalculateDamage(enemy, own, enemyMove);
-      actionsQueue.push({
-        action: ACTIONS.EXECUTE_MOVE,
-        text: `${enemy.name} causes a damage of ${damage} PS damage to ${own.name}`,
-        own: own,
-        enemy: enemy,
-        enemyValues: {},
-        ownValues: { life: -damage },
-      });
-    }
-  } else {
-    actionsQueue.push({
-      action: ACTIONS.MISS,
-      text: `${enemy.name} misses`,
-      own: own,
-      enemy: enemy,
-      enemyValues: {},
-      ownValues: {},
+  if (newEnemy.temporalStatus.length > 0) {
+    newEnemy.temporalStatus = newEnemy.temporalStatus.filter((item) => {
+      switch (item.status) {
+        case TEMPORAL_STATUS.FLINCHED: {
+          return false;
+        }
+        case TEMPORAL_STATUS.RELOADING: {
+          return false;
+        }
+        case TEMPORAL_STATUS.SEEDED: {
+          const damage = Math.floor(newEnemy.stats[STATS.HP] / 16);
+          newEnemy.life = newEnemy.life - damage;
+          newOwn.life =
+            newOwn.life + damage > newOwn.stats[STATS.HP]
+              ? newOwn.stats[STATS.HP]
+              : newOwn.life + damage;
+          newText =
+            newText +
+            `\n${newEnemy.name} is seeded. ${newOwn.name} recover a bit health.`;
+          return true;
+        }
+        default:
+          return true;
+      }
     });
   }
 
-  const statusEnemyActions = generateStatusActions(enemyMove, enemy, own);
-  actionsQueue = [...actionsQueue, ...statusEnemyActions];
-
-  return actionsQueue;
+  return { ownPokemon: newOwn, enemyPokemon: newEnemy, text: newText };
 };
