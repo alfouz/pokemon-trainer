@@ -4,7 +4,6 @@ import { battleDamage, criticalGenerator } from "./statsCalculator";
 import ACTIONS from "../assets/actions";
 import { FIXED_STATUS, TEMPORAL_STATUS } from "../assets/status";
 import EFFECTIVENESS_TABLE from "../assets/typesEffectiveness";
-import { generateNewMove } from "./enemyIa";
 
 const stabDamage = 2;
 const burnedDamage = 0.5;
@@ -44,6 +43,7 @@ const calculateStatsMultiplier = (value, isAccuracy) => {
     return 1;
   }
   if (value <= 0) {
+    console.log(Math.abs(value), Math.abs(value), 2 / (2 + Math.abs(value)));
     return isAccuracy ? 3 / (3 + Math.abs(value)) : 2 / (2 + Math.abs(value));
   }
   if (value >= 0) {
@@ -52,13 +52,23 @@ const calculateStatsMultiplier = (value, isAccuracy) => {
 };
 
 const generateActionMoveCalculateDamage = (pok1, pok2, move) => {
-  console.log("CALCULATING", pok1, pok2, move);
   const isStab = pok1.types.includes(move.type);
   const isBurned = pok1.status.includes(FIXED_STATUS.BURNED);
   const effectiveness = pok2.types.reduce((acc, item) => {
     return acc * EFFECTIVENESS_TABLE[move.type][item];
   }, 1);
   const isCrit = criticalGenerator(pok1.boosts[STATS.CRITCHANCE]); // Need to build critchance enhancement
+  console.log(
+    "STATS",
+    pok1.stats[STATS.ATTACK] *
+      calculateStatsMultiplier(pok1.boosts[STATS.ATTACK], false),
+    pok2.stats[STATS.DEFENSE] *
+      (isCrit ? 1 : calculateStatsMultiplier(pok2.boosts[STATS.DEFENSE]),
+      false),
+    isCrit ? 1 : calculateStatsMultiplier(pok2.boosts[STATS.DEFENSE]),
+    isCrit ? critDamage : 1,
+    isStab ? stabDamage : 1
+  );
   if (move.category === CATEGORIES.PHYSICAL) {
     const damage = battleDamage(
       pok1.level,
@@ -66,13 +76,16 @@ const generateActionMoveCalculateDamage = (pok1, pok2, move) => {
       pok1.stats[STATS.ATTACK] *
         calculateStatsMultiplier(pok1.boosts[STATS.ATTACK], false),
       pok2.stats[STATS.DEFENSE] *
-        (isCrit ? 1 : calculateStatsMultiplier(pok2.boosts[STATS.DEFENSE]),
-        false),
+        (isCrit
+          ? 1
+          : calculateStatsMultiplier(pok2.boosts[STATS.DEFENSE], false)),
+
       isCrit ? critDamage : 1,
       isStab ? stabDamage : 1,
       effectiveness,
       isBurned && !isCrit ? burnedDamage : 1
     );
+    console.log(damage);
     return Math.floor(damage);
   } else {
     const damage = battleDamage(
