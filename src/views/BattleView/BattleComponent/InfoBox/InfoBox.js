@@ -4,7 +4,7 @@ import styles from "./InfoBox.module.scss";
 const InfoBox = ({ message, onClick }) => {
   return (
     <div className={styles.container} onClick={onClick}>
-      <p className={styles.text}>{message}</p>
+      <pre className={styles.text}>{message}</pre>
     </div>
   );
 };

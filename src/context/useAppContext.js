@@ -50,10 +50,10 @@ const useAppContext = (context) => {
   );
 
   const modifyBattle = useCallback(
-    ({ ownPokemon, enemyPokemon, infoMessage }) => {
+    ({ ownPokemon, enemyPokemon, infoMessage, ownIndex, enemyIndex }) => {
       dispatch({
         type: ACTIONS.MODIFY_BATTLE,
-        value: { ownPokemon, enemyPokemon, infoMessage },
+        value: { ownPokemon, enemyPokemon, infoMessage, ownIndex, enemyIndex },
       });
     },
     [dispatch]

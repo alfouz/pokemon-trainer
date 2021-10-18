@@ -142,13 +142,16 @@ function appReducer(state, action) {
       const ownPokemon = action?.value?.ownPokemon;
       const enemyPokemon = action?.value?.enemyPokemon;
       const infoMessage = action?.value?.infoMessage;
+      const newOwnIndex = action?.value?.ownIndex;
+      const newEnemyIndex = action?.value?.enemyIndex;
+
       const newState = {
         ...state,
         battle: {
           ownTeam: ownPokemon,
           enemyTeam: enemyPokemon,
-          ownIndex: state.battle.ownIndex,
-          enemyIndex: state.battle.enemyIndex,
+          ownIndex: newOwnIndex || state.battle.ownIndex,
+          enemyIndex: newEnemyIndex || state.battle.enemyIndex,
           infoMessage,
         },
       };

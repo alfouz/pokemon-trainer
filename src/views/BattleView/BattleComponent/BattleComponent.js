@@ -7,11 +7,12 @@ import MovesComponent from "./MovesComponent/MovesComponent";
 import BattleProvider from "../../../utils/BattleProvider";
 import useAppContext from "../../../context/useAppContext";
 
-const BattleComponent = ({ ownTeam, enemyTeam }) => {
+const BattleComponent = () => {
   const [currentSelectedMove, setCurrentSelectedMove] = useState(undefined);
   const { state } = useAppContext();
 
   const [executeNextAction, setExecuteNextAction] = useState(false);
+  const [changePokemonTo, setChangePokemonTo] = useState(undefined);
 
   return (
     <BattleProvider
@@ -19,12 +20,18 @@ const BattleComponent = ({ ownTeam, enemyTeam }) => {
       onActionExecute={() => setExecuteNextAction(false)}
       selectedMove={currentSelectedMove}
       onFinishMove={() => setCurrentSelectedMove(undefined)}
+      changePokemonTo={changePokemonTo}
+      setChangePokemonTo={setChangePokemonTo}
     >
       <div className={styles.container}>
         <EnemyBar pokemon={state.battle.enemyTeam[state.battle.enemyIndex]} />
         <OwnBar
           pokemon={state.battle.ownTeam[state.battle.ownIndex]}
           team={state.battle.ownTeam}
+          changePokemon={(index) => {
+            setChangePokemonTo(index);
+            setExecuteNextAction(true);
+          }}
         />
         {state.battle.infoMessage ? (
           <InfoBox

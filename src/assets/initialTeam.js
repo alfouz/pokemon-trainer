@@ -34,7 +34,7 @@ const evs = {
 export const initialTeam = [
   getPokemon(0, ivs, evs, 10, [tackle, growl, vineWhip, leechSeed]),
 
-  getPokemon(3, ivs, evs, 10, [tackle, tailWhip, waterGun, withdraw]),
+  getPokemon(6, ivs, evs, 10, [tackle, tailWhip, waterGun, withdraw]),
 
-  getPokemon(6, ivs, evs, 10, [scratch, growl, ember, smokescreen]),
+  getPokemon(3, ivs, evs, 10, [scratch, growl, ember, smokescreen]),
 ];
