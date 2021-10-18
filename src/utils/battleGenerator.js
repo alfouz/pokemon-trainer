@@ -43,7 +43,6 @@ const calculateStatsMultiplier = (value, isAccuracy) => {
     return 1;
   }
   if (value <= 0) {
-    console.log(Math.abs(value), Math.abs(value), 2 / (2 + Math.abs(value)));
     return isAccuracy ? 3 / (3 + Math.abs(value)) : 2 / (2 + Math.abs(value));
   }
   if (value >= 0) {
@@ -53,7 +52,7 @@ const calculateStatsMultiplier = (value, isAccuracy) => {
 
 const generateActionMoveCalculateDamage = (pok1, pok2, move) => {
   const isStab = pok1.types.includes(move.type);
-  const isBurned = pok1.status.includes(FIXED_STATUS.BURNED);
+  const isBurned = pok1.status === FIXED_STATUS.BURNED;
   const effectiveness = pok2.types.reduce((acc, item) => {
     return acc * EFFECTIVENESS_TABLE[move.type][item];
   }, 1);
@@ -75,7 +74,6 @@ const generateActionMoveCalculateDamage = (pok1, pok2, move) => {
       effectiveness,
       isBurned && !isCrit ? burnedDamage : 1
     );
-    console.log(damage);
     return Math.floor(damage);
   } else {
     const damage = battleDamage(
@@ -84,8 +82,9 @@ const generateActionMoveCalculateDamage = (pok1, pok2, move) => {
       pok1.stats[STATS.SPATTACK] *
         calculateStatsMultiplier(pok1.boosts[STATS.SPATTACK], false),
       pok2.stats[STATS.SPDEFENSE] *
-        (isCrit ? 1 : calculateStatsMultiplier(pok2.boosts[STATS.SPDEFENSE]),
-        false),
+        (isCrit
+          ? 1
+          : calculateStatsMultiplier(pok2.boosts[STATS.SPDEFENSE], false)),
       isCrit ? critDamage : 1,
       isStab ? stabDamage : 1,
       effectiveness,
@@ -361,7 +360,6 @@ export const generateOwnMoveEffects = ({ move }, own, enemy) => {
                   break;
                 case ACTIONS.TEMPORAL_STATUS_EFFECT:
                   if (item.ownValues) {
-                    console.log("TEMP STATUS", item.ownValues);
                     newOwn.temporalStatus = [
                       ...newOwn.temporalStatus,
                       {
@@ -387,19 +385,19 @@ export const generateOwnMoveEffects = ({ move }, own, enemy) => {
               }
             });
           } else {
-            newText = newText + `\n${own.name} misses`;
+            newText = newText + `\n${own.name} misses.`;
           }
         } else {
-          newText = newText + `\n${own.name} flinched`;
+          newText = newText + `\n${own.name} flinched.`;
         }
       } else {
-        newText = newText + `\n${own.name} is paralyzed`;
+        newText = newText + `\n${own.name} is paralyzed.`;
       }
     } else {
-      newText = newText + `\n${own.name} is sleeping`;
+      newText = newText + `\n${own.name} is sleeping.`;
     }
   } else {
-    newText = newText + `\n${own.name} is freezed`;
+    newText = newText + `\n${own.name} is freezed.`;
   }
   return { ownPokemon: newOwn, enemyPokemon: newEnemy, text: newText };
 };
@@ -408,20 +406,24 @@ export const generateStatusEffects = (own, enemy) => {
   let newText = "";
   const newOwn = { ...own };
   const newEnemy = { ...enemy };
+  let hasEffects = false;
 
   if (newOwn.status !== FIXED_STATUS.HEALTHY) {
     switch (newOwn.status) {
       case FIXED_STATUS.BURNED:
         newOwn.life = newOwn.life - (1 / 16) * newOwn.stats[STATS.HP];
         newText = newText + `\n${own.name} gets burn damage`;
+        hasEffects = true;
         break;
       case FIXED_STATUS.POISONED:
         newOwn.life = newOwn.life - (1 / 86) * newOwn.stats[STATS.HP];
         newText = newText + `\n${own.name} gets burn damage`;
+        hasEffects = true;
         break;
       case FIXED_STATUS.BADLY_POISONED:
         newOwn.life = newOwn.life - (1 / 86) * newOwn.stats[STATS.HP];
         newText = newText + `\n${own.name} gets burn damage`;
+        hasEffects = true;
         break;
       default:
         break;
@@ -433,16 +435,19 @@ export const generateStatusEffects = (own, enemy) => {
         newEnemy.life =
           newEnemy.life - Math.floor((1 / 16) * newEnemy.stats[STATS.HP]);
         newText = newText + `\n${newEnemy.name} gets burn damage`;
+        hasEffects = true;
         break;
       case FIXED_STATUS.POISONED:
         newEnemy.life =
           newEnemy.life - Math.floor((1 / 8) * newEnemy.stats[STATS.HP]);
         newText = newText + `\n${newEnemy.name} gets burn damage`;
+        hasEffects = true;
         break;
       case FIXED_STATUS.BADLY_POISONED:
         newEnemy.life =
           newEnemy.life - Math.floor((1 / 8) * newEnemy.stats[STATS.HP]);
         newText = newText + `\n${newEnemy.name} gets burn damage`;
+        hasEffects = true;
         break;
       default:
         break;
@@ -468,6 +473,7 @@ export const generateStatusEffects = (own, enemy) => {
           newText =
             newText +
             `\n${newOwn.name} is seeded. ${newEnemy.name} recover a bit health.`;
+          hasEffects = true;
           return true;
         }
         default:
@@ -495,6 +501,7 @@ export const generateStatusEffects = (own, enemy) => {
           newText =
             newText +
             `\n${newEnemy.name} is seeded. ${newOwn.name} recover a bit health.`;
+          hasEffects = true;
           return true;
         }
         default:
@@ -502,6 +509,9 @@ export const generateStatusEffects = (own, enemy) => {
       }
     });
   }
-
-  return { ownPokemon: newOwn, enemyPokemon: newEnemy, text: newText };
+  if (hasEffects) {
+    return { ownPokemon: newOwn, enemyPokemon: newEnemy, text: newText };
+  } else {
+    return undefined;
+  }
 };

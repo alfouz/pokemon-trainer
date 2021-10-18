@@ -12,7 +12,6 @@ import PokemonView from "../../PokemonView/PokemonView";
 const Body = () => {
   const { state, getPokemon } = useAppContext();
   const [boxOpen, setBoxOpen] = useState(undefined);
-  console.log(state);
   return (
     <div className={styles.container}>
       <div className={styles.leftContainer}>

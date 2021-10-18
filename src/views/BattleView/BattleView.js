@@ -20,7 +20,6 @@ const BattleView = () => {
     },
     [state.currentTeam, createBattle, state.battle.enemyTeam.length]
   );
-  console.log("BATTLEVIEW", state);
   return (
     <div className={styles.container}>
       <div className={styles.badgesContainer}>

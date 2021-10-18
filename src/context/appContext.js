@@ -142,7 +142,6 @@ function appReducer(state, action) {
       const ownPokemon = action?.value?.ownPokemon;
       const enemyPokemon = action?.value?.enemyPokemon;
       const infoMessage = action?.value?.infoMessage;
-      console.log("STATE", ownPokemon, enemyPokemon, infoMessage);
       const newState = {
         ...state,
         battle: {

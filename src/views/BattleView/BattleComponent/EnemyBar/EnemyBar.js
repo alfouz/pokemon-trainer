@@ -1,5 +1,6 @@
 import React from "react";
 import stats from "../../../../assets/stats";
+import { FIXED_STATUS } from "../../../../assets/status";
 import styles from "./EnemyBar.module.scss";
 
 const EnemyBar = ({ pokemon }) => {
@@ -10,7 +11,9 @@ const EnemyBar = ({ pokemon }) => {
           <span className={styles.name}>{pokemon.name}</span>
           <span className={styles.level}>Lvl {pokemon.level}</span>
           <div className={styles.hpLife}>
-            <span className={styles.hpLabel}>HP</span>
+            <span className={styles.hpLabel}>
+              {pokemon.status !== FIXED_STATUS.HEALTHY ? pokemon.status : "HP"}
+            </span>
             <div className={styles.outerLifeBar}>
               <div
                 className={styles.innerLifeBar}

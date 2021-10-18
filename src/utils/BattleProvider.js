@@ -18,14 +18,6 @@ const BattleProvider = ({
 
   const [moveOrder, setMoveOrder] = useState([]);
 
-  // Create battle
-  //   useEffect(() => {
-  //     createBattle({
-  //       ownPokemon: generateBattleTeam(ownTeam),
-  //       enemyPokemon: generateBattleTeam(enemyTeam),
-  //     });
-  //   }, [createBattle, ownTeam, enemyTeam]);
-
   // CREATE ACTIONS
   useEffect(() => {
     const ownPokemon = state.battle.ownTeam[state.battle.ownIndex];
@@ -80,6 +72,7 @@ const BattleProvider = ({
   useEffect(() => {
     const ownTempPokemon = state.battle.ownTeam[state.battle.ownIndex];
     const enemyTempPokemon = state.battle.enemyTeam[state.battle.enemyIndex];
+    let resetMovement = false;
     if (moveOrder.length > 0) {
       if (executeNextAction) {
         switch (moveOrder[0].origin) {
@@ -104,7 +97,6 @@ const BattleProvider = ({
               }),
               infoMessage: ownData.text,
             });
-            console.log("ATTACKING OWN", ownData);
             break;
           case "enemy":
             const enemyData = generateOwnMoveEffects(
@@ -133,21 +125,31 @@ const BattleProvider = ({
               ownTempPokemon,
               enemyTempPokemon
             );
-            modifyBattle({
-              ownPokemon: state.battle.ownTeam.map((pok) => {
-                if (pok.id === autoData.ownPokemon.id) {
-                  return autoData.ownPokemon;
-                }
-                return pok;
-              }),
-              enemyPokemon: state.battle.enemyTeam.map((pok) => {
-                if (pok.id === autoData.enemyPokemon.id) {
-                  return autoData.enemyPokemon;
-                }
-                return pok;
-              }),
-              infoMessage: autoData.text,
-            });
+            if (autoData) {
+              modifyBattle({
+                ownPokemon: state.battle.ownTeam.map((pok) => {
+                  if (pok.id === autoData.ownPokemon.id) {
+                    return autoData.ownPokemon;
+                  }
+                  return pok;
+                }),
+                enemyPokemon: state.battle.enemyTeam.map((pok) => {
+                  if (pok.id === autoData.enemyPokemon.id) {
+                    return autoData.enemyPokemon;
+                  }
+                  return pok;
+                }),
+                infoMessage: autoData.text,
+              });
+            } else {
+              resetMovement = true;
+              setMoveOrder([]);
+              modifyBattle({
+                ownPokemon: state.battle.ownTeam,
+                enemyPokemon: state.battle.enemyTeam,
+                infoMessage: undefined,
+              });
+            }
             break;
           case "endTurn":
             modifyBattle({
@@ -164,7 +166,9 @@ const BattleProvider = ({
             });
             break;
         }
-        setMoveOrder(moveOrder.slice(1));
+        if (!resetMovement) {
+          setMoveOrder(moveOrder.slice(1));
+        }
         onActionExecute();
       }
     }
@@ -179,15 +183,6 @@ const BattleProvider = ({
     state.battle.enemyIndex,
     modifyBattle,
   ]);
-
-  //   const [battleSteps, setBattleSteps] = {
-  //     ownTurn: [],
-  //     enemyTurn: [],
-  //     statusTurn: [],
-  //     temporalStatusTurn: [],
-  //   };
-
-  //   const [actions, setActions] = useState([]);
 
   return <>{children}</>;
 };
