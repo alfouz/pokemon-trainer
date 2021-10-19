@@ -92,33 +92,7 @@ const BattleProvider = ({
       if (executeNextAction) {
         switch (moveOrder[0].origin) {
           case "own":
-            if (moveOrder[0].changePokemonTo) {
-              console.log(
-                "ASD",
-                state.battle.ownTeam.map((pok) => {
-                  if (
-                    pok.id ===
-                    state.battle.ownTeam[moveOrder[0].changePokemonTo].id
-                  ) {
-                    return {
-                      ...state.battle.ownTeam[moveOrder[0].changePokemonTo],
-                      temporalStatus: [],
-                      boosts: {
-                        [STATS.HP]: 0,
-                        [STATS.ATTACK]: 0,
-                        [STATS.DEFENSE]: 0,
-                        [STATS.SPATTACK]: 0,
-                        [STATS.SPDEFENSE]: 0,
-                        [STATS.SPEED]: 0,
-                        [STATS.ACCURACY]: 0,
-                        [STATS.EVASIVENESS]: 0,
-                        [STATS.CRITCHANCE]: 0,
-                      },
-                    };
-                  }
-                  return pok;
-                })
-              );
+            if (moveOrder[0].changePokemonTo !== undefined) {
               modifyBattle({
                 ownPokemon: state.battle.ownTeam.map((pok) => {
                   if (
