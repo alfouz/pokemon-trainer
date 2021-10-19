@@ -150,8 +150,12 @@ function appReducer(state, action) {
         battle: {
           ownTeam: ownPokemon,
           enemyTeam: enemyPokemon,
-          ownIndex: newOwnIndex || state.battle.ownIndex,
-          enemyIndex: newEnemyIndex || state.battle.enemyIndex,
+          ownIndex:
+            newOwnIndex !== undefined ? newOwnIndex : state.battle.ownIndex,
+          enemyIndex:
+            newEnemyIndex !== undefined
+              ? newEnemyIndex
+              : state.battle.enemyIndex,
           infoMessage,
         },
       };

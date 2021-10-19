@@ -5,6 +5,7 @@ export const PARALIZED = "paralized";
 export const FREEZED = "freezed";
 export const BADLY_POISONED = "badly poisoned";
 export const HEALTHY = "healthy";
+export const FAINTED = "fainted";
 
 export const FIXED_STATUS = {
   SLEEP,
@@ -14,6 +15,7 @@ export const FIXED_STATUS = {
   FREEZED,
   BADLY_POISONED,
   HEALTHY,
+  FAINTED,
 };
 
 export const FLINCHED = "flinched";

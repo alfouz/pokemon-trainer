@@ -13,6 +13,7 @@ const BattleComponent = () => {
 
   const [executeNextAction, setExecuteNextAction] = useState(false);
   const [changePokemonTo, setChangePokemonTo] = useState(undefined);
+  const [forceChange, setForceChange] = useState(false);
 
   return (
     <BattleProvider
@@ -22,6 +23,8 @@ const BattleComponent = () => {
       onFinishMove={() => setCurrentSelectedMove(undefined)}
       changePokemonTo={changePokemonTo}
       setChangePokemonTo={setChangePokemonTo}
+      forceChange={forceChange}
+      setForceChange={setForceChange}
     >
       <div className={styles.container}>
         <EnemyBar pokemon={state.battle.enemyTeam[state.battle.enemyIndex]} />
@@ -29,8 +32,10 @@ const BattleComponent = () => {
           pokemon={state.battle.ownTeam[state.battle.ownIndex]}
           team={state.battle.ownTeam}
           changePokemon={(index) => {
-            setChangePokemonTo(index);
-            setExecuteNextAction(true);
+            if (index !== state.battle.ownIndex) {
+              setChangePokemonTo(index);
+              setExecuteNextAction(true);
+            }
           }}
         />
         {state.battle.infoMessage ? (
@@ -40,6 +45,7 @@ const BattleComponent = () => {
           />
         ) : (
           <MovesComponent
+            disabled={forceChange}
             pokemon={state.battle.ownTeam[state.battle.ownIndex]}
             onClick={(move) => {
               setCurrentSelectedMove(move);

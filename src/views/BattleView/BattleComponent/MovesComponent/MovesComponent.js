@@ -2,15 +2,17 @@ import React, { useCallback } from "react";
 import styles from "./MovesComponent.module.scss";
 import PokemonMove from "../../../../components/PokemonMove/PokemonMove";
 
-const MovesComponent = ({ pokemon, onClick }) => {
+const MovesComponent = ({ pokemon, onClick, disabled }) => {
   const handleClick = useCallback(
     (move) => {
-      onClick && onClick(move);
+      if (!disabled) {
+        onClick && onClick(move);
+      }
     },
-    [onClick]
+    [onClick, disabled]
   );
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${disabled ? styles.disabled : ""}`}>
       {pokemon.currentMoves.map((item) => (
         <PokemonMove move={item} onClick={handleClick} />
       ))}
