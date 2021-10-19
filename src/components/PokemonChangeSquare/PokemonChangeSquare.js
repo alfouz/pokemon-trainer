@@ -25,7 +25,10 @@ const getColors = {
 
 const PokemonChangeSquare = ({ pokemon, onClick, selectable }) => {
   return (
-    <div className={styles.card} onClick={onClick}>
+    <div
+      className={`${styles.card} ${!selectable ? styles.selectable : ""}`}
+      onClick={selectable ? onClick : () => {}}
+    >
       <img
         className={styles.image}
         src={pokemon.image}

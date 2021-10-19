@@ -25,7 +25,7 @@ const BattleProvider = ({
   useEffect(() => {
     const ownPokemon = state.battle.ownTeam[state.battle.ownIndex];
     const enemyPokemon = state.battle.enemyTeam[state.battle.enemyIndex];
-    if (changePokemonTo) {
+    if (changePokemonTo !== undefined) {
       const enemyMove = generateNewMove(ownPokemon, enemyPokemon);
       setMoveOrder([
         { origin: "own", changePokemonTo },
@@ -93,13 +93,40 @@ const BattleProvider = ({
         switch (moveOrder[0].origin) {
           case "own":
             if (moveOrder[0].changePokemonTo) {
+              console.log(
+                "ASD",
+                state.battle.ownTeam.map((pok) => {
+                  if (
+                    pok.id ===
+                    state.battle.ownTeam[moveOrder[0].changePokemonTo].id
+                  ) {
+                    return {
+                      ...state.battle.ownTeam[moveOrder[0].changePokemonTo],
+                      temporalStatus: [],
+                      boosts: {
+                        [STATS.HP]: 0,
+                        [STATS.ATTACK]: 0,
+                        [STATS.DEFENSE]: 0,
+                        [STATS.SPATTACK]: 0,
+                        [STATS.SPDEFENSE]: 0,
+                        [STATS.SPEED]: 0,
+                        [STATS.ACCURACY]: 0,
+                        [STATS.EVASIVENESS]: 0,
+                        [STATS.CRITCHANCE]: 0,
+                      },
+                    };
+                  }
+                  return pok;
+                })
+              );
               modifyBattle({
                 ownPokemon: state.battle.ownTeam.map((pok) => {
                   if (
-                    pok.id === state.battle.ownTeam[state.battle.ownIndex].id
+                    pok.id ===
+                    state.battle.ownTeam[moveOrder[0].changePokemonTo].id
                   ) {
                     return {
-                      ...state.battle.ownTeam[state.battle.ownIndex],
+                      ...state.battle.ownTeam[moveOrder[0].changePokemonTo],
                       temporalStatus: [],
                       boosts: {
                         [STATS.HP]: 0,

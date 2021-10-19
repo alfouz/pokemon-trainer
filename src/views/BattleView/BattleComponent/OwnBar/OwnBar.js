@@ -39,8 +39,10 @@ const OwnBar = ({ pokemon, team, changePokemon }) => {
             <div className={styles.changePokemonContainer}>
               {team.map((item, index) => (
                 <PokemonChangeSquare
+                  selectable={item.life > 0}
                   pokemon={item}
                   onClick={() => {
+                    console.log("CHANGE TO: ", index);
                     changePokemon(index);
                   }}
                 />

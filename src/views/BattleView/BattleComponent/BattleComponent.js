@@ -29,8 +29,11 @@ const BattleComponent = () => {
           pokemon={state.battle.ownTeam[state.battle.ownIndex]}
           team={state.battle.ownTeam}
           changePokemon={(index) => {
-            setChangePokemonTo(index);
-            setExecuteNextAction(true);
+            if (index !== state.battle.ownIndex) {
+              console.log("INSIDE ", index);
+              setChangePokemonTo(index);
+              setExecuteNextAction(true);
+            }
           }}
         />
         {state.battle.infoMessage ? (
