@@ -7,6 +7,7 @@ import {
 import useAppContext from "../context/useAppContext";
 import { generateNewMove } from "./enemyIa";
 import STATS from "../assets/stats";
+import { FAINTED, FIXED_STATUS } from "../assets/status";
 
 const BattleProvider = ({
   children,
@@ -16,10 +17,14 @@ const BattleProvider = ({
   onFinishMove,
   changePokemonTo,
   setChangePokemonTo,
+  forceChange,
+  setForceChange,
 }) => {
   const { state, modifyBattle } = useAppContext();
 
   const [moveOrder, setMoveOrder] = useState([]);
+
+  const [faintChangingThisTurn, setFaintChangingThisTurn] = useState(false);
 
   // CREATE ACTIONS
   useEffect(() => {
@@ -93,6 +98,9 @@ const BattleProvider = ({
         switch (moveOrder[0].origin) {
           case "own":
             if (moveOrder[0].changePokemonTo !== undefined) {
+              if (forceChange) {
+                setFaintChangingThisTurn(true);
+              }
               modifyBattle({
                 ownPokemon: state.battle.ownTeam.map((pok) => {
                   if (
@@ -123,88 +131,181 @@ const BattleProvider = ({
                   state.battle.ownTeam[moveOrder[0].changePokemonTo].name
                 }`,
               });
+              setForceChange(false);
             } else {
-              const ownData = generateOwnMoveEffects(
-                moveOrder[0],
-                ownTempPokemon,
-                enemyTempPokemon
-              );
-              modifyBattle({
-                ownPokemon: state.battle.ownTeam.map((pok) => {
-                  if (pok.id === ownData.ownPokemon.id) {
-                    return ownData.ownPokemon;
-                  }
-                  return pok;
-                }),
-                enemyPokemon: state.battle.enemyTeam.map((pok) => {
-                  if (pok.id === ownData.enemyPokemon.id) {
-                    return ownData.enemyPokemon;
-                  }
-                  return pok;
-                }),
-                infoMessage: ownData.text,
-              });
+              // IF alive attack
+              if (ownTempPokemon.status !== FIXED_STATUS.FAINTED) {
+                const ownData = generateOwnMoveEffects(
+                  moveOrder[0],
+                  ownTempPokemon,
+                  enemyTempPokemon
+                );
+                // IF kills, set as killed
+                const newEnemyTempPokemon = { ...ownData.enemyPokemon };
+                if (newEnemyTempPokemon.life <= 0) {
+                  newEnemyTempPokemon.status = FIXED_STATUS.FAINTED;
+                }
+                modifyBattle({
+                  ownPokemon: state.battle.ownTeam.map((pok) => {
+                    if (pok.id === ownData.ownPokemon.id) {
+                      return ownData.ownPokemon;
+                    }
+                    return pok;
+                  }),
+                  enemyPokemon: state.battle.enemyTeam.map((pok) => {
+                    if (pok.id === newEnemyTempPokemon.id) {
+                      return newEnemyTempPokemon;
+                    }
+                    return pok;
+                  }),
+                  infoMessage: ownData.text,
+                });
+              } else {
+                //reset turn
+                resetMovement = true;
+                setMoveOrder([]);
+                modifyBattle({
+                  ownPokemon: state.battle.ownTeam,
+                  enemyPokemon: state.battle.enemyTeam,
+                  infoMessage: undefined,
+                });
+              }
             }
             break;
           case "enemy":
-            const enemyData = generateOwnMoveEffects(
-              moveOrder[0],
-              enemyTempPokemon,
-              ownTempPokemon
-            );
-            modifyBattle({
-              ownPokemon: state.battle.ownTeam.map((pok) => {
-                if (pok.id === enemyData.enemyPokemon.id) {
-                  return enemyData.enemyPokemon;
+            if (!faintChangingThisTurn) {
+              // IF alive, attacks
+              if (enemyTempPokemon.status !== FIXED_STATUS.FAINTED) {
+                const enemyData = generateOwnMoveEffects(
+                  moveOrder[0],
+                  enemyTempPokemon,
+                  ownTempPokemon
+                );
+                // IF kills, set as killed
+                const newEnemyTempPokemon = { ...enemyData.enemyPokemon };
+                if (newEnemyTempPokemon.life <= 0) {
+                  console.log("KILL");
+                  newEnemyTempPokemon.status = FIXED_STATUS.FAINTED;
                 }
-                return pok;
-              }),
-              enemyPokemon: state.battle.enemyTeam.map((pok) => {
-                if (pok.id === enemyData.ownPokemon.id) {
-                  return enemyData.ownPokemon;
-                }
-                return pok;
-              }),
-              infoMessage: enemyData.text,
-            });
+                modifyBattle({
+                  ownPokemon: state.battle.ownTeam.map((pok) => {
+                    if (pok.id === newEnemyTempPokemon.id) {
+                      return newEnemyTempPokemon;
+                    }
+                    return pok;
+                  }),
+                  enemyPokemon: state.battle.enemyTeam.map((pok) => {
+                    if (pok.id === enemyData.ownPokemon.id) {
+                      return enemyData.ownPokemon;
+                    }
+                    return pok;
+                  }),
+                  infoMessage: enemyData.text,
+                });
+              } else {
+                //reset turn
+                resetMovement = true;
+                setMoveOrder([]);
+                modifyBattle({
+                  ownPokemon: state.battle.ownTeam,
+                  enemyPokemon: state.battle.enemyTeam,
+                  infoMessage: undefined,
+                });
+              }
+            }
             break;
           case "auto":
-            const autoData = generateStatusEffects(
-              ownTempPokemon,
-              enemyTempPokemon
-            );
-            if (autoData) {
+            if (!faintChangingThisTurn) {
+              const autoData = generateStatusEffects(
+                ownTempPokemon,
+                enemyTempPokemon
+              );
+              if (autoData) {
+                // IF kills, set as killed
+                const newOwnTempPokemon = { ...autoData.ownPokemon };
+                if (newOwnTempPokemon.life <= 0) {
+                  newOwnTempPokemon.status = FIXED_STATUS.FAINTED;
+                }
+                // IF kills, set as killed
+                const newEnemyTempPokemon = { ...autoData.enemyPokemon };
+                if (newEnemyTempPokemon.life <= 0) {
+                  newEnemyTempPokemon.status = FIXED_STATUS.FAINTED;
+                }
+                modifyBattle({
+                  ownPokemon: state.battle.ownTeam.map((pok) => {
+                    if (pok.id === newOwnTempPokemon.id) {
+                      return newOwnTempPokemon;
+                    }
+                    return pok;
+                  }),
+                  enemyPokemon: state.battle.enemyTeam.map((pok) => {
+                    if (pok.id === newEnemyTempPokemon.id) {
+                      return newEnemyTempPokemon;
+                    }
+                    return pok;
+                  }),
+                  infoMessage: autoData.text,
+                });
+              } else {
+                resetMovement = true;
+                setMoveOrder([]);
+                modifyBattle({
+                  ownPokemon: state.battle.ownTeam,
+                  enemyPokemon: state.battle.enemyTeam,
+                  infoMessage: undefined,
+                });
+              }
+            }
+            break;
+          case "endTurn":
+            if (ownTempPokemon.status === FIXED_STATUS.FAINTED) {
+              if (
+                state.battle.ownTeam.some((item) => item.status !== FAINTED)
+              ) {
+                setForceChange(true);
+              }
+              console.log("you lose");
               modifyBattle({
-                ownPokemon: state.battle.ownTeam.map((pok) => {
-                  if (pok.id === autoData.ownPokemon.id) {
-                    return autoData.ownPokemon;
-                  }
-                  return pok;
-                }),
-                enemyPokemon: state.battle.enemyTeam.map((pok) => {
-                  if (pok.id === autoData.enemyPokemon.id) {
-                    return autoData.enemyPokemon;
-                  }
-                  return pok;
-                }),
-                infoMessage: autoData.text,
+                ownPokemon: state.battle.ownTeam,
+                enemyPokemon: state.battle.enemyTeam,
+                infoMessage: "You loose",
+                result: "lose",
               });
+            }
+            if (enemyTempPokemon.status === FIXED_STATUS.FAINTED) {
+              if (
+                state.battle.enemyTeam.length - 1 <
+                state.battle.enemyIndex + 1
+              ) {
+                console.log("you win");
+                modifyBattle({
+                  ownPokemon: state.battle.ownTeam,
+                  enemyPokemon: state.battle.enemyTeam,
+                  infoMessage: "Congratulations, you win!",
+                  result: "win",
+                });
+              } else {
+                console.log(
+                  state.battle.enemyTeam.length - 1,
+                  state.battle.enemyIndex + 1
+                );
+                modifyBattle({
+                  ownPokemon: state.battle.ownTeam,
+                  enemyPokemon: state.battle.enemyTeam,
+                  enemyIndex: state.battle.enemyIndex + 1,
+                  infoMessage: undefined,
+                });
+              }
             } else {
-              resetMovement = true;
-              setMoveOrder([]);
               modifyBattle({
                 ownPokemon: state.battle.ownTeam,
                 enemyPokemon: state.battle.enemyTeam,
                 infoMessage: undefined,
               });
             }
-            break;
-          case "endTurn":
-            modifyBattle({
-              ownPokemon: state.battle.ownTeam,
-              enemyPokemon: state.battle.enemyTeam,
-              infoMessage: undefined,
-            });
+            if (faintChangingThisTurn) {
+              setFaintChangingThisTurn(false);
+            }
             break;
           default:
             modifyBattle({
@@ -230,6 +331,9 @@ const BattleProvider = ({
     state.battle.enemyTeam,
     state.battle.enemyIndex,
     modifyBattle,
+    faintChangingThisTurn,
+    forceChange,
+    setForceChange,
   ]);
 
   return <>{children}</>;
