@@ -1,24 +1,22 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import BattleComponent from "./BattleComponent/BattleComponent";
 import styles from "./BattleView.module.scss";
 import useAppContext from "../../context/useAppContext";
 import { trainer1, randomTrainer } from "../../assets/enemyTeams/enemyTeams";
 import BADGES from "../../assets/badges";
 import PokemonBadge from "../../components/PokemonBadge/PokemonBadge";
-import { generateBattleTeam } from "../../utils/battleGenerator";
+import { BattleContextProvider } from "../../context/battleContext";
 
 const BattleView = () => {
-  const { state, createBattle } = useAppContext();
+  const { state } = useAppContext();
+  const [newEnemyTeam, setNewEnemyTeam] = useState(undefined);
   const createFight = useCallback(
     (enemyteam) => {
-      if (state.currentTeam.length > 0 && state.battle.enemyTeam.length <= 0) {
-        createBattle({
-          ownPokemon: generateBattleTeam(state.currentTeam),
-          enemyPokemon: generateBattleTeam(enemyteam),
-        });
+      if (!newEnemyTeam) {
+        setNewEnemyTeam(enemyteam);
       }
     },
-    [state.currentTeam, createBattle, state.battle.enemyTeam.length]
+    [newEnemyTeam]
   );
   return (
     <div className={styles.container}>
@@ -30,7 +28,12 @@ const BattleView = () => {
       <div className={styles.battleContainer}>
         {state.battle.enemyTeam.length > 0 &&
         state.battle.ownTeam.length > 0 ? (
-          <BattleComponent ownTeam={state.currentTeam} enemyTeam={trainer1} />
+          <BattleContextProvider>
+            <BattleComponent
+              ownTeam={state.currentTeam}
+              enemyTeam={newEnemyTeam}
+            />
+          </BattleContextProvider>
         ) : (
           <div
             className={styles.randomBattleButton}

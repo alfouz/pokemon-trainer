@@ -11,47 +11,47 @@ import { trainer1 } from "./enemyTeams/enemyTeams";
 export const BoulderBadge = {
   image: BoulderBadgeImage,
   name: "Boulder Badge",
-  team: { trainer1 },
+  team: trainer1,
 };
 export const CascadeBadge = {
   image: CascadeBadgeImage,
   name: "Boulder Badge",
-  team: { trainer1 },
+  team: trainer1,
 };
 
 export const ThunderBadge = {
   image: ThunderBadgeImage,
   name: "Boulder Badge",
-  team: { trainer1 },
+  team: trainer1,
 };
 
 export const RainbowBadge = {
   image: RainbowBadgeImage,
   name: "Boulder Badge",
-  team: { trainer1 },
+  team: trainer1,
 };
 
 export const SoulBadge = {
   image: SoulBadgeImage,
   name: "Boulder Badge",
-  team: { trainer1 },
+  team: trainer1,
 };
 
 export const MarshBadge = {
   image: MarshBadgeImage,
   name: "Boulder Badge",
-  team: { trainer1 },
+  team: trainer1,
 };
 
 export const VolcanoBadge = {
   image: VolcanoBadgeImage,
   name: "Boulder Badge",
-  team: { trainer1 },
+  team: trainer1,
 };
 export const EarthBadge = {
   image: EarthBadgeImage,
   name: "Boulder Badge",
-  team: { trainer1 },
+  team: trainer1,
 };
 
 const badges = [
