@@ -7,9 +7,10 @@ import BattleGround from "./BattleGround/BattleGround";
 import ActionSelector from "./ActionSelector/ActionSelector";
 
 const BattleComponent = ({ ownTeam, enemyTeam, onEndBattle }) => {
-  const { state, createBattle } = useBattleContext();
+  const { state, createBattle, executeMoves } = useBattleContext();
 
   const [loading, setLoading] = useState(true);
+  const [readyNextTurn, setReadyNextTurn] = useState(false);
 
   // useEffect(() => {
   //   if (!state.started) {
@@ -20,6 +21,12 @@ const BattleComponent = ({ ownTeam, enemyTeam, onEndBattle }) => {
     createBattle({ ownPokemon: ownTeam, enemyPokemon: enemyTeam });
     setLoading(false);
   }, []);
+
+  useEffect(() => {
+    if (readyNextTurn) {
+      executeMoves({ callback: () => setReadyNextTurn(false) });
+    }
+  }, [executeMoves, readyNextTurn]);
 
   useEffect(() => {
     if (state.isFinished) {
@@ -37,7 +44,7 @@ const BattleComponent = ({ ownTeam, enemyTeam, onEndBattle }) => {
           <BattleGround />
         </div>
         <div className={styles.leftBottomContainer}>
-          <ActionSelector />
+          <ActionSelector setReadyNextTurn={setReadyNextTurn} />
         </div>
       </div>
       <div className={styles.rightContainer}>

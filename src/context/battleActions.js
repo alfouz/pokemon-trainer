@@ -1,11 +1,17 @@
 export const CREATE_BATTLE = "CREATE_BATTLE";
 export const SET_MOVES = "SET_MOVES";
 export const FORFEIT_BATTLE = "FORFEIT_BATTLE";
+export const CHANGE_POKEMON = "CHANGE_POKEMON";
+export const EXECUTE_MOVES = "EXECUTE_MOVES";
+export const MODIFY_POKEMON = "MODIFY_POKEMON";
 
 const actions = {
   CREATE_BATTLE,
   SET_MOVES,
   FORFEIT_BATTLE,
+  CHANGE_POKEMON,
+  EXECUTE_MOVES,
+  MODIFY_POKEMON,
 };
 
 export default actions;

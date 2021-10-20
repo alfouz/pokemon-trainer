@@ -6,7 +6,6 @@ import OwnSide from "./OwnSide/OwnSide";
 
 const BattleGround = () => {
   const { state } = useBattleContext();
-  console.log(state);
   return (
     <div className={styles.container}>
       <EnemySide pokemon={state.enemyPokemon} />

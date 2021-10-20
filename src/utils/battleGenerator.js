@@ -248,7 +248,7 @@ const generateStatusActions = (move, own, enemy) => {
   return actionQueue;
 };
 
-export const generateOwnMoveEffects = ({ move }, own, enemy) => {
+export const generateMoveEffects = (move, own, enemy) => {
   // Create Actions Queue
   let newText = `${own.name} uses ${move.name}.`;
   const newOwn = { ...own };

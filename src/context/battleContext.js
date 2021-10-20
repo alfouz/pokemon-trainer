@@ -7,8 +7,7 @@ const initialState = {
   enemyTeam: [],
   ownPokemon: {},
   enemyPokemon: {},
-  infoMessage:
-    "Pikachu used thundershock.\n Charmander has a damage of 97PS. \n Charmandes is paralyzed.\n Pokachu is dancing.\n Charmander has a damage of 97PS. \n Charmandes is paralyzed.\n Pokachu is dancing.\n Charmander has a damage of 97PS. \n Charmandes is paralyzed.\n Pokachu is dancing.\n Charmander has a damage of 97PS. \n Charmandes is paralyzed.\n Pokachu is dancing.\n Charmander has a damage of 97PS. \n Charmandes is paralyzed.\n Pokachu is dancing.\n Charmander has a damage of 97PS. \n Charmandes is paralyzed.\n Pokachu is dancing.\n Charmander has a damage of 97PS. \n Charmandes is paralyzed.\n Pokachu is dancing.\n Charmander has a damage of 97PS. \n Charmandes is paralyzed.\n Pokachu is dancing.\n Charmander has a damage of 97PS. \n Charmandes is paralyzed.\n Pokachu is dancing.\n Charmander has a damage of 97PS. \n Charmandes is paralyzed.\n Pokachu is dancing.\n Charmander has a damage of 97PS. \n Charmandes is paralyzed.\n Pokachu is dancing.\n Charmander has a damage of 97PS. \n Charmandes is paralyzed.\n Pokachu is dancing.\n Charmander has a damage of 97PS. \n Charmandes is paralyzed.\n Pokachu is dancing.\n Charmander has a damage of 97PS. \n Charmandes is paralyzed.\n Pokachu is dancing.\n Charmander has a damage of 97PS. \n Charmandes is paralyzed.\n Pokachu is dancing.\n Charmander has a damage of 97PS. \n Charmandes is paralyzed.\n Pokachu is dancing.\n Charmander has a damage of 97PS. \n Charmandes is paralyzed.\n Pokachu is dancing.",
+  infoMessage: "A new battle has started \n",
   nextTurn: {
     ownMove: undefined,
     enemyMove: undefined,
@@ -24,10 +23,8 @@ const initialState = {
 function appReducer(state, action) {
   switch (action.type) {
     case ACTIONS.CREATE_BATTLE: {
-      console.log("enemy team", action);
       const ownPokemon = action?.value?.ownPokemon;
       const enemyPokemon = action?.value?.enemyPokemon;
-      console.log("enemy team", enemyPokemon);
       const newState = {
         ...initialState,
         ownTeam: ownPokemon,
@@ -48,6 +45,7 @@ function appReducer(state, action) {
           enemyMove,
         },
       };
+      console.log(newState);
       return newState;
     }
     case ACTIONS.FORFEIT_BATTLE: {
@@ -55,6 +53,39 @@ function appReducer(state, action) {
         ...state,
         isFinished: true,
         results: { win: false, earns: {} },
+      };
+    }
+    case ACTIONS.CHANGE_POKEMON: {
+      const ownNewPokemon = action?.value?.ownPokemon;
+      return {
+        ...state,
+        ownPokemon: state.ownTeam.find((item) => item.id === ownNewPokemon.id),
+        infoMessage:
+          state.infoMessage + `\n${ownNewPokemon.name} appears to battle`,
+      };
+    }
+    case ACTIONS.MODIFY_POKEMON: {
+      const ownNewPokemon = action?.value?.ownPokemon;
+      const enemyNewPokemon = action?.value?.enemyPokemon;
+      const infoMessage = action?.value?.infoMessage;
+
+      return {
+        ...state,
+        ownPokemon: ownNewPokemon,
+        ownTeam: state.ownTeam.map((pok) => {
+          if (pok.id === ownNewPokemon.id) {
+            return ownNewPokemon;
+          }
+          return pok;
+        }),
+        enemyPokemon: enemyNewPokemon,
+        enemyTeam: state.enemyTeam.map((pok) => {
+          if (pok.id === enemyNewPokemon.id) {
+            return enemyNewPokemon;
+          }
+          return pok;
+        }),
+        infoMessage: infoMessage,
       };
     }
     default: {
