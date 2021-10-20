@@ -14,6 +14,7 @@ const initialState = {
     enemyMove: undefined,
   },
   isFinished: false,
+  started: false,
   results: {
     win: false,
     earns: {},
@@ -23,14 +24,17 @@ const initialState = {
 function appReducer(state, action) {
   switch (action.type) {
     case ACTIONS.CREATE_BATTLE: {
+      console.log("enemy team", action);
       const ownPokemon = action?.value?.ownPokemon;
       const enemyPokemon = action?.value?.enemyPokemon;
+      console.log("enemy team", enemyPokemon);
       const newState = {
         ...initialState,
         ownTeam: ownPokemon,
         enemyTeam: enemyPokemon,
         ownPokemon: ownPokemon[0],
         enemyPokemon: enemyPokemon[0],
+        started: true,
       };
       return newState;
     }

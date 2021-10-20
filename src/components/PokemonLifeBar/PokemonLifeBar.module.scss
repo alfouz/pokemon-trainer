@@ -1,0 +1,24 @@
+.hpLife {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+}
+
+.hpLabel {
+  color: white;
+  font-weight: bolder;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.outerLifeBar {
+  border: 2px solid black;
+  height: 8px;
+  background: white;
+  width: 200px;
+}
+
+.innerLifeBar {
+  background: green;
+  height: 8px;
+  width: 40%;
+}

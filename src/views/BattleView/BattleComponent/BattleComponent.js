@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./BattleComponent.module.scss";
 import useBattleContext from "../../../context/useBattleContext";
 import { useEffect } from "react/cjs/react.development";
@@ -9,9 +9,17 @@ import ActionSelector from "./ActionSelector/ActionSelector";
 const BattleComponent = ({ ownTeam, enemyTeam, onEndBattle }) => {
   const { state, createBattle } = useBattleContext();
 
+  const [loading, setLoading] = useState(true);
+
+  // useEffect(() => {
+  //   if (!state.started) {
+  //     createBattle({ ownPokemon: ownTeam, enemyPokemon: enemyTeam });
+  //   }
+  // }, [createBattle, enemyTeam, ownTeam, state.started]);
   useEffect(() => {
     createBattle({ ownPokemon: ownTeam, enemyPokemon: enemyTeam });
-  }, [createBattle, enemyTeam, ownTeam]);
+    setLoading(false);
+  }, []);
 
   useEffect(() => {
     if (state.isFinished) {
@@ -19,6 +27,9 @@ const BattleComponent = ({ ownTeam, enemyTeam, onEndBattle }) => {
     }
   }, [onEndBattle, state.isFinished, state.results.earns, state.results.win]);
 
+  if (loading) {
+    return <div />;
+  }
   return (
     <div className={styles.container}>
       <div className={styles.leftContainer}>

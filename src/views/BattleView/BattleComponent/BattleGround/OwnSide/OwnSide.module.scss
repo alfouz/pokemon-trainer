@@ -1,0 +1,40 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.imageContainer {
+  padding: 24px;
+  margin-left: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.lifeContainer {
+  position: relative;
+  margin-top: 16px;
+  border-left: 1px solid black;
+  border-bottom: 1px solid black;
+  border-top: 1px solid black;
+  width: 240px;
+  height: 64px;
+}
+
+.name {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.level {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  font-size: 16px;
+  font-weight: 400;
+}
