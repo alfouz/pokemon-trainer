@@ -1,6 +1,6 @@
 .container {
   background: rgb(255, 255, 255);
-  width: 640px;
+  width: 720px;
   height: 480px;
   display: flex;
   flex-direction: row;
@@ -9,8 +9,8 @@
 }
 
 .rightContainer {
-  width: 180px;
-  background: red;
+  width: 240px;
+  border-left: 1px solid black;
 }
 
 .leftContainer {
@@ -21,10 +21,9 @@
 
 .leftTopContainer {
   flex: 1;
-  background: green;
 }
 
 .leftBottomContainer {
+  border-top: 1px solid black;
   height: 120px;
-  background: blue;
 }

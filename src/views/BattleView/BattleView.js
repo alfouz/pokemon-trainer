@@ -32,6 +32,10 @@ const BattleView = () => {
             <BattleComponent
               ownTeam={state.currentTeam}
               enemyTeam={newEnemyTeam}
+              onEndBattle={(win, earns) => {
+                console.log(win ? "CONGRATULATIONS, YOU WIN" : "NOB");
+                setNewEnemyTeam(undefined);
+              }}
             />
           </BattleContextProvider>
         ) : (

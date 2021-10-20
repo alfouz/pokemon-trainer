@@ -7,10 +7,16 @@ const initialState = {
   enemyTeam: [],
   ownPokemon: {},
   enemyPokemon: {},
-  infoMessage: "",
+  infoMessage:
+    "Pikachu used thundershock.\n Charmander has a damage of 97PS. \n Charmandes is paralyzed.\n Pokachu is dancing.\n Charmander has a damage of 97PS. \n Charmandes is paralyzed.\n Pokachu is dancing.\n Charmander has a damage of 97PS. \n Charmandes is paralyzed.\n Pokachu is dancing.\n Charmander has a damage of 97PS. \n Charmandes is paralyzed.\n Pokachu is dancing.\n Charmander has a damage of 97PS. \n Charmandes is paralyzed.\n Pokachu is dancing.\n Charmander has a damage of 97PS. \n Charmandes is paralyzed.\n Pokachu is dancing.\n Charmander has a damage of 97PS. \n Charmandes is paralyzed.\n Pokachu is dancing.\n Charmander has a damage of 97PS. \n Charmandes is paralyzed.\n Pokachu is dancing.\n Charmander has a damage of 97PS. \n Charmandes is paralyzed.\n Pokachu is dancing.\n Charmander has a damage of 97PS. \n Charmandes is paralyzed.\n Pokachu is dancing.\n Charmander has a damage of 97PS. \n Charmandes is paralyzed.\n Pokachu is dancing.\n Charmander has a damage of 97PS. \n Charmandes is paralyzed.\n Pokachu is dancing.\n Charmander has a damage of 97PS. \n Charmandes is paralyzed.\n Pokachu is dancing.\n Charmander has a damage of 97PS. \n Charmandes is paralyzed.\n Pokachu is dancing.\n Charmander has a damage of 97PS. \n Charmandes is paralyzed.\n Pokachu is dancing.\n Charmander has a damage of 97PS. \n Charmandes is paralyzed.\n Pokachu is dancing.\n Charmander has a damage of 97PS. \n Charmandes is paralyzed.\n Pokachu is dancing.",
   nextTurn: {
-    ownMove: {},
-    enemyMove: {},
+    ownMove: undefined,
+    enemyMove: undefined,
+  },
+  isFinished: false,
+  results: {
+    win: false,
+    earns: {},
   },
 };
 
@@ -20,15 +26,11 @@ function appReducer(state, action) {
       const ownPokemon = action?.value?.ownPokemon;
       const enemyPokemon = action?.value?.enemyPokemon;
       const newState = {
+        ...initialState,
         ownTeam: ownPokemon,
         enemyTeam: enemyPokemon,
         ownPokemon: ownPokemon[0],
         enemyPokemon: enemyPokemon[0],
-        infoMessage: "",
-        nextTurn: {
-          ownMove: undefined,
-          enemyMove: undefined,
-        },
       };
       return newState;
     }
@@ -43,6 +45,13 @@ function appReducer(state, action) {
         },
       };
       return newState;
+    }
+    case ACTIONS.FORFEIT_BATTLE: {
+      return {
+        ...state,
+        isFinished: true,
+        results: { win: false, earns: {} },
+      };
     }
     default: {
       throw new Error(`Unhandled battle action type: ${action.type}`);

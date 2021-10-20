@@ -32,11 +32,18 @@ const useAppContext = () => {
     [dispatch, state]
   );
 
+  const forfeitBattle = useCallback(() => {
+    dispatch({
+      type: ACTIONS.FORFEIT_BATTLE,
+    });
+  }, [dispatch]);
+
   return {
     state,
     dispatch,
     createBattle,
     setMoves,
+    forfeitBattle,
   };
 };
 
