@@ -1,60 +1,31 @@
 import React, { useState } from "react";
 import styles from "./BattleComponent.module.scss";
-import EnemyBar from "./EnemyBar/EnemyBar";
-import OwnBar from "./OwnBar/OwnBar";
-import InfoBox from "./InfoBox/InfoBox";
-import MovesComponent from "./MovesComponent/MovesComponent";
-import BattleProvider from "../../../utils/BattleProvider";
-import useAppContext from "../../../context/useAppContext";
+import useBattleContext from "../../../context/useBattleContext";
+// import useBattleContext from "../../context/useBattleContext";
+import { useEffect } from "react/cjs/react.development";
+import InfoComponent from "./InfoComponent/InfoComponent";
+import BattleGround from "./BattleGround/BattleGround";
+import ActionSelector from "./ActionSelector/ActionSelector";
 
-const BattleComponent = () => {
-  const [currentSelectedMove, setCurrentSelectedMove] = useState(undefined);
-  const { state } = useAppContext();
-
-  const [executeNextAction, setExecuteNextAction] = useState(false);
-  const [changePokemonTo, setChangePokemonTo] = useState(undefined);
-  const [forceChange, setForceChange] = useState(false);
-
+const BattleComponent = ({ ownTeam, enemyTeam }) => {
+  const { state, createBattle } = useBattleContext();
+  useEffect(() => {
+    createBattle({ ownPokemon: ownTeam, enemyPokemon: enemyTeam });
+  }, []);
   return (
-    <BattleProvider
-      executeNextAction={executeNextAction}
-      onActionExecute={() => setExecuteNextAction(false)}
-      selectedMove={currentSelectedMove}
-      onFinishMove={() => setCurrentSelectedMove(undefined)}
-      changePokemonTo={changePokemonTo}
-      setChangePokemonTo={setChangePokemonTo}
-      forceChange={forceChange}
-      setForceChange={setForceChange}
-    >
-      <div className={styles.container}>
-        <EnemyBar pokemon={state.battle.enemyTeam[state.battle.enemyIndex]} />
-        <OwnBar
-          pokemon={state.battle.ownTeam[state.battle.ownIndex]}
-          team={state.battle.ownTeam}
-          changePokemon={(index) => {
-            if (index !== state.battle.ownIndex) {
-              setChangePokemonTo(index);
-              setExecuteNextAction(true);
-            }
-          }}
-        />
-        {state.battle.infoMessage ? (
-          <InfoBox
-            message={state.battle.infoMessage}
-            onClick={() => setExecuteNextAction(true)}
-          />
-        ) : (
-          <MovesComponent
-            disabled={forceChange}
-            pokemon={state.battle.ownTeam[state.battle.ownIndex]}
-            onClick={(move) => {
-              setCurrentSelectedMove(move);
-              setExecuteNextAction(true);
-            }}
-          />
-        )}
+    <div className={styles.container}>
+      <div className={styles.leftContainer}>
+        <div className={styles.leftTopContainer}>
+          <BattleGround />
+        </div>
+        <div className={styles.leftBottomContainer}>
+          <ActionSelector />
+        </div>
       </div>
-    </BattleProvider>
+      <div className={styles.rightContainer}>
+        <InfoComponent />
+      </div>
+    </div>
   );
 };
 export default BattleComponent;

@@ -2,7 +2,7 @@ import React, { useCallback, useState } from "react";
 import BattleComponent from "./BattleComponent/BattleComponent";
 import styles from "./BattleView.module.scss";
 import useAppContext from "../../context/useAppContext";
-import { trainer1, randomTrainer } from "../../assets/enemyTeams/enemyTeams";
+import { randomTrainer } from "../../assets/enemyTeams/enemyTeams";
 import BADGES from "../../assets/badges";
 import PokemonBadge from "../../components/PokemonBadge/PokemonBadge";
 import { BattleContextProvider } from "../../context/battleContext";
@@ -13,6 +13,7 @@ const BattleView = () => {
   const createFight = useCallback(
     (enemyteam) => {
       if (!newEnemyTeam) {
+        console.log(enemyteam);
         setNewEnemyTeam(enemyteam);
       }
     },
@@ -26,8 +27,7 @@ const BattleView = () => {
         ))}
       </div>
       <div className={styles.battleContainer}>
-        {state.battle.enemyTeam.length > 0 &&
-        state.battle.ownTeam.length > 0 ? (
+        {newEnemyTeam && newEnemyTeam.length > 0 ? (
           <BattleContextProvider>
             <BattleComponent
               ownTeam={state.currentTeam}

@@ -1,5 +1,5 @@
 import React, { createContext, useReducer } from "react";
-import ACTIONS from "./stateActions";
+import ACTIONS from "./battleActions";
 export const BattleContext = createContext();
 
 const initialState = {
@@ -7,7 +7,11 @@ const initialState = {
   enemyTeam: [],
   ownPokemon: {},
   enemyPokemon: {},
-  chat: "",
+  infoMessage: "",
+  nextTurn: {
+    ownMove: {},
+    enemyMove: {},
+  },
 };
 
 function appReducer(state, action) {
@@ -16,32 +20,26 @@ function appReducer(state, action) {
       const ownPokemon = action?.value?.ownPokemon;
       const enemyPokemon = action?.value?.enemyPokemon;
       const newState = {
-        ...state,
-        battle: {
-          ownTeam: ownPokemon,
-          enemyTeam: enemyPokemon,
-          ownIndex: 0,
-          enemyIndex: 0,
-          message: undefined,
+        ownTeam: ownPokemon,
+        enemyTeam: enemyPokemon,
+        ownPokemon: ownPokemon[0],
+        enemyPokemon: enemyPokemon[0],
+        infoMessage: "",
+        nextTurn: {
+          ownMove: undefined,
+          enemyMove: undefined,
         },
       };
       return newState;
     }
-    case ACTIONS.MODIFY_BATTLE: {
-      const ownPokemon = action?.value?.ownPokemon;
-      const enemyPokemon = action?.value?.enemyPokemon;
-      const infoMessage = action?.value?.infoMessage;
-      const newOwnIndex = action?.value?.ownIndex;
-      const newEnemyIndex = action?.value?.enemyIndex;
-
+    case ACTIONS.SET_MOVES: {
+      const ownMove = action?.value?.ownMove;
+      const enemyMove = action?.value?.enemyMove;
       const newState = {
         ...state,
-        battle: {
-          ownTeam: ownPokemon,
-          enemyTeam: enemyPokemon,
-          ownIndex: newOwnIndex || state.battle.ownIndex,
-          enemyIndex: newEnemyIndex || state.battle.enemyIndex,
-          infoMessage,
+        nextTurn: {
+          ownMove,
+          enemyMove,
         },
       };
       return newState;

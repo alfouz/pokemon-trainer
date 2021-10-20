@@ -1,7 +1,8 @@
 import { useCallback, useContext } from "react";
 import { BattleContext } from "../context/battleContext";
-import { generateBattleTeam } from "../../utils/battleGenerator";
-import ACTIONS from "../context/stateActions";
+import { generateNewMove } from "../utils/enemyIa";
+import { generateBattleTeam } from "../utils/battleGenerator";
+import ACTIONS from "../context/battleActions";
 
 const useAppContext = () => {
   const { state, dispatch } = useContext(BattleContext);
@@ -19,21 +20,23 @@ const useAppContext = () => {
     [dispatch]
   );
 
-  const modifyBattle = useCallback(
-    ({ ownPokemon, enemyPokemon, infoMessage, ownIndex, enemyIndex }) => {
+  const setMoves = useCallback(
+    ({ ownMove }) => {
+      const { ownPokemon, enemyPokemon } = state;
+      const enemyMove = generateNewMove(ownPokemon, enemyPokemon);
       dispatch({
-        type: ACTIONS.MODIFY_BATTLE,
-        value: { ownPokemon, enemyPokemon, infoMessage, ownIndex, enemyIndex },
+        type: ACTIONS.SET_MOVES,
+        value: { ownMove, enemyMove },
       });
     },
-    [dispatch]
+    [dispatch, state]
   );
 
   return {
     state,
     dispatch,
     createBattle,
-    modifyBattle,
+    setMoves,
   };
 };
 
