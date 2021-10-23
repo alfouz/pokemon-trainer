@@ -23,9 +23,12 @@ const BattleComponent = ({ ownTeam, enemyTeam, onEndBattle }) => {
   }, []);
 
   useEffect(() => {
-    if (readyNextTurn) {
-      executeMoves({ callback: () => setReadyNextTurn(false) });
-    }
+    const executeTurn = async () => {
+      if (readyNextTurn) {
+        executeMoves({ callback: () => setReadyNextTurn(false) });
+      }
+    };
+    executeTurn();
   }, [executeMoves, readyNextTurn]);
 
   useEffect(() => {

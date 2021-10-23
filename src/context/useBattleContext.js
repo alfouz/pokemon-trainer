@@ -55,15 +55,7 @@ const useAppContext = () => {
 
   const executeMoves = useCallback(
     async ({ callback }) => {
-      // Set a function to run every "interval" seconds a total of "x" times
-      // let x = 4;
-      // let interval = 1000;
-
-      // for (var i = 0; i < x; i++) {
-      //   setTimeout(function () {
-      //     // Do Something
-      //   }, i * interval);
-      // }
+      callback();
       const { ownMove, enemyMove } = state.nextTurn;
       const turnOrder = getFirstAttack(
         ownMove,
@@ -71,7 +63,8 @@ const useAppContext = () => {
         state.ownPokemon,
         state.enemyPokemon
       );
-      const delay = 300;
+      const delay = 1000;
+
       if (turnOrder >= 0) {
         //Attack own
         const ownAttack = generateMoveEffects(
@@ -79,12 +72,13 @@ const useAppContext = () => {
           state.ownPokemon,
           state.enemyPokemon
         );
+        console.log("ATACK OWN FASTER", ownAttack);
         dispatch({
           type: ACTIONS.MODIFY_POKEMON,
           value: {
             ownPokemon: ownAttack.ownPokemon,
             enemyPokemon: ownAttack.enemyPokemon,
-            infoMessage: state.infoMessage + ownAttack.infoMessage,
+            infoMessage: state.infoMessage + "\n" + ownAttack.text,
           },
         });
         await executeAnimations(delay);
@@ -94,57 +88,104 @@ const useAppContext = () => {
           ownAttack.enemyPokemon,
           ownAttack.ownPokemon
         );
+        console.log("ATACK ENEMY SLOWER", enemyAttack);
         dispatch({
           type: ACTIONS.MODIFY_POKEMON,
           value: {
-            ownPokemon: enemyAttack.ownPokemon,
-            enemyPokemon: enemyAttack.enemyPokemon,
-            infoMessage: state.infoMessage + enemyAttack.infoMessage,
+            ownPokemon: enemyAttack.enemyPokemon,
+            enemyPokemon: enemyAttack.ownPokemon,
+            infoMessage:
+              state.infoMessage +
+              "\n" +
+              ownAttack.text +
+              "\n" +
+              enemyAttack.text,
           },
         });
         await executeAnimations(delay);
-        callback();
-        // Set a function to run every "interval" seconds a total of "x" times
-        // let x = 4;
-        // let interval = 1000;
-        // for (var i = 0; i < x; i++) {
-        //   setTimeout(function () {
-        //     // Do Something
-        //   }, i * interval);
-        // }
+        const statusEffects = generateStatusEffects(
+          enemyAttack.enemyPokemon,
+          enemyAttack.ownPokemon
+        );
+        if (statusEffects) {
+          console.log("EFFECTS STATUS", statusEffects);
+          dispatch({
+            type: ACTIONS.MODIFY_POKEMON,
+            value: {
+              ownPokemon: statusEffects.ownPokemon,
+              enemyPokemon: statusEffects.enemyPokemon,
+              infoMessage:
+                state.infoMessage +
+                "\n" +
+                ownAttack.text +
+                "\n" +
+                enemyAttack.text +
+                "\n" +
+                statusEffects.text,
+            },
+          });
+        }
       } else {
         //Attackenemy
         const enemyAttack = generateMoveEffects(
           state.nextTurn.enemyMove,
-          ownAttack.enemyPokemon,
-          ownAttack.ownPokemon
+          state.enemyPokemon,
+          state.ownPokemon
         );
+        console.log("ATACK ENEMY FASTER", enemyAttack);
         dispatch({
           type: ACTIONS.MODIFY_POKEMON,
           value: {
-            ownPokemon: enemyAttack.ownPokemon,
-            enemyPokemon: enemyAttack.enemyPokemon,
-            infoMessage: state.infoMessage + enemyAttack.infoMessage,
+            ownPokemon: enemyAttack.enemyPokemon,
+            enemyPokemon: enemyAttack.ownPokemon,
+            infoMessage: state.infoMessage + "\n" + enemyAttack.text,
           },
         });
         await executeAnimations(delay);
         //Attack own
         const ownAttack = generateMoveEffects(
           state.nextTurn.ownMove,
-          state.ownPokemon,
-          state.enemyPokemon
+          enemyAttack.enemyPokemon,
+          enemyAttack.ownPokemon
         );
+        console.log("ATACK OWN SLOWER", ownAttack);
         dispatch({
           type: ACTIONS.MODIFY_POKEMON,
           value: {
             ownPokemon: ownAttack.ownPokemon,
             enemyPokemon: ownAttack.enemyPokemon,
-            infoMessage: state.infoMessage + ownAttack.infoMessage,
+            infoMessage:
+              state.infoMessage +
+              "\n" +
+              enemyAttack.text +
+              "\n" +
+              ownAttack.text,
           },
         });
 
         await executeAnimations(delay);
-        callback();
+        const statusEffects = generateStatusEffects(
+          ownAttack.ownPokemon,
+          ownAttack.enemyPokemon
+        );
+        if (statusEffects) {
+          console.log("EFFECTS STATUS", statusEffects);
+          dispatch({
+            type: ACTIONS.MODIFY_POKEMON,
+            value: {
+              ownPokemon: statusEffects.ownPokemon,
+              enemyPokemon: statusEffects.enemyPokemon,
+              infoMessage:
+                state.infoMessage +
+                "\n" +
+                enemyAttack.text +
+                "\n" +
+                ownAttack.text +
+                "\n" +
+                statusEffects.text,
+            },
+          });
+        }
       }
     },
     [state, dispatch]
