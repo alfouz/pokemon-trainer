@@ -4,7 +4,7 @@ import { getHP, getStat } from "./statsCalculator";
 import { generateId } from "./idGenerator";
 
 const minPokemon = 0;
-const maxPokemon = 25;
+const maxPokemon = 36;
 
 export const getRandomPokemon = () => {
   const random = Math.floor(
