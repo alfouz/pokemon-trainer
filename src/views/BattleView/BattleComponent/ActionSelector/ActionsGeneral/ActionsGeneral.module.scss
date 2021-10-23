@@ -29,3 +29,8 @@
     border: 1px solid rgba(0, 0, 0, 0.4);
   }
 }
+
+.disabled {
+  background: rgb(99, 99, 99);
+  cursor: not-allowed;
+}

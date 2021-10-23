@@ -5,12 +5,15 @@ import { useEffect } from "react/cjs/react.development";
 import InfoComponent from "./InfoComponent/InfoComponent";
 import BattleGround from "./BattleGround/BattleGround";
 import ActionSelector from "./ActionSelector/ActionSelector";
+import { FIXED_STATUS } from "../../../assets/status";
 
 const BattleComponent = ({ ownTeam, enemyTeam, onEndBattle }) => {
-  const { state, createBattle, executeMoves } = useBattleContext();
+  const { state, createBattle, executeMoves, changeEnemyPokemon } =
+    useBattleContext();
 
   const [loading, setLoading] = useState(true);
   const [readyNextTurn, setReadyNextTurn] = useState(false);
+  const [forceChange, setForceChange] = useState(false);
 
   // useEffect(() => {
   //   if (!state.started) {
@@ -25,11 +28,33 @@ const BattleComponent = ({ ownTeam, enemyTeam, onEndBattle }) => {
   useEffect(() => {
     const executeTurn = async () => {
       if (readyNextTurn) {
-        executeMoves({ callback: () => setReadyNextTurn(false) });
+        if (
+          state.ownPokemon.status !== FIXED_STATUS.FAINTED &&
+          state.enemyPokemon.status !== FIXED_STATUS.FAINTED
+        ) {
+          await executeMoves({ callback: () => setReadyNextTurn(false) });
+        }
       }
     };
     executeTurn();
-  }, [executeMoves, readyNextTurn]);
+  }, [
+    executeMoves,
+    readyNextTurn,
+    state.enemyPokemon.status,
+    state.ownPokemon.status,
+  ]);
+
+  useEffect(() => {
+    if (state.ownPokemon.status === FIXED_STATUS.FAINTED) {
+      setForceChange(true);
+    }
+  }, [state.ownPokemon.status]);
+
+  useEffect(() => {
+    if (state.enemyPokemon.status === FIXED_STATUS.FAINTED) {
+      changeEnemyPokemon();
+    }
+  }, [changeEnemyPokemon, state.enemyPokemon.status, state.ownPokemon.status]);
 
   useEffect(() => {
     if (state.isFinished) {
@@ -47,7 +72,11 @@ const BattleComponent = ({ ownTeam, enemyTeam, onEndBattle }) => {
           <BattleGround />
         </div>
         <div className={styles.leftBottomContainer}>
-          <ActionSelector setReadyNextTurn={setReadyNextTurn} />
+          <ActionSelector
+            setReadyNextTurn={setReadyNextTurn}
+            setForceChange={setForceChange}
+            forceChange={forceChange}
+          />
         </div>
       </div>
       <div className={styles.rightContainer}>

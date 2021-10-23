@@ -7,11 +7,11 @@ export const currentActions = {
   RUN: "RUN",
 };
 
-const ActionsGeneral = ({ onSelect }) => {
+const ActionsGeneral = ({ onSelect, forceChange }) => {
   return (
     <div className={styles.container}>
       <div
-        className={styles.button}
+        className={`${styles.button} ${forceChange ? styles.disabled : ""}`}
         onClick={() => onSelect(currentActions.ATTACK)}
       >
         ATTACK

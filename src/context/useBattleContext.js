@@ -8,6 +8,7 @@ import {
 } from "../utils/battleGenerator";
 import ACTIONS from "../context/battleActions";
 import { getFirstAttack, executeAnimations } from "../utils/battleUtils";
+import { FIXED_STATUS } from "../assets/status";
 
 const useAppContext = () => {
   const { state, dispatch } = useContext(BattleContext);
@@ -52,6 +53,92 @@ const useAppContext = () => {
     },
     [dispatch]
   );
+
+  const addText = useCallback(
+    ({ text }) => {
+      dispatch({
+        type: ACTIONS.MODIFY_POKEMON,
+        value: {
+          ownPokemon: state.ownPokemon,
+          enemyPokemon: state.enemyPokemon,
+          infoMessage: state.infoMessage + "\n" + text,
+        },
+      });
+    },
+    [dispatch, state.enemyPokemon, state.infoMessage, state.ownPokemon]
+  );
+
+  const changeEnemyPokemon = useCallback(() => {
+    const enemyLeftPokemon = state.enemyTeam.filter(
+      (item) => item.status !== FIXED_STATUS.FAINTED
+    );
+    console.log(enemyLeftPokemon);
+    if (enemyLeftPokemon.length > 0) {
+      const newRandomIndex = Math.floor(
+        Math.random() * (enemyLeftPokemon.length - 0 + 1) + 0
+      );
+      const randomEnemyPokemon = enemyLeftPokemon[newRandomIndex];
+      dispatch({
+        type: ACTIONS.MODIFY_POKEMON,
+        value: {
+          ownPokemon: state.ownPokemon,
+          enemyPokemon: randomEnemyPokemon,
+          infoMessage:
+            state.infoMessage + `\n${randomEnemyPokemon.name} appears`,
+        },
+      });
+    } else {
+      dispatch({
+        type: ACTIONS.WIN_BATTLE,
+        value: { earns: {} },
+      });
+    }
+  }, [dispatch, state.enemyTeam, state.infoMessage, state.ownPokemon]);
+
+  const executeEnemyMove = useCallback(({ callback }) => {
+    // const enemyAttack = generateMoveEffects(
+    //   state.nextTurn.enemyMove,
+    //   ownAttack.enemyPokemon,
+    //   ownAttack.ownPokemon
+    // );
+    // console.log("ATACK ENEMY SLOWER", enemyAttack);
+    // dispatch({
+    //   type: ACTIONS.MODIFY_POKEMON,
+    //   value: {
+    //     ownPokemon: enemyAttack.enemyPokemon,
+    //     enemyPokemon: enemyAttack.ownPokemon,
+    //     infoMessage:
+    //       state.infoMessage +
+    //       "\n" +
+    //       ownAttack.text +
+    //       "\n" +
+    //       enemyAttack.text,
+    //   },
+    // });
+    // await executeAnimations(delay);
+    // const statusEffects = generateStatusEffects(
+    //   enemyAttack.enemyPokemon,
+    //   enemyAttack.ownPokemon
+    // );
+    // if (statusEffects) {
+    //   console.log("EFFECTS STATUS", statusEffects);
+    //   dispatch({
+    //     type: ACTIONS.MODIFY_POKEMON,
+    //     value: {
+    //       ownPokemon: statusEffects.ownPokemon,
+    //       enemyPokemon: statusEffects.enemyPokemon,
+    //       infoMessage:
+    //         state.infoMessage +
+    //         "\n" +
+    //         ownAttack.text +
+    //         "\n" +
+    //         enemyAttack.text +
+    //         "\n" +
+    //         statusEffects.text,
+    //     },
+    //   });
+    // }
+  });
 
   const executeMoves = useCallback(
     async ({ callback }) => {
@@ -199,6 +286,8 @@ const useAppContext = () => {
     forfeitBattle,
     changePokemon,
     executeMoves,
+    addText,
+    changeEnemyPokemon,
   };
 };
 

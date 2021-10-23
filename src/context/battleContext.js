@@ -55,6 +55,14 @@ function appReducer(state, action) {
         results: { win: false, earns: {} },
       };
     }
+    case ACTIONS.WIN_BATTLE: {
+      const earns = action?.value?.earns;
+      return {
+        ...state,
+        isFinished: true,
+        results: { win: true, earns: earns },
+      };
+    }
     case ACTIONS.CHANGE_POKEMON: {
       const ownNewPokemon = action?.value?.ownPokemon;
       return {

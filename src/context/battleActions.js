@@ -4,6 +4,7 @@ export const FORFEIT_BATTLE = "FORFEIT_BATTLE";
 export const CHANGE_POKEMON = "CHANGE_POKEMON";
 export const EXECUTE_MOVES = "EXECUTE_MOVES";
 export const MODIFY_POKEMON = "MODIFY_POKEMON";
+export const WIN_BATTLE = "WIN_BATTLE";
 
 const actions = {
   CREATE_BATTLE,
@@ -12,6 +13,7 @@ const actions = {
   CHANGE_POKEMON,
   EXECUTE_MOVES,
   MODIFY_POKEMON,
+  WIN_BATTLE,
 };
 
 export default actions;

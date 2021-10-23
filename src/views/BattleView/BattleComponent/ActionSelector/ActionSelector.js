@@ -7,7 +7,7 @@ import ActionsGeneral, {
 import ActionsMove from "./ActionsMove/ActionsMove";
 import ActionChange from "./ActionChange/ActionChange";
 
-const ActionSelector = ({ setReadyNextTurn }) => {
+const ActionSelector = ({ setReadyNextTurn, setForceChange, forceChange }) => {
   const {
     state,
     forfeitBattle,
@@ -58,7 +58,13 @@ const ActionSelector = ({ setReadyNextTurn }) => {
             setChangePokemon(undefined);
             setCurrentAction(undefined);
           }}
-          onSelect={(newPokemon) => setChangePokemon(newPokemon)}
+          onSelect={(newPokemon) => {
+            setChangePokemon(newPokemon);
+            if (forceChange) {
+              setForceChange(false);
+            } else {
+            }
+          }}
         />
       );
     }
@@ -72,11 +78,14 @@ const ActionSelector = ({ setReadyNextTurn }) => {
         onSelect={(action) => {
           setCurrentAction(action);
         }}
+        forceChange={forceChange}
       />
     );
   }, [
     currentAction,
+    forceChange,
     forfeitBattle,
+    setForceChange,
     state.ownPokemon.currentMoves,
     state.ownTeam,
   ]);
