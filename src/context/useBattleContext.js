@@ -26,6 +26,12 @@ const useAppContext = () => {
     [dispatch]
   );
 
+  const restartBattle = useCallback(() => {
+    dispatch({
+      type: ACTIONS.RESTART_STATE,
+    });
+  }, [dispatch]);
+
   const setMoves = useCallback(
     ({ ownMove }) => {
       const { ownPokemon, enemyPokemon } = state;
@@ -96,45 +102,48 @@ const useAppContext = () => {
   }, [dispatch, state.enemyTeam, state.infoMessage, state.ownPokemon]);
 
   // ----------------------------------------------------
-  const executeEnemyMove = useCallback(async ({ newOwnPokemon }) => {
-    const enemyMove = generateNewMove(state.ownPokemon, state.enemyPokemon);
-    console.log(enemyMove);
-    const delay = 1000;
-    const enemyAttack = generateMoveEffects(
-      enemyMove,
-      state.enemyPokemon,
-      newOwnPokemon
-    );
-    console.log(enemyAttack);
-    dispatch({
-      type: ACTIONS.MODIFY_POKEMON,
-      value: {
-        ownPokemon: enemyAttack.enemyPokemon,
-        enemyPokemon: enemyAttack.ownPokemon,
-        infoMessage: state.infoMessage + "\n" + enemyAttack.text,
-      },
-    });
-    await executeAnimations(delay);
-    const statusEffects = generateStatusEffects(
-      enemyAttack.enemyPokemon,
-      enemyAttack.ownPokemon
-    );
-    if (statusEffects) {
+  const executeEnemyMove = useCallback(
+    async ({ newOwnPokemon }) => {
+      const enemyMove = generateNewMove(state.ownPokemon, state.enemyPokemon);
+      console.log(enemyMove);
+      const delay = 1000;
+      const enemyAttack = generateMoveEffects(
+        enemyMove,
+        state.enemyPokemon,
+        newOwnPokemon
+      );
+      console.log(enemyAttack);
       dispatch({
         type: ACTIONS.MODIFY_POKEMON,
         value: {
-          ownPokemon: statusEffects.ownPokemon,
-          enemyPokemon: statusEffects.enemyPokemon,
-          infoMessage:
-            state.infoMessage +
-            "\n" +
-            enemyAttack.text +
-            "\n" +
-            statusEffects.text,
+          ownPokemon: enemyAttack.enemyPokemon,
+          enemyPokemon: enemyAttack.ownPokemon,
+          infoMessage: state.infoMessage + "\n" + enemyAttack.text,
         },
       });
-    }
-  }, []);
+      await executeAnimations(delay);
+      const statusEffects = generateStatusEffects(
+        enemyAttack.enemyPokemon,
+        enemyAttack.ownPokemon
+      );
+      if (statusEffects) {
+        dispatch({
+          type: ACTIONS.MODIFY_POKEMON,
+          value: {
+            ownPokemon: statusEffects.ownPokemon,
+            enemyPokemon: statusEffects.enemyPokemon,
+            infoMessage:
+              state.infoMessage +
+              "\n" +
+              enemyAttack.text +
+              "\n" +
+              statusEffects.text,
+          },
+        });
+      }
+    },
+    [dispatch, state.enemyPokemon, state.infoMessage, state.ownPokemon]
+  );
   // ----------------------------------------------------
 
   const executeMoves = useCallback(
@@ -286,6 +295,7 @@ const useAppContext = () => {
     addText,
     changeEnemyPokemon,
     executeEnemyMove,
+    restartBattle,
   };
 };
 

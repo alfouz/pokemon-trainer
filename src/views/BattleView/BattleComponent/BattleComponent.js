@@ -6,10 +6,16 @@ import InfoComponent from "./InfoComponent/InfoComponent";
 import BattleGround from "./BattleGround/BattleGround";
 import ActionSelector from "./ActionSelector/ActionSelector";
 import { FIXED_STATUS } from "../../../assets/status";
+import ModalEndBattle from "./ModalEndBattle/ModalEndBattle";
 
 const BattleComponent = ({ ownTeam, enemyTeam, onEndBattle }) => {
-  const { state, createBattle, executeMoves, changeEnemyPokemon } =
-    useBattleContext();
+  const {
+    state,
+    createBattle,
+    executeMoves,
+    changeEnemyPokemon,
+    restartBattle,
+  } = useBattleContext();
 
   const [loading, setLoading] = useState(true);
   const [readyNextTurn, setReadyNextTurn] = useState(false);
@@ -56,12 +62,6 @@ const BattleComponent = ({ ownTeam, enemyTeam, onEndBattle }) => {
     }
   }, [changeEnemyPokemon, state.enemyPokemon.status, state.ownPokemon.status]);
 
-  useEffect(() => {
-    if (state.isFinished) {
-      onEndBattle(state.results.win, state.results.earns);
-    }
-  }, [onEndBattle, state.isFinished, state.results.earns, state.results.win]);
-
   if (loading) {
     return <div />;
   }
@@ -82,6 +82,16 @@ const BattleComponent = ({ ownTeam, enemyTeam, onEndBattle }) => {
       <div className={styles.rightContainer}>
         <InfoComponent />
       </div>
+      <ModalEndBattle
+        status={state.results.win}
+        visible={state.isFinished}
+        onAccept={() => {
+          onEndBattle(state.results.win, state.results.earns);
+          restartBattle();
+        }}
+      >
+        END BATTLE
+      </ModalEndBattle>
     </div>
   );
 };

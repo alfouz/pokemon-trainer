@@ -35,6 +35,9 @@ function appReducer(state, action) {
       };
       return newState;
     }
+    case ACTIONS.RESTART_STATE: {
+      return initialState;
+    }
     case ACTIONS.SET_MOVES: {
       const ownMove = action?.value?.ownMove;
       const enemyMove = action?.value?.enemyMove;
