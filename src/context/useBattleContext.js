@@ -283,19 +283,22 @@ const useAppContext = () => {
     [state, dispatch]
   );
 
-  const endBattle = useCallback(({ win, earns }) => {
-    if (win) {
-      dispatch({
-        type: ACTIONS.WIN_BATTLE,
-        value: { earns: earns },
-      });
-    } else {
-      dispatch({
-        type: ACTIONS.LOSE_BATTLE,
-        value: { earns: earns },
-      });
-    }
-  }, []);
+  const endBattle = useCallback(
+    ({ win, earns }) => {
+      if (win) {
+        dispatch({
+          type: ACTIONS.WIN_BATTLE,
+          value: { earns: earns },
+        });
+      } else {
+        dispatch({
+          type: ACTIONS.LOSE_BATTLE,
+          value: { earns: earns },
+        });
+      }
+    },
+    [dispatch]
+  );
 
   return {
     state,

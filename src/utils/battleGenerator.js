@@ -283,25 +283,61 @@ export const generateMoveEffects = (move, own, enemy) => {
             newText = newText + `${own.name} uses ${move.name}.`;
             if (itHitsGeneric) {
               if (move.category !== CATEGORIES.STATUS) {
-                const damage = generateActionMoveCalculateDamage(
-                  newOwn,
-                  newEnemy,
-                  move
-                );
-                newEnemy.life = newEnemy.life - damage;
-                newText =
-                  newText +
-                  `\n${own.name} causes a damage of ${damage} PS to ${enemy.name}.`;
+                if (move.fixedPower) {
+                  const damage = move.fixedPower;
+                  newText =
+                    newText +
+                    `\n${own.name} causes a damage of ${damage} PS to ${enemy.name}.`;
+                } else {
+                  if (move.damageOnLevel) {
+                    const damage = own.level;
+                    newText =
+                      newText +
+                      `\n${own.name} causes a damage of ${damage} PS to ${enemy.name}.`;
+                  } else {
+                    const damage = generateActionMoveCalculateDamage(
+                      newOwn,
+                      newEnemy,
+                      move
+                    );
+                    //Multihit
+                    if (move.multihit) {
+                      const randomTimes = Math.floor(
+                        Math.random() *
+                          (move.multihit[1] - move.multihit[0] + 1) +
+                          move.multihit[0]
+                      );
+                      newText = newText + `\nHit ${randomTimes} times`;
+                      newEnemy.life = newEnemy.life - damage * randomTimes;
+                    } else {
+                      newEnemy.life = newEnemy.life - damage;
+                    }
+                    newText =
+                      newText +
+                      `\n${own.name} causes a damage of ${damage} PS to ${enemy.name}.`;
+                    //Recoil
+                    if (move.recoil) {
+                      newOwn.life = newEnemy.life - damage * move.recoil;
+                      newText =
+                        newText +
+                        `\nReceives ${damage * move.recoil} damage in return`;
+                    }
+                    if (move.drain) {
+                      const drain = damage * move.drain;
+                      newOwn.life =
+                        newOwn.life + drain > newOwn.stats[STATS.HP]
+                          ? newOwn.stats[STATS.HP]
+                          : newOwn.life + drain;
+                      newText =
+                        newText + `\n${own.name} heals half damage done.`;
+                    }
+                  }
+                }
                 if (newEnemy.life <= 0) {
                   newEnemy.status = FIXED_STATUS.FAINTED;
                 }
-                if (move.drain) {
-                  const drain = damage * move.drain;
-                  newOwn.life =
-                    newOwn.life + drain > newOwn.stats[STATS.HP]
-                      ? newOwn.stats[STATS.HP]
-                      : newOwn.life + drain;
-                  newText = newText + `\n${own.name} heals half damage done.`;
+                if (newOwn.life <= 0) {
+                  newOwn.status = FIXED_STATUS.FAINTED;
                 }
               }
               const statusActions = generateStatusActions(
