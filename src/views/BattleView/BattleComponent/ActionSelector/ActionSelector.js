@@ -13,6 +13,7 @@ const ActionSelector = ({ setReadyNextTurn, setForceChange, forceChange }) => {
     forfeitBattle,
     changePokemon: changePokemonFromTeam,
     setMoves,
+    executeEnemyMove,
   } = useBattleContext();
   const [currentAction, setCurrentAction] = useState(undefined);
   const [move, setMove] = useState(undefined);
@@ -59,10 +60,13 @@ const ActionSelector = ({ setReadyNextTurn, setForceChange, forceChange }) => {
             setCurrentAction(undefined);
           }}
           onSelect={(newPokemon) => {
-            setChangePokemon(newPokemon);
-            if (forceChange) {
-              setForceChange(false);
-            } else {
+            if (newPokemon.id !== state.ownPokemon.id) {
+              setChangePokemon(newPokemon);
+              if (forceChange) {
+                setForceChange(false);
+              } else {
+                executeEnemyMove({ newOwnPokemon: newPokemon });
+              }
             }
           }}
         />
@@ -83,6 +87,7 @@ const ActionSelector = ({ setReadyNextTurn, setForceChange, forceChange }) => {
     );
   }, [
     currentAction,
+    executeEnemyMove,
     forceChange,
     forfeitBattle,
     setForceChange,

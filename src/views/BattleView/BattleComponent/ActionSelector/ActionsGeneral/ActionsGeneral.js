@@ -12,7 +12,11 @@ const ActionsGeneral = ({ onSelect, forceChange }) => {
     <div className={styles.container}>
       <div
         className={`${styles.button} ${forceChange ? styles.disabled : ""}`}
-        onClick={() => onSelect(currentActions.ATTACK)}
+        onClick={() => {
+          if (!forceChange) {
+            onSelect(currentActions.ATTACK);
+          }
+        }}
       >
         ATTACK
       </div>

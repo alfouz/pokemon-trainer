@@ -95,50 +95,47 @@ const useAppContext = () => {
     }
   }, [dispatch, state.enemyTeam, state.infoMessage, state.ownPokemon]);
 
-  const executeEnemyMove = useCallback(({ callback }) => {
-    // const enemyAttack = generateMoveEffects(
-    //   state.nextTurn.enemyMove,
-    //   ownAttack.enemyPokemon,
-    //   ownAttack.ownPokemon
-    // );
-    // console.log("ATACK ENEMY SLOWER", enemyAttack);
-    // dispatch({
-    //   type: ACTIONS.MODIFY_POKEMON,
-    //   value: {
-    //     ownPokemon: enemyAttack.enemyPokemon,
-    //     enemyPokemon: enemyAttack.ownPokemon,
-    //     infoMessage:
-    //       state.infoMessage +
-    //       "\n" +
-    //       ownAttack.text +
-    //       "\n" +
-    //       enemyAttack.text,
-    //   },
-    // });
-    // await executeAnimations(delay);
-    // const statusEffects = generateStatusEffects(
-    //   enemyAttack.enemyPokemon,
-    //   enemyAttack.ownPokemon
-    // );
-    // if (statusEffects) {
-    //   console.log("EFFECTS STATUS", statusEffects);
-    //   dispatch({
-    //     type: ACTIONS.MODIFY_POKEMON,
-    //     value: {
-    //       ownPokemon: statusEffects.ownPokemon,
-    //       enemyPokemon: statusEffects.enemyPokemon,
-    //       infoMessage:
-    //         state.infoMessage +
-    //         "\n" +
-    //         ownAttack.text +
-    //         "\n" +
-    //         enemyAttack.text +
-    //         "\n" +
-    //         statusEffects.text,
-    //     },
-    //   });
-    // }
-  });
+  // ----------------------------------------------------
+  const executeEnemyMove = useCallback(async ({ newOwnPokemon }) => {
+    const enemyMove = generateNewMove(state.ownPokemon, state.enemyPokemon);
+    console.log(enemyMove);
+    const delay = 1000;
+    const enemyAttack = generateMoveEffects(
+      enemyMove,
+      state.enemyPokemon,
+      newOwnPokemon
+    );
+    console.log(enemyAttack);
+    dispatch({
+      type: ACTIONS.MODIFY_POKEMON,
+      value: {
+        ownPokemon: enemyAttack.enemyPokemon,
+        enemyPokemon: enemyAttack.ownPokemon,
+        infoMessage: state.infoMessage + "\n" + enemyAttack.text,
+      },
+    });
+    await executeAnimations(delay);
+    const statusEffects = generateStatusEffects(
+      enemyAttack.enemyPokemon,
+      enemyAttack.ownPokemon
+    );
+    if (statusEffects) {
+      dispatch({
+        type: ACTIONS.MODIFY_POKEMON,
+        value: {
+          ownPokemon: statusEffects.ownPokemon,
+          enemyPokemon: statusEffects.enemyPokemon,
+          infoMessage:
+            state.infoMessage +
+            "\n" +
+            enemyAttack.text +
+            "\n" +
+            statusEffects.text,
+        },
+      });
+    }
+  }, []);
+  // ----------------------------------------------------
 
   const executeMoves = useCallback(
     async ({ callback }) => {
@@ -288,6 +285,7 @@ const useAppContext = () => {
     executeMoves,
     addText,
     changeEnemyPokemon,
+    executeEnemyMove,
   };
 };
 
