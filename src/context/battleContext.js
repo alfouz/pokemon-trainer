@@ -48,7 +48,6 @@ function appReducer(state, action) {
           enemyMove,
         },
       };
-      console.log(newState);
       return newState;
     }
     case ACTIONS.FORFEIT_BATTLE: {
@@ -64,6 +63,14 @@ function appReducer(state, action) {
         ...state,
         isFinished: true,
         results: { win: true, earns: earns },
+      };
+    }
+    case ACTIONS.LOSE_BATTLE: {
+      const earns = action?.value?.earns;
+      return {
+        ...state,
+        isFinished: true,
+        results: { win: false, earns: earns },
       };
     }
     case ACTIONS.CHANGE_POKEMON: {

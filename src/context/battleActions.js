@@ -6,6 +6,7 @@ export const EXECUTE_MOVES = "EXECUTE_MOVES";
 export const MODIFY_POKEMON = "MODIFY_POKEMON";
 export const WIN_BATTLE = "WIN_BATTLE";
 export const RESTART_STATE = "RESTART_STATE";
+export const LOSE_BATTLE = "LOSE_BATTLE";
 
 const actions = {
   CREATE_BATTLE,
@@ -15,6 +16,7 @@ const actions = {
   EXECUTE_MOVES,
   MODIFY_POKEMON,
   WIN_BATTLE,
+  LOSE_BATTLE,
   RESTART_STATE,
 };
 

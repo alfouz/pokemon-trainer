@@ -10,6 +10,8 @@ import ACTIONS from "../context/battleActions";
 import { getFirstAttack, executeAnimations } from "../utils/battleUtils";
 import { FIXED_STATUS } from "../assets/status";
 
+const delay = 200;
+
 const useAppContext = () => {
   const { state, dispatch } = useContext(BattleContext);
 
@@ -105,8 +107,6 @@ const useAppContext = () => {
   const executeEnemyMove = useCallback(
     async ({ newOwnPokemon }) => {
       const enemyMove = generateNewMove(state.ownPokemon, state.enemyPokemon);
-      console.log(enemyMove);
-      const delay = 1000;
       const enemyAttack = generateMoveEffects(
         enemyMove,
         state.enemyPokemon,
@@ -156,7 +156,6 @@ const useAppContext = () => {
         state.ownPokemon,
         state.enemyPokemon
       );
-      const delay = 1000;
 
       if (turnOrder >= 0) {
         //Attack own
@@ -284,6 +283,20 @@ const useAppContext = () => {
     [state, dispatch]
   );
 
+  const endBattle = useCallback(({ win, earns }) => {
+    if (win) {
+      dispatch({
+        type: ACTIONS.WIN_BATTLE,
+        value: { earns: earns },
+      });
+    } else {
+      dispatch({
+        type: ACTIONS.LOSE_BATTLE,
+        value: { earns: earns },
+      });
+    }
+  }, []);
+
   return {
     state,
     dispatch,
@@ -296,6 +309,7 @@ const useAppContext = () => {
     changeEnemyPokemon,
     executeEnemyMove,
     restartBattle,
+    endBattle,
   };
 };
 

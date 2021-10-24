@@ -11,8 +11,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 832px;
-  height: 640px;
+  width: 480px;
+  height: 360px;
   display: flex;
   flex-direction: column;
   background: white;
@@ -34,6 +34,7 @@
   width: 48px;
   height: 48px;
   display: flex;
+  padding: 16px;
   justify-content: center;
   align-items: center;
   font-weight: bold;
@@ -44,4 +45,7 @@
 .body {
   flex: 1;
   padding: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

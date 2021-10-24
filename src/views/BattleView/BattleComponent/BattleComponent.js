@@ -15,6 +15,7 @@ const BattleComponent = ({ ownTeam, enemyTeam, onEndBattle }) => {
     executeMoves,
     changeEnemyPokemon,
     restartBattle,
+    endBattle,
   } = useBattleContext();
 
   const [loading, setLoading] = useState(true);
@@ -52,15 +53,36 @@ const BattleComponent = ({ ownTeam, enemyTeam, onEndBattle }) => {
 
   useEffect(() => {
     if (state.ownPokemon.status === FIXED_STATUS.FAINTED) {
-      setForceChange(true);
+      if (
+        state.ownTeam.filter((item) => item.status !== FIXED_STATUS.FAINTED)
+          .length > 0
+      ) {
+        setForceChange(true);
+      } else {
+        endBattle({ win: false, earns: {} });
+      }
     }
-  }, [state.ownPokemon.status]);
+  }, [endBattle, state.ownPokemon.status, state.ownTeam]);
 
   useEffect(() => {
     if (state.enemyPokemon.status === FIXED_STATUS.FAINTED) {
-      changeEnemyPokemon();
+      if (
+        state.enemyTeam.filter((item) => item.status !== FIXED_STATUS.FAINTED)
+          .length > 0
+      ) {
+        changeEnemyPokemon();
+      } else {
+        endBattle({ win: true, earns: {} });
+      }
     }
-  }, [changeEnemyPokemon, state.enemyPokemon.status, state.ownPokemon.status]);
+  }, [
+    changeEnemyPokemon,
+    endBattle,
+    state.enemyPokemon,
+    state.enemyPokemon.status,
+    state.enemyTeam,
+    state.ownPokemon.status,
+  ]);
 
   if (loading) {
     return <div />;
@@ -83,7 +105,7 @@ const BattleComponent = ({ ownTeam, enemyTeam, onEndBattle }) => {
         <InfoComponent />
       </div>
       <ModalEndBattle
-        status={state.results.win}
+        isWin={state.results.win}
         visible={state.isFinished}
         onAccept={() => {
           onEndBattle(state.results.win, state.results.earns);

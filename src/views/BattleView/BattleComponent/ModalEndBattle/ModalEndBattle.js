@@ -15,7 +15,13 @@ const ModalEndBattle = ({ children, isWin, visible, onAccept }) => {
             Accept
           </div>
         </div>
-        <div className={styles.body}>{children}</div>
+        <div className={styles.body}>
+          {isWin ? (
+            <h4>You win x gold and x items</h4>
+          ) : (
+            <h4>You loose x gold</h4>
+          )}
+        </div>
       </div>
     </div>
   ) : (

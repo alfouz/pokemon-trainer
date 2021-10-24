@@ -92,6 +92,7 @@ const ActionSelector = ({ setReadyNextTurn, setForceChange, forceChange }) => {
     forfeitBattle,
     setForceChange,
     state.ownPokemon.currentMoves,
+    state.ownPokemon.id,
     state.ownTeam,
   ]);
   return <div className={styles.container}>{renderActions()}</div>;
